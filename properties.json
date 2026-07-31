@@ -1,0 +1,62 @@
+[
+  {
+    "id": "TC-101",
+    "title": "2 BHK Premium Residence",
+    "location": "Thane West",
+    "region": "All Thane",
+    "type": "1, 2, 3, 4 BHK Flats",
+    "price": "₹1.15 Cr",
+    "verified": true,
+    "verifiedText": "Title Verified",
+    "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80",
+    "whatsappText": "Hi Tricore, I am interested in property ID TC-101 (2 BHK in Thane West)."
+  },
+  {
+    "id": "TC-102",
+    "title": "NA Villa Plot / Land",
+    "location": "Lonavala Expressway",
+    "region": "Lonavala",
+    "type": "Plots / Land",
+    "price": "₹85 Lakhs",
+    "verified": true,
+    "verifiedText": "7/12 Clear",
+    "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80",
+    "whatsappText": "Hi Tricore, I am interested in property ID TC-102 (NA Plot in Lonavala)."
+  },
+  {
+    "id": "TC-103",
+    "title": "3 BHK Modern Apartment",
+    "location": "Kharghar, Sector 15",
+    "region": "Navi Mumbai",
+    "type": "1, 2, 3, 4 BHK Flats",
+    "price": "₹1.65 Cr",
+    "verified": true,
+    "verifiedText": "Title Verified",
+    "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80",
+    "whatsappText": "Hi Tricore, I am interested in property ID TC-103 (3 BHK in Kharghar)."
+  },
+  {
+    "id": "TC-104",
+    "title": "Commercial Office Space",
+    "location": "Virar West",
+    "region": "Virar & Vasai",
+    "type": "Commercial",
+    "price": "₹45 Lakhs",
+    "verified": true,
+    "verifiedText": "RERA Approved",
+    "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80",
+    "whatsappText": "Hi Tricore, I am interested in property ID TC-104 (Commercial Office in Virar West)."
+  },
+  {
+    "id": "TC-105",
+    "title": "Independent Luxury Bungalow",
+    "location": "Chembur, Central Mumbai",
+    "region": "All Mumbai",
+    "type": "Bungalows & Houses",
+    "price": "₹4.50 Cr",
+    "verified": true,
+    "verifiedText": "100 Yr Title Search Clear",
+    "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80",
+    "whatsappText": "Hi Tricore, I am interested in property ID TC-105 (Bungalow in Chembur)."
+  }
+]
