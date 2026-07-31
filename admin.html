@@ -71,9 +71,9 @@
         </div>
     </div>
 
-    <!-- MODAL FORM -->
+    <!-- MODAL FORM WITH FILE UPLOAD -->
     <div id="property-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg shadow-2xl max-w-xl w-full p-6">
+        <div class="bg-white rounded-lg shadow-2xl max-w-xl w-full p-6 max-h-[90vh] overflow-y-auto">
             <h3 id="modal-title" class="text-lg font-bold mb-4">Add New Property</h3>
             <form id="property-form" class="space-y-3 text-xs">
                 <input type="hidden" id="p-id">
@@ -103,10 +103,21 @@
                         </select>
                     </div>
                 </div>
-                <div><label class="font-bold">Image URL</label><input type="text" id="p-image" required class="w-full border p-2 rounded" placeholder="https://images.unsplash.com/..."></div>
+
+                <!-- DIRECT FILE UPLOAD FIELD -->
+                <div>
+                    <label class="font-bold block mb-1">Select Property Image File</label>
+                    <input type="file" id="p-file" accept="image/*" class="w-full border p-2 rounded bg-slate-50">
+                    <p id="upload-status" class="text-[11px] text-blue-600 font-semibold mt-1 hidden">Uploading image to server...</p>
+                    <input type="hidden" id="p-image-url">
+                    <div id="image-preview-container" class="mt-2 hidden">
+                        <img id="image-preview" class="h-20 w-32 object-cover rounded border">
+                    </div>
+                </div>
+
                 <div class="flex justify-end gap-2 pt-3">
                     <button type="button" onclick="closeForm()" class="border px-4 py-2 rounded font-bold">Cancel</button>
-                    <button type="submit" class="bg-blue-600 text-white font-bold px-6 py-2 rounded">Save Property</button>
+                    <button type="submit" id="save-btn" class="bg-blue-600 text-white font-bold px-6 py-2 rounded">Save Property</button>
                 </div>
             </form>
         </div>
@@ -114,7 +125,6 @@
 
     <!-- SCRIPT -->
     <script>
-        // Clean base URL without trailing rest/v1/
         const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
 
@@ -190,6 +200,8 @@
 
         function openForm() { 
             document.getElementById('p-id').value = '';
+            document.getElementById('p-image-url').value = '';
+            document.getElementById('image-preview-container').classList.add('hidden');
             document.getElementById('property-form').reset();
             document.getElementById('modal-title').innerText = 'Add New Property';
             document.getElementById('property-modal').classList.remove('hidden'); 
@@ -209,23 +221,62 @@
             document.getElementById('p-region').value = prop.region || 'All Mumbai';
             document.getElementById('p-location').value = prop.location || '';
             document.getElementById('p-category').value = prop.category || '1, 2, 3, 4 BHK Flats';
-            document.getElementById('p-image').value = (prop.images && prop.images[0]) ? prop.images[0] : '';
             
+            const existingUrl = (prop.images && prop.images[0]) ? prop.images[0] : '';
+            document.getElementById('p-image-url').value = existingUrl;
+            
+            if (existingUrl) {
+                document.getElementById('image-preview').src = existingUrl;
+                document.getElementById('image-preview-container').classList.remove('hidden');
+            }
+
             document.getElementById('modal-title').innerText = 'Edit Property';
             document.getElementById('property-modal').classList.remove('hidden');
         }
 
         document.getElementById('property-form').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const id = document.getElementById('p-id').value;
+            
+            const saveBtn = document.getElementById('save-btn');
+            const fileInput = document.getElementById('p-file');
+            const statusText = document.getElementById('upload-status');
+            let imageUrl = document.getElementById('p-image-url').value;
 
+            saveBtn.disabled = true;
+
+            // HANDLE FILE UPLOAD TO SUPABASE STORAGE
+            if (fileInput.files.length > 0) {
+                statusText.classList.remove('hidden');
+                const file = fileInput.files[0];
+                const fileExt = file.name.split('.').pop();
+                const fileName = `${Date.now()}.${fileExt}`;
+
+                const { data, error } = await supabaseClient.storage.from('property-images').upload(fileName, file);
+
+                if (error) {
+                    alert("Image Upload Error: " + error.message + "\nMake sure you created a public bucket named 'property-images' in Supabase.");
+                    statusText.classList.add('hidden');
+                    saveBtn.disabled = false;
+                    return;
+                }
+
+                const { data: publicUrlData } = supabaseClient.storage.from('property-images').getPublicUrl(fileName);
+                imageUrl = publicUrlData.publicUrl;
+                statusText.classList.add('hidden');
+            }
+
+            if (!imageUrl) {
+                imageUrl = 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80';
+            }
+
+            const id = document.getElementById('p-id').value;
             const payload = {
                 title: document.getElementById('p-title').value,
                 price: document.getElementById('p-price').value,
                 region: document.getElementById('p-region').value,
                 location: document.getElementById('p-location').value,
                 category: document.getElementById('p-category').value,
-                images: [document.getElementById('p-image').value],
+                images: [imageUrl],
                 status: 'Published'
             };
 
@@ -235,6 +286,8 @@
             } else {
                 res = await supabaseClient.from('properties').insert([payload]);
             }
+
+            saveBtn.disabled = false;
 
             if (res.error) {
                 alert("Error saving property: " + res.error.message);
