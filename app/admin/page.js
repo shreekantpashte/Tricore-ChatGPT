@@ -5,8 +5,8 @@ import { createClient } from '@supabase/supabase-js';
 
 // Supabase Client Config
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || 'YOUR_SUPABASE_URL',
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY'
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://pccvfdvsufqnlnvcdrxk.supabase.co/rest/v1/',
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt'
 );
 
 const DEFAULT_AMENITIES = [
