@@ -38,23 +38,24 @@
             
             <!-- SECTION MANAGER TABS -->
             <div class="flex space-x-6 border-b border-slate-300 mb-6 text-sm font-bold text-slate-500">
-                <button onclick="switchAdminSection('sec-properties', this)" class="admin-sec-tab text-blue-600 border-b-2 border-blue-600 pb-2">Properties & Land</button>
+                <button onclick="switchAdminSection('sec-properties', this)" class="admin-sec-tab text-blue-600 border-b-2 border-blue-600 pb-2">Properties (Flats / Villas / Comm)</button>
+                <button onclick="switchAdminSection('sec-land', this)" class="admin-sec-tab border-b-2 border-transparent pb-2 hover:text-blue-600">Land Investments</button>
                 <button onclick="switchAdminSection('sec-services', this)" class="admin-sec-tab border-b-2 border-transparent pb-2 hover:text-blue-600">Legal Services</button>
                 <button onclick="switchAdminSection('sec-testimonials', this)" class="admin-sec-tab border-b-2 border-transparent pb-2 hover:text-blue-600">Testimonials</button>
             </div>
 
-            <!-- SECTION 1: PROPERTIES & LAND -->
+            <!-- SECTION 1: REGULAR PROPERTIES -->
             <div id="sec-properties" class="admin-sec">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                     <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-slate-500 font-bold uppercase">Total Properties</p><p id="stat-total" class="text-2xl font-extrabold text-slate-800">0</p></div>
                     <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-emerald-600 font-bold uppercase">Published</p><p id="stat-published" class="text-2xl font-extrabold text-emerald-600">0</p></div>
-                    <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-amber-600 font-bold uppercase">Drafts</p><p id="stat-drafts" class="text-2xl font-extrabold text-amber-600">0</p></div>
-                    <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-purple-600 font-bold uppercase">Recommended/Featured</p><p id="stat-featured" class="text-2xl font-extrabold text-purple-600">0</p></div>
+                    <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-purple-600 font-bold uppercase">Recommended</p><p id="stat-featured" class="text-2xl font-extrabold text-purple-600">0</p></div>
+                    <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-blue-600 font-bold uppercase">Land Listings</p><p id="stat-land" class="text-2xl font-extrabold text-blue-600">0</p></div>
                 </div>
 
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-bold text-slate-800">All Properties</h2>
-                    <button onclick="openForm()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded transition">+ Add New Property</button>
+                    <h2 class="text-lg font-bold text-slate-800">Residential & Commercial Listings</h2>
+                    <button onclick="openForm(false)" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded transition">+ Add New Property</button>
                 </div>
 
                 <div class="bg-white rounded border overflow-x-auto shadow-sm">
@@ -64,7 +65,7 @@
                                 <th class="p-3">Title</th>
                                 <th class="p-3">Region</th>
                                 <th class="p-3">Price</th>
-                                <th class="p-3">Type</th>
+                                <th class="p-3">Category</th>
                                 <th class="p-3">Recommended</th>
                                 <th class="p-3 text-right">Actions</th>
                             </tr>
@@ -76,7 +77,32 @@
                 </div>
             </div>
 
-            <!-- SECTION 2: SERVICES MANAGER -->
+            <!-- SECTION 2: LAND INVESTMENTS -->
+            <div id="sec-land" class="admin-sec hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-slate-800">Land & Plot Investments</h2>
+                    <button onclick="openForm(true)" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2 rounded transition">+ Add Land Investment</button>
+                </div>
+
+                <div class="bg-white rounded border overflow-x-auto shadow-sm">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead class="bg-slate-50 border-b text-slate-500 font-bold uppercase">
+                            <tr>
+                                <th class="p-3">Title</th>
+                                <th class="p-3">Region / Location</th>
+                                <th class="p-3">Price</th>
+                                <th class="p-3">Recommended</th>
+                                <th class="p-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="land-list" class="divide-y divide-slate-100 font-medium">
+                            <tr><td colspan="5" class="p-4 text-center text-slate-400">Loading land listings...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECTION 3: SERVICES -->
             <div id="sec-services" class="admin-sec hidden">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-lg font-bold text-slate-800">Legal & Revenue Services</h2>
@@ -99,7 +125,7 @@
                 </div>
             </div>
 
-            <!-- SECTION 3: TESTIMONIALS MANAGER -->
+            <!-- SECTION 4: TESTIMONIALS -->
             <div id="sec-testimonials" class="admin-sec hidden">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-lg font-bold text-slate-800">Client Reviews</h2>
@@ -125,66 +151,159 @@
         </div>
     </div>
 
-    <!-- MODAL 1: PROPERTY FORM -->
+    <!-- FULL DETAIL PROPERTY / LAND MODAL -->
     <div id="property-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full p-6 max-h-[92vh] overflow-y-auto">
-            <h3 id="modal-title" class="text-lg font-bold text-slate-900 mb-4">Add Property</h3>
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 id="modal-title" class="text-lg font-bold text-slate-900">Add Property</h3>
+                <button type="button" onclick="closeForm()" class="text-slate-400 hover:text-slate-700 font-bold text-xl">×</button>
+            </div>
+
+            <!-- MODAL FORM TABS -->
+            <div class="flex space-x-4 border-b mb-4 text-xs font-bold text-slate-500">
+                <button type="button" onclick="switchAdminTab('tab-basic', this)" class="admin-tab text-blue-600 border-b-2 border-blue-600 pb-2">Basic Info</button>
+                <button type="button" id="btn-tab-details" onclick="switchAdminTab('tab-details', this)" class="admin-tab border-b-2 border-transparent pb-2 hover:text-blue-600">Details & Specifications</button>
+                <button type="button" onclick="switchAdminTab('tab-media', this)" class="admin-tab border-b-2 border-transparent pb-2 hover:text-blue-600">Photos & Media</button>
+                <button type="button" id="btn-tab-amenities" onclick="switchAdminTab('tab-amenities', this)" class="admin-tab border-b-2 border-transparent pb-2 hover:text-blue-600">Amenities</button>
+            </div>
+
             <form id="property-form" class="text-xs space-y-4">
                 <input type="hidden" id="p-id">
-                <div>
-                    <label class="font-bold block mb-1">Title</label>
-                    <input type="text" id="p-title" required class="w-full border p-2 rounded">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
+                <input type="hidden" id="p-is-land-val" value="false">
+
+                <!-- TAB 1: BASIC -->
+                <div id="tab-basic" class="tab-content space-y-3">
                     <div>
-                        <label class="font-bold block mb-1">Price</label>
-                        <input type="text" id="p-price" required class="w-full border p-2 rounded">
+                        <label class="font-bold block mb-1">Property Title</label>
+                        <input type="text" id="p-title" required class="w-full border p-2 rounded" placeholder="1 BHK Flat In Sagar Park Hsg Society For Sale In Ghatkopar">
                     </div>
-                    <div>
-                        <label class="font-bold block mb-1">Region</label>
-                        <select id="p-region" class="w-full border p-2 rounded">
-                            <option value="All Mumbai">All Mumbai</option>
-                            <option value="All Thane">All Thane</option>
-                            <option value="Navi Mumbai">Navi Mumbai</option>
-                            <option value="Virar & Vasai">Virar & Vasai</option>
-                            <option value="Lonavala">Lonavala</option>
-                        </select>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="font-bold block mb-1">Price (e.g. ₹98 L or ₹1.12 Cr)</label>
+                            <input type="text" id="p-price" required class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-1">Region</label>
+                            <select id="p-region" class="w-full border p-2 rounded">
+                                <option value="All Mumbai">All Mumbai</option>
+                                <option value="All Thane">All Thane</option>
+                                <option value="Navi Mumbai">Navi Mumbai</option>
+                                <option value="Virar & Vasai">Virar & Vasai</option>
+                                <option value="Lonavala">Lonavala / Karjat</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="font-bold block mb-1">Location Details</label>
-                        <input type="text" id="p-location" required class="w-full border p-2 rounded">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="font-bold block mb-1">Location Details</label>
+                            <input type="text" id="p-location" required class="w-full border p-2 rounded" placeholder="Amrut Nagar Cir, Ghatkopar West">
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-1">Category</label>
+                            <select id="p-category" class="w-full border p-2 rounded">
+                                <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
+                                <option value="Bungalows & Houses">Bungalows & Houses</option>
+                                <option value="Plots / Land">Plots / Land</option>
+                                <option value="Commercial">Commercial</option>
+                            </select>
+                        </div>
                     </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded flex items-center gap-2">
+                        <input type="checkbox" id="p-featured" class="w-4 h-4 text-blue-600 rounded cursor-pointer">
+                        <label for="p-featured" class="font-bold text-amber-900 cursor-pointer">Show this property in Home Page Recommended section</label>
+                    </div>
+
                     <div>
-                        <label class="font-bold block mb-1">Category</label>
-                        <select id="p-category" class="w-full border p-2 rounded">
-                            <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
-                            <option value="Bungalows & Houses">Bungalows & Houses</option>
-                            <option value="Plots / Land">Plots / Land</option>
-                            <option value="Commercial">Commercial</option>
-                        </select>
+                        <label class="font-bold block mb-1">Description</label>
+                        <textarea id="p-desc" rows="3" class="w-full border p-2 rounded" placeholder="Description about location, connectivity, key highlights..."></textarea>
                     </div>
                 </div>
 
-                <div class="flex gap-4">
-                    <label class="flex items-center gap-1.5 font-bold cursor-pointer">
-                        <input type="checkbox" id="p-featured" class="w-4 h-4"> Show in Recommended Section
-                    </label>
-                    <label class="flex items-center gap-1.5 font-bold cursor-pointer text-blue-700">
-                        <input type="checkbox" id="p-land" class="w-4 h-4"> This is a Land / Plot Investment
-                    </label>
+                <!-- TAB 2: SPECIFICATIONS -->
+                <div id="tab-details" class="tab-content hidden space-y-3">
+                    <div class="grid grid-cols-3 gap-3">
+                        <div><label class="font-bold block mb-1">Carpet Area (sq.ft)</label><input type="text" id="p-carpet" class="w-full border p-2 rounded" placeholder="690"></div>
+                        <div><label class="font-bold block mb-1">Bedrooms</label><input type="text" id="p-bedrooms" class="w-full border p-2 rounded" placeholder="2"></div>
+                        <div><label class="font-bold block mb-1">Bathrooms</label><input type="text" id="p-bathrooms" class="w-full border p-2 rounded" placeholder="2"></div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div><label class="font-bold block mb-1">Balconies</label><input type="text" id="p-balconies" class="w-full border p-2 rounded" placeholder="1"></div>
+                        <div><label class="font-bold block mb-1">Floor No.</label><input type="text" id="p-floor" class="w-full border p-2 rounded" placeholder="4"></div>
+                        <div><label class="font-bold block mb-1">Total Floors</label><input type="text" id="p-total-floors" class="w-full border p-2 rounded" placeholder="18"></div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div>
+                            <label class="font-bold block mb-1">Facing</label>
+                            <select id="p-facing" class="w-full border p-2 rounded">
+                                <option value="East">East</option>
+                                <option value="West">West</option>
+                                <option value="North">North</option>
+                                <option value="South">South</option>
+                                <option value="North-East">North-East</option>
+                            </select>
+                        </div>
+                        <div><label class="font-bold block mb-1">Parking</label><input type="text" id="p-parking" class="w-full border p-2 rounded" placeholder="1 Covered"></div>
+                        <div>
+                            <label class="font-bold block mb-1">Furnishing</label>
+                            <select id="p-furnishing" class="w-full border p-2 rounded">
+                                <option value="Semi Furnished">Semi Furnished</option>
+                                <option value="Fully Furnished">Fully Furnished</option>
+                                <option value="Unfurnished">Unfurnished</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div>
+                            <label class="font-bold block mb-1">Possession Status</label>
+                            <select id="p-possession" class="w-full border p-2 rounded">
+                                <option value="Ready Possession">Ready Possession</option>
+                                <option value="Under Construction">Under Construction</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-1">Ownership Type</label>
+                            <select id="p-ownership" class="w-full border p-2 rounded">
+                                <option value="Co-operative Society">Co-operative Society</option>
+                                <option value="Freehold">Freehold</option>
+                                <option value="Leasehold">Leasehold</option>
+                            </select>
+                        </div>
+                        <div><label class="font-bold block mb-1">RERA Number</label><input type="text" id="p-rera" class="w-full border p-2 rounded" placeholder="P5170303"></div>
+                    </div>
+                    <div>
+                        <label class="font-bold block mb-1">Highlights (One per line)</label>
+                        <textarea id="p-highlights" rows="2" class="w-full border p-2 rounded" placeholder="Legally checked and verified by Tricore&#10;690 sq.ft. usable area&#10;Ready possession"></textarea>
+                    </div>
                 </div>
 
-                <div>
-                    <label class="font-bold block mb-1">Description</label>
-                    <textarea id="p-desc" rows="2" class="w-full border p-2 rounded"></textarea>
+                <!-- TAB 3: MEDIA -->
+                <div id="tab-media" class="tab-content hidden space-y-3">
+                    <div>
+                        <label class="font-bold block mb-1">Upload Property Photos (Select Multiple)</label>
+                        <input type="file" id="p-files" accept="image/*" multiple class="w-full border p-2 rounded bg-slate-50">
+                        <p id="upload-status" class="text-[11px] text-blue-600 font-semibold mt-1 hidden">Uploading images...</p>
+                        <div id="image-previews" class="flex flex-wrap gap-2 mt-3"></div>
+                    </div>
                 </div>
 
-                <div>
-                    <label class="font-bold block mb-1">Upload Photos</label>
-                    <input type="file" id="p-files" accept="image/*" multiple class="w-full border p-2 rounded">
-                    <div id="image-previews" class="flex flex-wrap gap-2 mt-2"></div>
+                <!-- TAB 4: AMENITIES -->
+                <div id="tab-amenities" class="tab-content hidden space-y-2">
+                    <label class="font-bold block mb-2">Select Amenities Available</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Parking"> Parking</label>
+                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Lift"> Lift</label>
+                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Power Backup"> Power Backup</label>
+                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Swimming Pool"> Swimming Pool</label>
+                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Gym"> Gym</label>
+                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Garden"> Garden</label>
+                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Club House"> Club House</label>
+                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Kids Play Area"> Kids Play Area</label>
+                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Security"> Security</label>
+                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="CCTV"> CCTV</label>
+                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Temple"> Temple</label>
+                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="School Nearby"> School Nearby</label>
+                    </div>
                 </div>
 
                 <div class="flex justify-end gap-2 pt-3 border-t">
@@ -262,48 +381,86 @@
             el.classList.remove('border-transparent');
         }
 
+        function switchAdminTab(tabId, el) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+            document.querySelectorAll('.admin-tab').forEach(t => {
+                t.classList.remove('text-blue-600', 'border-blue-600');
+                t.classList.add('border-transparent');
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+            el.classList.add('text-blue-600', 'border-blue-600');
+            el.classList.remove('border-transparent');
+        }
+
         async function fetchAllAdminData() {
-            // 1. Fetch Properties (Isolated Error Protection)
             try {
-                const { data, error } = await supabaseClient.from('properties').select('*').order('created_at', { ascending: false });
-                if (!error) propertiesData = data || [];
+                const { data } = await supabaseClient.from('properties').select('*').order('created_at', { ascending: false });
+                propertiesData = data || [];
                 renderProperties();
+                renderLand();
             } catch (err) { console.error("Properties Fetch Error:", err); }
 
-            // 2. Fetch Services (Isolated Error Protection)
             try {
-                const { data, error } = await supabaseClient.from('services').select('*').order('created_at', { ascending: false });
-                if (!error) servicesData = data || [];
+                const { data } = await supabaseClient.from('services').select('*').order('created_at', { ascending: false });
+                servicesData = data || [];
                 renderServices();
             } catch (err) { console.error("Services Fetch Error:", err); }
 
-            // 3. Fetch Testimonials (Isolated Error Protection)
             try {
-                const { data, error } = await supabaseClient.from('testimonials').select('*').order('created_at', { ascending: false });
-                if (!error) testimonialsData = data || [];
+                const { data } = await supabaseClient.from('testimonials').select('*').order('created_at', { ascending: false });
+                testimonialsData = data || [];
                 renderTestimonials();
             } catch (err) { console.error("Testimonials Fetch Error:", err); }
         }
 
         function renderProperties() {
             const list = document.getElementById('properties-list');
+            const regProps = propertiesData.filter(p => !p.is_land);
+
             document.getElementById('stat-total').innerText = propertiesData.length;
             document.getElementById('stat-published').innerText = propertiesData.filter(p => p.status === 'Published').length;
             document.getElementById('stat-featured').innerText = propertiesData.filter(p => p.is_featured).length;
+            document.getElementById('stat-land').innerText = propertiesData.filter(p => p.is_land).length;
 
-            if (propertiesData.length === 0) {
+            if (regProps.length === 0) {
                 list.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-400">No properties found. Click "+ Add New Property" above.</td></tr>`;
                 return;
             }
 
             list.innerHTML = '';
-            propertiesData.forEach(item => {
+            regProps.forEach(item => {
                 list.innerHTML += `
                     <tr class="hover:bg-slate-50">
                         <td class="p-3 font-bold text-slate-800">${item.title}</td>
                         <td class="p-3 text-slate-600">${item.region}</td>
                         <td class="p-3 text-blue-700 font-bold">${item.price}</td>
-                        <td class="p-3"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-[10px] font-bold">${item.is_land ? 'Land Plot' : 'Residential/Comm'}</span></td>
+                        <td class="p-3"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-[10px] font-bold">${item.category}</span></td>
+                        <td class="p-3"><span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-[10px] font-bold">${item.is_featured ? 'Recommended' : 'Standard'}</span></td>
+                        <td class="p-3 text-right space-x-2">
+                            <button onclick="editProperty('${item.id}')" class="text-blue-600 font-bold">Edit</button>
+                            <button onclick="deleteProperty('${item.id}')" class="text-red-600 font-bold">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function renderLand() {
+            const list = document.getElementById('land-list');
+            const landProps = propertiesData.filter(p => p.is_land);
+
+            if (landProps.length === 0) {
+                list.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No land listings found. Click "+ Add Land Investment" above.</td></tr>`;
+                return;
+            }
+
+            list.innerHTML = '';
+            landProps.forEach(item => {
+                list.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-3 font-bold text-slate-800">${item.title}</td>
+                        <td class="p-3 text-slate-600">${item.location || item.region}</td>
+                        <td class="p-3 text-blue-700 font-bold">${item.price}</td>
                         <td class="p-3"><span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-[10px] font-bold">${item.is_featured ? 'Recommended' : 'Standard'}</span></td>
                         <td class="p-3 text-right space-x-2">
                             <button onclick="editProperty('${item.id}')" class="text-blue-600 font-bold">Edit</button>
@@ -354,13 +511,24 @@
             });
         }
 
-        // PROPERTY FORM HANDLERS
-        function openForm() { 
+        // PROPERTY / LAND FORM HANDLERS
+        function openForm(isLand = false) { 
             document.getElementById('p-id').value = '';
+            document.getElementById('p-is-land-val').value = isLand ? "true" : "false";
             currentUploadedImages = [];
             document.getElementById('image-previews').innerHTML = '';
             document.getElementById('property-form').reset();
-            document.getElementById('modal-title').innerText = 'Add Property';
+            document.querySelectorAll('input[name="amenity"]').forEach(cb => cb.checked = false);
+
+            if (isLand) {
+                document.getElementById('p-category').value = "Plots / Land";
+                document.getElementById('modal-title').innerText = 'Add Land Investment';
+            } else {
+                document.getElementById('modal-title').innerText = 'Add Property';
+            }
+
+            // Switch to Basic tab
+            switchAdminTab('tab-basic', document.querySelectorAll('.admin-tab')[0]);
             document.getElementById('property-modal').classList.remove('hidden'); 
         }
 
@@ -371,6 +539,7 @@
             if (!prop) return;
 
             document.getElementById('p-id').value = prop.id;
+            document.getElementById('p-is-land-val').value = prop.is_land ? "true" : "false";
             document.getElementById('p-title').value = prop.title || '';
             document.getElementById('p-price').value = prop.price || '';
             document.getElementById('p-region').value = prop.region || 'All Mumbai';
@@ -378,22 +547,43 @@
             document.getElementById('p-category').value = prop.category || '1, 2, 3, 4 BHK Flats';
             document.getElementById('p-desc').value = prop.description || '';
             document.getElementById('p-featured').checked = !!prop.is_featured;
-            document.getElementById('p-land').checked = !!prop.is_land;
+
+            document.getElementById('p-carpet').value = prop.carpet_area || '';
+            document.getElementById('p-bedrooms').value = prop.bedrooms || '';
+            document.getElementById('p-bathrooms').value = prop.bathrooms || '';
+            document.getElementById('p-balconies').value = prop.balconies || '';
+            document.getElementById('p-floor').value = prop.floor_no || '';
+            document.getElementById('p-total-floors').value = prop.total_floors || '';
+            document.getElementById('p-facing').value = prop.facing || 'East';
+            document.getElementById('p-parking').value = prop.parking || '';
+            document.getElementById('p-furnishing').value = prop.furnishing || 'Semi Furnished';
+            document.getElementById('p-possession').value = prop.possession_status || 'Ready Possession';
+            document.getElementById('p-ownership').value = prop.ownership_type || 'Co-operative Society';
+            document.getElementById('p-rera').value = prop.rera_number || '';
+            document.getElementById('p-highlights').value = prop.highlights || '';
+
+            const selectedAmenities = prop.amenities || [];
+            document.querySelectorAll('input[name="amenity"]').forEach(cb => {
+                cb.checked = selectedAmenities.includes(cb.value);
+            });
 
             currentUploadedImages = prop.images || [];
-            
             const container = document.getElementById('image-previews');
             container.innerHTML = '';
             currentUploadedImages.forEach((url, i) => {
                 container.innerHTML += `<img src="${url}" class="w-12 h-12 object-cover rounded border">`;
             });
 
-            document.getElementById('modal-title').innerText = 'Edit Property';
+            document.getElementById('modal-title').innerText = prop.is_land ? 'Edit Land Investment' : 'Edit Property';
+            switchAdminTab('tab-basic', document.querySelectorAll('.admin-tab')[0]);
             document.getElementById('property-modal').classList.remove('hidden');
         }
 
         document.getElementById('property-form').addEventListener('submit', async function(e) {
             e.preventDefault();
+            const saveBtn = document.getElementById('save-btn');
+            saveBtn.disabled = true;
+
             const fileInput = document.getElementById('p-files');
             if (fileInput.files.length > 0) {
                 for (let file of fileInput.files) {
@@ -404,7 +594,12 @@
                 }
             }
 
+            const chosenAmenities = [];
+            document.querySelectorAll('input[name="amenity"]:checked').forEach(cb => chosenAmenities.push(cb.value));
+
             const id = document.getElementById('p-id').value;
+            const isLand = document.getElementById('p-is-land-val').value === "true";
+
             const payload = {
                 title: document.getElementById('p-title').value,
                 price: document.getElementById('p-price').value,
@@ -413,7 +608,21 @@
                 category: document.getElementById('p-category').value,
                 description: document.getElementById('p-desc').value,
                 is_featured: document.getElementById('p-featured').checked,
-                is_land: document.getElementById('p-land').checked,
+                is_land: isLand,
+                carpet_area: document.getElementById('p-carpet').value,
+                bedrooms: document.getElementById('p-bedrooms').value,
+                bathrooms: document.getElementById('p-bathrooms').value,
+                balconies: document.getElementById('p-balconies').value,
+                floor_no: document.getElementById('p-floor').value,
+                total_floors: document.getElementById('p-total-floors').value,
+                facing: document.getElementById('p-facing').value,
+                parking: document.getElementById('p-parking').value,
+                furnishing: document.getElementById('p-furnishing').value,
+                possession_status: document.getElementById('p-possession').value,
+                ownership_type: document.getElementById('p-ownership').value,
+                rera_number: document.getElementById('p-rera').value,
+                highlights: document.getElementById('p-highlights').value,
+                amenities: chosenAmenities,
                 images: currentUploadedImages.length > 0 ? currentUploadedImages : ['https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80'],
                 status: 'Published'
             };
@@ -421,12 +630,13 @@
             if (id) await supabaseClient.from('properties').update(payload).eq('id', id);
             else await supabaseClient.from('properties').insert([payload]);
 
+            saveBtn.disabled = false;
             closeForm();
             fetchAllAdminData();
         });
 
         async function deleteProperty(id) {
-            if (confirm("Delete property?")) {
+            if (confirm("Delete this listing?")) {
                 await supabaseClient.from('properties').delete().eq('id', id);
                 fetchAllAdminData();
             }
