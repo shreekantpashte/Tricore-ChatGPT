@@ -46,55 +46,79 @@
     <div class="pt-24 pb-16 max-w-7xl mx-auto px-4 sm:px-6">
         <a href="buy.html" class="text-xs font-bold text-slate-500 hover:text-blue-600 transition mb-4 inline-block">&larr; Back to listings</a>
 
-        <!-- BENTO IMAGE GALLERY -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
-            <div class="md:col-span-2 relative h-80 sm:h-96 rounded-lg overflow-hidden border">
-                <img id="main-img" class="w-full h-full object-cover">
-                <span class="absolute bottom-3 left-3 bg-black/70 text-white text-[10px] font-bold px-2 py-1 rounded" id="img-count">1 Photos</span>
+        <!-- MAIN IMAGE SLIDER WITH ARROW SELECTION -->
+        <div class="mb-6">
+            <div class="relative w-full h-[400px] sm:h-[500px] bg-black rounded-lg overflow-hidden border">
+                <img id="main-img" class="w-full h-full object-contain mx-auto">
+                
+                <!-- ARROWS -->
+                <button onclick="prevImage()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black text-white p-3 rounded-full transition"><i class="fa-solid fa-chevron-left"></i></button>
+                <button onclick="nextImage()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black text-white p-3 rounded-full transition"><i class="fa-solid fa-chevron-right"></i></button>
+                
+                <!-- COUNTER -->
+                <span class="absolute bottom-3 left-3 bg-black/70 text-white text-xs font-bold px-3 py-1 rounded" id="img-count">1 / 1</span>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-1 gap-3 h-80 sm:h-96" id="side-imgs"></div>
+
+            <!-- SMALL THUMBNAIL PREVIEW BOXES BELOW MAIN IMAGE -->
+            <div id="thumb-container" class="flex gap-3 mt-3 overflow-x-auto pb-2"></div>
         </div>
 
         <!-- MAIN LAYOUT GRID -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            <!-- LEFT COLUMN: SPECS & DETAILS -->
+            <!-- LEFT COLUMN -->
             <div class="lg:col-span-2 space-y-6">
                 <div>
                     <div class="flex gap-2 mb-2">
                         <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
-                        <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase">READY POSSESSION</span>
+                        <span id="badge-possession" class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase">READY POSSESSION</span>
                     </div>
                     <h1 id="prop-title" class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-1">Loading Title...</h1>
                     <p id="prop-location" class="text-xs text-slate-500 font-medium"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i> Loading Location...</p>
                     <p id="prop-price" class="text-2xl font-extrabold text-blue-700 mt-3">₹0</p>
                 </div>
 
-                <!-- QUICK PROPERTY DETAILS TABLE -->
+                <!-- DESCRIPTION -->
+                <div class="bg-white p-5 rounded-lg border">
+                    <h3 class="font-bold text-sm text-navy-900 mb-2">Description</h3>
+                    <p id="prop-desc" class="text-xs text-slate-600 leading-relaxed">No description provided.</p>
+                </div>
+
+                <!-- PROPERTY SPECIFICATIONS TABLE -->
                 <div class="bg-white p-5 rounded-lg border">
                     <h3 class="font-bold text-sm text-navy-900 mb-4">Quick Property Details</h3>
-                    <div class="grid grid-cols-2 gap-4 text-xs">
-                        <div><span class="text-slate-400 block">Price</span><span id="q-price" class="font-bold text-slate-800">-</span></div>
-                        <div><span class="text-slate-400 block">Property Type</span><span id="q-type" class="font-bold text-slate-800">-</span></div>
-                        <div><span class="text-slate-400 block">Location</span><span id="q-loc" class="font-bold text-slate-800">-</span></div>
-                        <div><span class="text-slate-400 block">Possession</span><span class="font-bold text-slate-800">Ready Possession • Immediate</span></div>
-                        <div><span class="text-slate-400 block">Ownership Type</span><span class="font-bold text-slate-800">Co-operative Society</span></div>
-                        <div><span class="text-slate-400 block">RERA Status</span><span id="q-rera" class="font-bold text-slate-800">Clear Title</span></div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs">
+                        <div><span class="text-slate-400 block mb-0.5">Price</span><span id="spec-price" class="font-bold text-slate-800">-</span></div>
+                        <div><span class="text-slate-400 block mb-0.5">Carpet Area</span><span id="spec-carpet" class="font-bold text-slate-800">-</span></div>
+                        <div><span class="text-slate-400 block mb-0.5">Configuration</span><span id="spec-config" class="font-bold text-slate-800">-</span></div>
+                        <div><span class="text-slate-400 block mb-0.5">Floor</span><span id="spec-floor" class="font-bold text-slate-800">-</span></div>
+                        <div><span class="text-slate-400 block mb-0.5">Facing</span><span id="spec-facing" class="font-bold text-slate-800">-</span></div>
+                        <div><span class="text-slate-400 block mb-0.5">Parking</span><span id="spec-parking" class="font-bold text-slate-800">-</span></div>
+                        <div><span class="text-slate-400 block mb-0.5">Furnishing</span><span id="spec-furnishing" class="font-bold text-slate-800">-</span></div>
+                        <div><span class="text-slate-400 block mb-0.5">Possession</span><span id="spec-possession" class="font-bold text-slate-800">-</span></div>
+                        <div><span class="text-slate-400 block mb-0.5">Ownership</span><span id="spec-ownership" class="font-bold text-slate-800">-</span></div>
+                        <div><span class="text-slate-400 block mb-0.5">RERA No.</span><span id="spec-rera" class="font-bold text-slate-800">-</span></div>
                     </div>
                 </div>
 
-                <!-- WHY CHOOSE THIS PROPERTY -->
+                <!-- HIGHLIGHTS -->
                 <div class="bg-white p-5 rounded-lg border">
                     <h3 class="font-bold text-sm text-navy-900 mb-3">Why Choose This Property</h3>
-                    <ul class="space-y-2 text-xs text-slate-600">
+                    <ul id="highlights-list" class="space-y-2 text-xs text-slate-600">
                         <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600"></i> Legally checked and verified by the Tricore advisory desk.</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600"></i> Clear chain of title documents and revenue verification complete.</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600"></i> Eligible for major nationalized and private bank home loans.</li>
                     </ul>
+                </div>
+
+                <!-- AMENITIES -->
+                <div class="bg-white p-5 rounded-lg border">
+                    <h3 class="font-bold text-sm text-navy-900 mb-3">Amenities</h3>
+                    <div id="amenities-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs text-slate-700">
+                        <span class="text-slate-400">No specific amenities listed.</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- RIGHT COLUMN: STICKY ASSISTANCE CARD -->
+            <!-- RIGHT COLUMN: STICKY ASSISTANCE SIDEBAR -->
             <div>
                 <div class="bg-white p-6 rounded-lg border shadow-sm sticky top-24">
                     <h3 class="font-bold text-base text-navy-900 mb-1">Need Assistance?</h3>
@@ -118,10 +142,38 @@
         </div>
     </div>
 
+    <!-- SCRIPT -->
     <script>
         const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let propertyImages = [];
+        let currentImageIdx = 0;
+
+        function updateMainImage(index) {
+            currentImageIdx = index;
+            document.getElementById('main-img').src = propertyImages[currentImageIdx];
+            document.getElementById('img-count').innerText = `${currentImageIdx + 1} / ${propertyImages.length}`;
+            
+            // Highlight thumbnail
+            document.querySelectorAll('.thumb-box').forEach((tb, i) => {
+                if (i === index) tb.classList.add('border-blue-600', 'ring-2', 'ring-blue-600');
+                else tb.classList.remove('border-blue-600', 'ring-2', 'ring-blue-600');
+            });
+        }
+
+        function nextImage() {
+            if (propertyImages.length === 0) return;
+            currentImageIdx = (currentImageIdx + 1) % propertyImages.length;
+            updateMainImage(currentImageIdx);
+        }
+
+        function prevImage() {
+            if (propertyImages.length === 0) return;
+            currentImageIdx = (currentImageIdx - 1 + propertyImages.length) % propertyImages.length;
+            updateMainImage(currentImageIdx);
+        }
 
         async function loadDetail() {
             const params = new URLSearchParams(window.location.search);
@@ -135,23 +187,58 @@
             document.getElementById('prop-title').innerText = data.title;
             document.getElementById('prop-location').innerText = data.location || data.region;
             document.getElementById('prop-price').innerText = data.price;
+            document.getElementById('prop-desc').innerText = data.description || "Detailed description available upon request.";
 
-            document.getElementById('q-price').innerText = data.price;
-            document.getElementById('q-type').innerText = data.category;
-            document.getElementById('q-loc').innerText = data.location || data.region;
-
-            const imgs = (data.images && data.images.length > 0) ? data.images : ['https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80'];
+            document.getElementById('spec-price').innerText = data.price;
+            document.getElementById('spec-carpet').innerText = data.carpet_area ? `${data.carpet_area} sq.ft.` : '-';
             
-            document.getElementById('main-img').src = imgs[0];
-            document.getElementById('img-count').innerText = `${imgs.length} Photos`;
+            const bedrooms = data.bedrooms ? `${data.bedrooms} Bed` : '';
+            const bathrooms = data.bathrooms ? `${data.bathrooms} Bath` : '';
+            document.getElementById('spec-config').innerText = `${bedrooms} ${bathrooms}`.trim() || data.category;
 
-            const sideContainer = document.getElementById('side-imgs');
-            sideContainer.innerHTML = '';
-            for (let i = 1; i < Math.min(imgs.length, 3); i++) {
-                sideContainer.innerHTML += `<img src="${imgs[i]}" class="w-full h-full object-cover rounded border">`;
+            document.getElementById('spec-floor').innerText = data.floor_no ? `${data.floor_no} of ${data.total_floors || '-'}` : '-';
+            document.getElementById('spec-facing').innerText = data.facing || '-';
+            document.getElementById('spec-parking').innerText = data.parking || '-';
+            document.getElementById('spec-furnishing').innerText = data.furnishing || '-';
+            document.getElementById('spec-possession').innerText = data.possession_status || 'Ready Possession';
+            document.getElementById('spec-ownership').innerText = data.ownership_type || 'Co-operative Society';
+            document.getElementById('spec-rera').innerText = data.rera_number || 'Clear Title';
+
+            // Highlights
+            if (data.highlights) {
+                const hlList = document.getElementById('highlights-list');
+                const items = data.highlights.split('\n');
+                hlList.innerHTML = '';
+                items.forEach(h => {
+                    if (h.trim()) hlList.innerHTML += `<li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600"></i> ${h.trim()}</li>`;
+                });
             }
 
-            const msg = encodeURIComponent(`Hi Tricore, I am interested in ${data.title} (${data.price}). Please share legal verification documents.`);
+            // Amenities
+            if (data.amenities && data.amenities.length > 0) {
+                const amGrid = document.getElementById('amenities-grid');
+                amGrid.innerHTML = '';
+                data.amenities.forEach(a => {
+                    amGrid.innerHTML += `<div class="bg-slate-100 p-2 rounded border font-semibold flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-600"></i> ${a}</div>`;
+                });
+            }
+
+            // Media Slider setup
+            propertyImages = (data.images && data.images.length > 0) ? data.images : ['https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80'];
+            
+            const thumbContainer = document.getElementById('thumb-container');
+            thumbContainer.innerHTML = '';
+            propertyImages.forEach((url, i) => {
+                thumbContainer.innerHTML += `
+                    <div onclick="updateMainImage(${i})" class="thumb-box w-20 h-16 rounded border overflow-hidden cursor-pointer flex-shrink-0">
+                        <img src="${url}" class="w-full h-full object-cover">
+                    </div>
+                `;
+            });
+
+            updateMainImage(0);
+
+            const msg = encodeURIComponent(`Hi Tricore, I am interested in ${data.title} (${data.price}). Please share legal verification details.`);
             document.getElementById('btn-wa').href = `https://wa.me/919987975429?text=${msg}`;
         }
 
