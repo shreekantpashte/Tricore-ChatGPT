@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details | Tricore Realty & Advisory</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { navy: { 800: '#1e293b', 900: '#0f172a' }, surface: '#F8FAFC' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-slate-800 font-sans antialiased">
+
+    <!-- NAVIGATION HEADER -->
+    <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-extrabold text-navy-900 flex items-center gap-2">
+                <i class="fa-solid fa-building text-blue-600"></i> TRICORE
+            </a>
+            
+            <div class="hidden md:flex space-x-8 font-medium text-slate-700 text-sm">
+                <a href="index.html">Home</a>
+                <a href="buy.html" class="text-blue-600 font-bold">Buy Properties</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+
+            <a href="https://wa.me/919987975429" target="_blank" class="bg-emerald-600 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-[8px]">
+                <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
+            </a>
+        </div>
+    </nav>
+
+    <!-- CONTENT WRAPPER -->
+    <div class="pt-24 pb-16 max-w-7xl mx-auto px-4 sm:px-6">
+        <a href="buy.html" class="text-xs font-bold text-slate-500 hover:text-blue-600 transition mb-4 inline-block">&larr; Back to listings</a>
+
+        <!-- BENTO IMAGE GALLERY -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
+            <div class="md:col-span-2 relative h-80 sm:h-96 rounded-lg overflow-hidden border">
+                <img id="main-img" class="w-full h-full object-cover">
+                <span class="absolute bottom-3 left-3 bg-black/70 text-white text-[10px] font-bold px-2 py-1 rounded" id="img-count">1 Photos</span>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-1 gap-3 h-80 sm:h-96" id="side-imgs"></div>
+        </div>
+
+        <!-- MAIN LAYOUT GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- LEFT COLUMN: SPECS & DETAILS -->
+            <div class="lg:col-span-2 space-y-6">
+                <div>
+                    <div class="flex gap-2 mb-2">
+                        <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase"><i class="fa-solid fa-circle-check"></i> VERIFIED</span>
+                        <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase">READY POSSESSION</span>
+                    </div>
+                    <h1 id="prop-title" class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-1">Loading Title...</h1>
+                    <p id="prop-location" class="text-xs text-slate-500 font-medium"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i> Loading Location...</p>
+                    <p id="prop-price" class="text-2xl font-extrabold text-blue-700 mt-3">₹0</p>
+                </div>
+
+                <!-- QUICK PROPERTY DETAILS TABLE -->
+                <div class="bg-white p-5 rounded-lg border">
+                    <h3 class="font-bold text-sm text-navy-900 mb-4">Quick Property Details</h3>
+                    <div class="grid grid-cols-2 gap-4 text-xs">
+                        <div><span class="text-slate-400 block">Price</span><span id="q-price" class="font-bold text-slate-800">-</span></div>
+                        <div><span class="text-slate-400 block">Property Type</span><span id="q-type" class="font-bold text-slate-800">-</span></div>
+                        <div><span class="text-slate-400 block">Location</span><span id="q-loc" class="font-bold text-slate-800">-</span></div>
+                        <div><span class="text-slate-400 block">Possession</span><span class="font-bold text-slate-800">Ready Possession • Immediate</span></div>
+                        <div><span class="text-slate-400 block">Ownership Type</span><span class="font-bold text-slate-800">Co-operative Society</span></div>
+                        <div><span class="text-slate-400 block">RERA Status</span><span id="q-rera" class="font-bold text-slate-800">Clear Title</span></div>
+                    </div>
+                </div>
+
+                <!-- WHY CHOOSE THIS PROPERTY -->
+                <div class="bg-white p-5 rounded-lg border">
+                    <h3 class="font-bold text-sm text-navy-900 mb-3">Why Choose This Property</h3>
+                    <ul class="space-y-2 text-xs text-slate-600">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600"></i> Legally checked and verified by the Tricore advisory desk.</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600"></i> Clear chain of title documents and revenue verification complete.</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600"></i> Eligible for major nationalized and private bank home loans.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: STICKY ASSISTANCE CARD -->
+            <div>
+                <div class="bg-white p-6 rounded-lg border shadow-sm sticky top-24">
+                    <h3 class="font-bold text-base text-navy-900 mb-1">Need Assistance?</h3>
+                    <p class="text-xs text-slate-500 mb-4">Talk to a Tricore advisor for pricing, documents and a site visit for this property.</p>
+
+                    <div class="space-y-3">
+                        <a id="btn-wa" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded text-xs text-center block transition">
+                            <i class="fa-brands fa-whatsapp text-sm mr-1"></i> WhatsApp Enquiry
+                        </a>
+                        <a href="tel:+919987975429" class="w-full bg-navy-900 hover:bg-slate-800 text-white font-bold py-3 rounded text-xs text-center block transition">
+                            <i class="fa-solid fa-phone mr-1"></i> Call Now • +91 9987975429
+                        </a>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t text-[11px] text-slate-500 leading-relaxed">
+                        <i class="fa-solid fa-shield-halved text-blue-600 mr-1"></i> Tricore Realty & Advisory verifies ownership and documents before listing. You get honest guidance, clear pricing and full support till registration.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function loadDetail() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            if (!id) return;
+
+            const { data, error } = await supabaseClient.from('properties').select('*').eq('id', id).single();
+            if (error || !data) { alert("Property not found"); return; }
+
+            document.getElementById('prop-title').innerText = data.title;
+            document.getElementById('prop-location').innerText = data.location || data.region;
+            document.getElementById('prop-price').innerText = data.price;
+
+            document.getElementById('q-price').innerText = data.price;
+            document.getElementById('q-type').innerText = data.category;
+            document.getElementById('q-loc').innerText = data.location || data.region;
+
+            const imgs = (data.images && data.images.length > 0) ? data.images : ['https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80'];
+            
+            document.getElementById('main-img').src = imgs[0];
+            document.getElementById('img-count').innerText = `${imgs.length} Photos`;
+
+            const sideContainer = document.getElementById('side-imgs');
+            sideContainer.innerHTML = '';
+            for (let i = 1; i < Math.min(imgs.length, 3); i++) {
+                sideContainer.innerHTML += `<img src="${imgs[i]}" class="w-full h-full object-cover rounded border">`;
+            }
+
+            const msg = encodeURIComponent(`Hi Tricore, I am interested in ${data.title} (${data.price}). Please share legal verification documents.`);
+            document.getElementById('btn-wa').href = `https://wa.me/919987975429?text=${msg}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDetail);
+    </script>
+</body>
+</html>
