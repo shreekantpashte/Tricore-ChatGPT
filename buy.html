@@ -6,8 +6,13 @@
     <title>All Properties for Sale | Tricore Realty & Advisory</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Supabase JS Client SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         tailwind.config = {
@@ -42,6 +47,7 @@
         </div>
     </nav>
 
+    <!-- HEADER SPACER -->
     <div class="pt-24 pb-6 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <h1 class="text-2xl sm:text-4xl font-extrabold text-navy-900">Verified Properties for Sale</h1>
@@ -49,15 +55,22 @@
         </div>
     </div>
 
+    <!-- MAIN CONTENT WITH ADVANCED FILTERS & GRID -->
     <section class="py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             
-            <div class="bg-white p-4 rounded-[8px] border border-slate-200 shadow-sm mb-8 flex flex-wrap gap-4 items-center justify-between">
-                <div class="flex flex-wrap gap-4 items-center flex-1">
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Region</label>
-                        <select id="buy-filter-region" onchange="applyFilters()" class="bg-slate-50 border border-slate-200 text-xs font-semibold rounded p-2 text-slate-800">
-                            <option value="All">All Regions</option>
+            <!-- SEARCH BAR & TOP CONTROLS -->
+            <div class="bg-white p-4 rounded-[8px] border border-slate-200 shadow-sm mb-4">
+                <div class="flex flex-wrap gap-3 items-center justify-between">
+                    <!-- BUY / RENT TOGGLE -->
+                    <div class="flex items-center bg-slate-100 p-1 rounded font-bold text-xs">
+                        <button class="bg-navy-900 text-white px-3 py-1.5 rounded shadow-sm">Buy</button>
+                    </div>
+
+                    <!-- REGION DROPDOWN -->
+                    <div class="flex-1 min-w-[150px]">
+                        <select id="buy-filter-region" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 text-xs font-semibold rounded p-2.5 text-slate-800 focus:outline-none">
+                            <option value="All">All Locations</option>
                             <option value="All Mumbai">All Mumbai</option>
                             <option value="All Thane">All Thane</option>
                             <option value="Navi Mumbai">Navi Mumbai</option>
@@ -66,30 +79,119 @@
                         </select>
                     </div>
 
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Category</label>
-                        <select id="buy-filter-type" onchange="applyFilters()" class="bg-slate-50 border border-slate-200 text-xs font-semibold rounded p-2 text-slate-800">
-                            <option value="All">All Categories</option>
+                    <!-- PROPERTY TYPE DROPDOWN -->
+                    <div class="flex-1 min-w-[150px]">
+                        <select id="buy-filter-type" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 text-xs font-semibold rounded p-2.5 text-slate-800 focus:outline-none">
+                            <option value="All">All Property Types</option>
                             <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
                             <option value="Bungalows & Houses">Bungalows / Villa</option>
                             <option value="Plots / Land">Plots / Land</option>
                             <option value="Commercial">Commercial</option>
                         </select>
                     </div>
+
+                    <!-- SEARCH INPUT -->
+                    <div class="relative flex-1 min-w-[200px]">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" id="filter-search" oninput="applyFilters()" placeholder="Search by ID, locality, society..." class="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded text-xs focus:outline-none font-medium">
+                    </div>
+
+                    <!-- ACTION BUTTONS -->
+                    <div class="flex items-center gap-2">
+                        <button onclick="toggleFilterDrawer()" class="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-bold text-xs px-3.5 py-2 rounded transition">
+                            <i class="fa-solid fa-sliders"></i> Filters
+                        </button>
+                        <button onclick="resetAllFilters()" class="flex items-center gap-1 bg-navy-900 hover:bg-slate-800 text-white font-bold text-xs px-3.5 py-2 rounded transition">
+                            <i class="fa-solid fa-xmark"></i> Clear
+                        </button>
+                    </div>
                 </div>
 
-                <div class="text-xs font-medium text-slate-500">
-                    Showing <span id="property-count" class="font-bold text-navy-900">0</span> properties
+                <!-- EXPANDABLE FILTER DRAWER -->
+                <div id="filter-drawer" class="hidden pt-4 mt-4 border-t border-slate-100">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs font-bold text-slate-600">
+                        <div>
+                            <label class="block mb-1 text-[10px] text-slate-400 uppercase">MIN BUDGET (Lakhs)</label>
+                            <input type="number" id="filter-min-price" oninput="applyFilters()" placeholder="e.g. 50" class="w-full border p-2 rounded bg-slate-50 font-medium">
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-[10px] text-slate-400 uppercase">MAX BUDGET (Lakhs)</label>
+                            <input type="number" id="filter-max-price" oninput="applyFilters()" placeholder="e.g. 250" class="w-full border p-2 rounded bg-slate-50 font-medium">
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-[10px] text-slate-400 uppercase">BEDROOMS</label>
+                            <select id="filter-bedrooms" onchange="applyFilters()" class="w-full border p-2 rounded bg-slate-50 font-medium">
+                                <option value="All">Any</option>
+                                <option value="1">1 BHK</option>
+                                <option value="2">2 BHK</option>
+                                <option value="3">3 BHK</option>
+                                <option value="4">4+ BHK</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-[10px] text-slate-400 uppercase">BATHROOMS</label>
+                            <select id="filter-bathrooms" onchange="applyFilters()" class="w-full border p-2 rounded bg-slate-50 font-medium">
+                                <option value="All">Any</option>
+                                <option value="1">1 Bath</option>
+                                <option value="2">2 Bath</option>
+                                <option value="3">3+ Bath</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-[10px] text-slate-400 uppercase">MIN AREA (SQ.FT.)</label>
+                            <input type="number" id="filter-min-area" oninput="applyFilters()" placeholder="e.g. 500" class="w-full border p-2 rounded bg-slate-50 font-medium">
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-[10px] text-slate-400 uppercase">MAX AREA (SQ.FT.)</label>
+                            <input type="number" id="filter-max-area" oninput="applyFilters()" placeholder="e.g. 2000" class="w-full border p-2 rounded bg-slate-50 font-medium">
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-[10px] text-slate-400 uppercase">POSSESSION</label>
+                            <select id="filter-possession" onchange="applyFilters()" class="w-full border p-2 rounded bg-slate-50 font-medium">
+                                <option value="All">Any</option>
+                                <option value="Ready Possession">Ready Possession</option>
+                                <option value="Under Construction">Under Construction</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-[10px] text-slate-400 uppercase">FURNISHING</label>
+                            <select id="filter-furnishing" onchange="applyFilters()" class="w-full border p-2 rounded bg-slate-50 font-medium">
+                                <option value="All">Any</option>
+                                <option value="Semi Furnished">Semi Furnished</option>
+                                <option value="Fully Furnished">Fully Furnished</option>
+                                <option value="Unfurnished">Unfurnished</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-right">
+                        <button onclick="resetAllFilters()" class="text-xs font-bold text-slate-500 hover:text-red-600 transition"><i class="fa-solid fa-xmark"></i> Reset all filters</button>
+                    </div>
                 </div>
             </div>
 
+            <!-- RESULT COUNT -->
+            <div class="mb-4 text-xs font-medium text-slate-500">
+                <span id="property-count" class="font-bold text-navy-900">0</span> properties match your search
+            </div>
+
+            <!-- DYNAMIC PROPERTIES GRID -->
             <div id="buy-properties-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="col-span-3 text-center py-12 text-slate-500 font-medium">Loading live properties...</div>
+                <div class="col-span-3 text-center py-12 text-slate-500 font-medium">
+                    Loading live properties...
+                </div>
             </div>
 
         </div>
     </section>
 
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 py-8 text-xs border-t border-slate-800 mt-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            &copy; 2026 Tricore Realty & Advisory. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- SCRIPT -->
     <script>
         const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
@@ -97,9 +199,16 @@
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         let allProperties = [];
 
+        function toggleFilterDrawer() {
+            document.getElementById('filter-drawer').classList.toggle('hidden');
+        }
+
         function getUrlParams() {
             const params = new URLSearchParams(window.location.search);
-            return { region: params.get('region') || 'All', type: params.get('type') || 'All' };
+            return {
+                region: params.get('region') || 'All',
+                type: params.get('type') || 'All'
+            };
         }
 
         async function initBuyPage() {
@@ -108,52 +217,128 @@
             document.getElementById('buy-filter-type').value = urlFilters.type;
 
             try {
-                const { data, error } = await supabaseClient.from('properties').select('*').order('created_at', { ascending: false });
+                const { data, error } = await supabaseClient
+                    .from('properties')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
                 if (error) throw error;
+                
                 allProperties = data || [];
                 applyFilters();
             } catch (err) {
-                console.error(err);
-                document.getElementById('buy-properties-grid').innerHTML = `<div class="col-span-3 text-center py-12 text-red-500">Failed to load live properties.</div>`;
+                console.error("Error fetching properties from Supabase:", err);
+                document.getElementById('buy-properties-grid').innerHTML = `
+                    <div class="col-span-3 text-center py-12 text-red-500 font-medium">
+                        Failed to load live properties. Please try refreshing.
+                    </div>`;
             }
         }
 
         function applyFilters() {
             const selectedRegion = document.getElementById('buy-filter-region').value;
             const selectedType = document.getElementById('buy-filter-type').value;
+            const searchKeyword = document.getElementById('filter-search').value.toLowerCase().trim();
+
+            const minPrice = parseFloat(document.getElementById('filter-min-price').value) || 0;
+            const maxPrice = parseFloat(document.getElementById('filter-max-price').value) || Infinity;
+            const bedrooms = document.getElementById('filter-bedrooms').value;
+            const bathrooms = document.getElementById('filter-bathrooms').value;
+            const minArea = parseFloat(document.getElementById('filter-min-area').value) || 0;
+            const maxArea = parseFloat(document.getElementById('filter-max-area').value) || Infinity;
+            const possession = document.getElementById('filter-possession').value;
+            const furnishing = document.getElementById('filter-furnishing').value;
 
             const filtered = allProperties.filter(item => {
                 const matchesRegion = (selectedRegion === 'All' || item.region === selectedRegion);
                 const matchesType = (selectedType === 'All' || item.category === selectedType);
-                return matchesRegion && matchesType;
+                
+                const matchesSearch = !searchKeyword || 
+                    (item.title && item.title.toLowerCase().includes(searchKeyword)) ||
+                    (item.location && item.location.toLowerCase().includes(searchKeyword)) ||
+                    (item.id && item.id.toLowerCase().includes(searchKeyword));
+
+                // Price Parsing (Converts Cr/Lakhs string into Lakhs for numerical comparison)
+                let propertyLakhs = 0;
+                if (item.price) {
+                    const priceStr = item.price.toLowerCase();
+                    const numMatch = priceStr.match(/[\d.]+/);
+                    if (numMatch) {
+                        const val = parseFloat(numMatch[0]);
+                        if (priceStr.includes('cr')) propertyLakhs = val * 100;
+                        else propertyLakhs = val;
+                    }
+                }
+                const matchesPrice = (propertyLakhs >= minPrice) && (propertyLakhs <= maxPrice);
+
+                // Bedroom matching
+                const matchesBedrooms = (bedrooms === 'All' || (item.bedrooms && item.bedrooms.toString() === bedrooms));
+                
+                // Bathroom matching
+                const matchesBathrooms = (bathrooms === 'All' || (item.bathrooms && item.bathrooms.toString() === bathrooms));
+
+                // Area matching
+                const carpetNum = parseFloat(item.carpet_area) || 0;
+                const matchesArea = (!carpetNum) || (carpetNum >= minArea && carpetNum <= maxArea);
+
+                // Possession matching
+                const matchesPossession = (possession === 'All' || item.possession_status === possession);
+
+                // Furnishing matching
+                const matchesFurnishing = (furnishing === 'All' || item.furnishing === furnishing);
+
+                return matchesRegion && matchesType && matchesSearch && matchesPrice && matchesBedrooms && matchesBathrooms && matchesArea && matchesPossession && matchesFurnishing;
             });
 
             document.getElementById('property-count').innerText = filtered.length;
             renderProperties(filtered);
         }
 
+        function resetAllFilters() {
+            document.getElementById('buy-filter-region').value = 'All';
+            document.getElementById('buy-filter-type').value = 'All';
+            document.getElementById('filter-search').value = '';
+            document.getElementById('filter-min-price').value = '';
+            document.getElementById('filter-max-price').value = '';
+            document.getElementById('filter-bedrooms').value = 'All';
+            document.getElementById('filter-bathrooms').value = 'All';
+            document.getElementById('filter-min-area').value = '';
+            document.getElementById('filter-max-area').value = '';
+            document.getElementById('filter-possession').value = 'All';
+            document.getElementById('filter-furnishing').value = 'All';
+            applyFilters();
+        }
+
         function renderProperties(items) {
             const grid = document.getElementById('buy-properties-grid');
             if (items.length === 0) {
-                grid.innerHTML = `<div class="col-span-3 text-center py-12 text-slate-500">No properties found matching criteria.</div>`;
+                grid.innerHTML = `
+                    <div class="col-span-3 text-center py-12 text-slate-500 font-medium bg-white rounded border border-slate-200">
+                        No properties found matching your search criteria.
+                    </div>`;
                 return;
             }
 
             grid.innerHTML = '';
             items.forEach(item => {
-                const displayImage = (item.images && item.images.length > 0) ? item.images[0] : 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80';
+                const displayImage = (item.images && item.images.length > 0 && item.images[0]) 
+                    ? item.images[0] 
+                    : 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80';
+
                 const locationText = item.location || item.region;
-                const encodedMsg = encodeURIComponent(`Hi Tricore, I am interested in ${item.title} (${locationText}).`);
+                const encodedMsg = encodeURIComponent(`Hi Tricore, I am interested in property: ${item.title} (${locationText}). Price: ${item.price}`);
                 const whatsappUrl = `https://wa.me/919987975429?text=${encodedMsg}`;
                 const detailUrl = `property-detail.html?id=${item.id}`;
 
                 grid.innerHTML += `
-                    <div class="bg-white rounded-[8px] border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="bg-white rounded-[8px] border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition duration-200">
                         <a href="${detailUrl}">
                             <img src="${displayImage}" class="w-full h-48 object-cover cursor-pointer hover:opacity-95 transition" alt="${item.title}">
                         </a>
                         <div class="p-5">
-                            <span class="text-[10px] font-bold text-slate-500 uppercase"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i>${locationText}</span>
+                            <span class="text-[10px] font-bold text-slate-500 uppercase">
+                                <i class="fa-solid fa-location-dot text-red-500 mr-1"></i>${locationText}
+                            </span>
                             <a href="${detailUrl}">
                                 <h3 class="font-bold text-base text-navy-900 line-clamp-1 mt-1 mb-1 hover:text-blue-600 transition">${item.title}</h3>
                             </a>
