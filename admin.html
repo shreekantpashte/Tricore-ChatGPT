@@ -35,190 +35,149 @@
         </header>
 
         <div class="max-w-7xl mx-auto w-full px-6 pt-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-slate-500 font-bold uppercase">Total Properties</p><p id="stat-total" class="text-2xl font-extrabold text-slate-800">0</p></div>
-                <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-emerald-600 font-bold uppercase">Published</p><p id="stat-published" class="text-2xl font-extrabold text-emerald-600">0</p></div>
-                <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-amber-600 font-bold uppercase">Drafts</p><p id="stat-drafts" class="text-2xl font-extrabold text-amber-600">0</p></div>
-                <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-purple-600 font-bold uppercase">Recommended/Featured</p><p id="stat-featured" class="text-2xl font-extrabold text-purple-600">0</p></div>
+            
+            <!-- SECTION MANAGER TABS -->
+            <div class="flex space-x-6 border-b border-slate-300 mb-6 text-sm font-bold text-slate-500">
+                <button onclick="switchAdminSection('sec-properties', this)" class="admin-sec-tab text-blue-600 border-b-2 border-blue-600 pb-2">Properties & Land</button>
+                <button onclick="switchAdminSection('sec-services', this)" class="admin-sec-tab border-b-2 border-transparent pb-2 hover:text-blue-600">Legal Services</button>
+                <button onclick="switchAdminSection('sec-testimonials', this)" class="admin-sec-tab border-b-2 border-transparent pb-2 hover:text-blue-600">Testimonials</button>
             </div>
 
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-bold text-slate-800">All Properties</h2>
-                <button onclick="openForm()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded transition">+ Add New Property</button>
+            <!-- SECTION 1: PROPERTIES & LAND -->
+            <div id="sec-properties" class="admin-sec">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-slate-800">All Properties</h2>
+                    <button onclick="openForm()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded transition">+ Add New Property</button>
+                </div>
+
+                <div class="bg-white rounded border overflow-x-auto shadow-sm">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead class="bg-slate-50 border-b text-slate-500 font-bold uppercase">
+                            <tr>
+                                <th class="p-3">Title</th>
+                                <th class="p-3">Region</th>
+                                <th class="p-3">Price</th>
+                                <th class="p-3">Type</th>
+                                <th class="p-3">Recommended</th>
+                                <th class="p-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="properties-list" class="divide-y divide-slate-100 font-medium">
+                            <tr><td colspan="6" class="p-4 text-center text-slate-400">Loading properties...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <div class="bg-white rounded border overflow-x-auto shadow-sm">
-                <table class="w-full text-left text-xs border-collapse">
-                    <thead class="bg-slate-50 border-b text-slate-500 font-bold uppercase">
-                        <tr>
-                            <th class="p-3">Title</th>
-                            <th class="p-3">Region</th>
-                            <th class="p-3">Price</th>
-                            <th class="p-3">Recommended</th>
-                            <th class="p-3">Status</th>
-                            <th class="p-3 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="properties-list" class="divide-y divide-slate-100 font-medium">
-                        <tr><td colspan="6" class="p-4 text-center text-slate-400">Loading properties...</td></tr>
-                    </tbody>
-                </table>
+            <!-- SECTION 2: SERVICES MANAGER -->
+            <div id="sec-services" class="admin-sec hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-slate-800">Legal & Revenue Services</h2>
+                    <button onclick="openServiceForm()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded transition">+ Add New Service</button>
+                </div>
+
+                <div class="bg-white rounded border overflow-x-auto shadow-sm">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead class="bg-slate-50 border-b text-slate-500 font-bold uppercase">
+                            <tr>
+                                <th class="p-3">Title</th>
+                                <th class="p-3">Description</th>
+                                <th class="p-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="services-list" class="divide-y divide-slate-100 font-medium">
+                            <tr><td colspan="3" class="p-4 text-center text-slate-400">Loading services...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
+            <!-- SECTION 3: TESTIMONIALS MANAGER -->
+            <div id="sec-testimonials" class="admin-sec hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-slate-800">Client Reviews</h2>
+                    <button onclick="openTestimonialForm()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded transition">+ Add Review</button>
+                </div>
+
+                <div class="bg-white rounded border overflow-x-auto shadow-sm">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead class="bg-slate-50 border-b text-slate-500 font-bold uppercase">
+                            <tr>
+                                <th class="p-3">Client</th>
+                                <th class="p-3">Review</th>
+                                <th class="p-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="testimonials-list" class="divide-y divide-slate-100 font-medium">
+                            <tr><td colspan="3" class="p-4 text-center text-slate-400">Loading reviews...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <!-- MODAL FORM -->
+    <!-- MODAL 1: PROPERTY FORM -->
     <div id="property-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full p-6 max-h-[92vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4 border-b pb-3">
-                <h3 id="modal-title" class="text-lg font-bold text-slate-900">Add Property</h3>
-                <button type="button" onclick="closeForm()" class="text-slate-400 hover:text-slate-700 font-bold text-xl">×</button>
-            </div>
-
-            <div class="flex space-x-4 border-b mb-4 text-xs font-bold text-slate-500">
-                <button type="button" onclick="switchAdminTab('tab-basic', this)" class="admin-tab text-blue-600 border-b-2 border-blue-600 pb-2">Basic</button>
-                <button type="button" onclick="switchAdminTab('tab-details', this)" class="admin-tab border-b-2 border-transparent pb-2 hover:text-blue-600">Details</button>
-                <button type="button" onclick="switchAdminTab('tab-media', this)" class="admin-tab border-b-2 border-transparent pb-2 hover:text-blue-600">Media</button>
-                <button type="button" onclick="switchAdminTab('tab-amenities', this)" class="admin-tab border-b-2 border-transparent pb-2 hover:text-blue-600">Amenities</button>
-            </div>
-
+            <h3 id="modal-title" class="text-lg font-bold text-slate-900 mb-4">Add Property</h3>
             <form id="property-form" class="text-xs space-y-4">
                 <input type="hidden" id="p-id">
-
-                <!-- TAB 1: BASIC -->
-                <div id="tab-basic" class="tab-content space-y-3">
+                <div>
+                    <label class="font-bold block mb-1">Title</label>
+                    <input type="text" id="p-title" required class="w-full border p-2 rounded">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="font-bold block mb-1">Property Title</label>
-                        <input type="text" id="p-title" required class="w-full border p-2 rounded" placeholder="1 BHK Flat In Sagar Park Hsg Society For Sale In Ghatkopar">
+                        <label class="font-bold block mb-1">Price</label>
+                        <input type="text" id="p-price" required class="w-full border p-2 rounded">
                     </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="font-bold block mb-1">Price (e.g. ₹98 L or ₹1.12 Cr)</label>
-                            <input type="text" id="p-price" required class="w-full border p-2 rounded">
-                        </div>
-                        <div>
-                            <label class="font-bold block mb-1">Region</label>
-                            <select id="p-region" class="w-full border p-2 rounded">
-                                <option value="All Mumbai">All Mumbai</option>
-                                <option value="All Thane">All Thane</option>
-                                <option value="Navi Mumbai">Navi Mumbai</option>
-                                <option value="Virar & Vasai">Virar & Vasai</option>
-                                <option value="Lonavala">Lonavala</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="font-bold block mb-1">Location / Address</label>
-                            <input type="text" id="p-location" required class="w-full border p-2 rounded" placeholder="Amrut Nagar Cir, Ghatkopar West">
-                        </div>
-                        <div>
-                            <label class="font-bold block mb-1">Category</label>
-                            <select id="p-category" class="w-full border p-2 rounded">
-                                <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
-                                <option value="Bungalows & Houses">Bungalows & Houses</option>
-                                <option value="Plots / Land">Plots / Land</option>
-                                <option value="Commercial">Commercial</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <!-- RECOMMENDED / FEATURED TOGGLE CHECKBOX -->
-                    <div class="bg-amber-50 border border-amber-200 p-3 rounded flex items-center gap-2">
-                        <input type="checkbox" id="p-featured" class="w-4 h-4 text-blue-600 rounded cursor-pointer">
-                        <label for="p-featured" class="font-bold text-amber-900 cursor-pointer">Show this property in Home Page Recommended Properties section</label>
-                    </div>
-
                     <div>
-                        <label class="font-bold block mb-1">Description</label>
-                        <textarea id="p-desc" rows="3" class="w-full border p-2 rounded" placeholder="Short description about location, connectivity, amenities..."></textarea>
+                        <label class="font-bold block mb-1">Region</label>
+                        <select id="p-region" class="w-full border p-2 rounded">
+                            <option value="All Mumbai">All Mumbai</option>
+                            <option value="All Thane">All Thane</option>
+                            <option value="Navi Mumbai">Navi Mumbai</option>
+                            <option value="Virar & Vasai">Virar & Vasai</option>
+                            <option value="Lonavala">Lonavala</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="font-bold block mb-1">Location Details</label>
+                        <input type="text" id="p-location" required class="w-full border p-2 rounded">
+                    </div>
+                    <div>
+                        <label class="font-bold block mb-1">Category</label>
+                        <select id="p-category" class="w-full border p-2 rounded">
+                            <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
+                            <option value="Bungalows & Houses">Bungalows & Houses</option>
+                            <option value="Plots / Land">Plots / Land</option>
+                            <option value="Commercial">Commercial</option>
+                        </select>
                     </div>
                 </div>
 
-                <!-- TAB 2: DETAILS -->
-                <div id="tab-details" class="tab-content hidden space-y-3">
-                    <div class="grid grid-cols-3 gap-3">
-                        <div><label class="font-bold block mb-1">Carpet Area (sq.ft)</label><input type="text" id="p-carpet" class="w-full border p-2 rounded" placeholder="690"></div>
-                        <div><label class="font-bold block mb-1">Bedrooms</label><input type="text" id="p-bedrooms" class="w-full border p-2 rounded" placeholder="2"></div>
-                        <div><label class="font-bold block mb-1">Bathrooms</label><input type="text" id="p-bathrooms" class="w-full border p-2 rounded" placeholder="2"></div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-3">
-                        <div><label class="font-bold block mb-1">Balconies</label><input type="text" id="p-balconies" class="w-full border p-2 rounded" placeholder="1"></div>
-                        <div><label class="font-bold block mb-1">Floor No.</label><input type="text" id="p-floor" class="w-full border p-2 rounded" placeholder="4"></div>
-                        <div><label class="font-bold block mb-1">Total Floors</label><input type="text" id="p-total-floors" class="w-full border p-2 rounded" placeholder="18"></div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-3">
-                        <div>
-                            <label class="font-bold block mb-1">Facing</label>
-                            <select id="p-facing" class="w-full border p-2 rounded">
-                                <option value="East">East</option>
-                                <option value="West">West</option>
-                                <option value="North">North</option>
-                                <option value="South">South</option>
-                                <option value="North-East">North-East</option>
-                            </select>
-                        </div>
-                        <div><label class="font-bold block mb-1">Parking</label><input type="text" id="p-parking" class="w-full border p-2 rounded" placeholder="1 Covered"></div>
-                        <div>
-                            <label class="font-bold block mb-1">Furnishing</label>
-                            <select id="p-furnishing" class="w-full border p-2 rounded">
-                                <option value="Semi Furnished">Semi Furnished</option>
-                                <option value="Fully Furnished">Fully Furnished</option>
-                                <option value="Unfurnished">Unfurnished</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-3">
-                        <div>
-                            <label class="font-bold block mb-1">Possession Status</label>
-                            <select id="p-possession" class="w-full border p-2 rounded">
-                                <option value="Ready Possession">Ready Possession</option>
-                                <option value="Under Construction">Under Construction</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="font-bold block mb-1">Ownership Type</label>
-                            <select id="p-ownership" class="w-full border p-2 rounded">
-                                <option value="Co-operative Society">Co-operative Society</option>
-                                <option value="Freehold">Freehold</option>
-                                <option value="Leasehold">Leasehold</option>
-                            </select>
-                        </div>
-                        <div><label class="font-bold block mb-1">RERA Number</label><input type="text" id="p-rera" class="w-full border p-2 rounded" placeholder="P5170303"></div>
-                    </div>
-                    <div>
-                        <label class="font-bold block mb-1">Highlights (One per line)</label>
-                        <textarea id="p-highlights" rows="2" class="w-full border p-2 rounded" placeholder="Legally checked and verified by Tricore&#10;690 sq.ft. usable area&#10;Ready possession"></textarea>
-                    </div>
+                <div class="flex gap-4">
+                    <label class="flex items-center gap-1.5 font-bold cursor-pointer">
+                        <input type="checkbox" id="p-featured" class="w-4 h-4"> Show in Recommended Section
+                    </label>
+                    <label class="flex items-center gap-1.5 font-bold cursor-pointer text-blue-700">
+                        <input type="checkbox" id="p-land" class="w-4 h-4"> This is a Land / Plot Investment
+                    </label>
                 </div>
 
-                <!-- TAB 3: MEDIA -->
-                <div id="tab-media" class="tab-content hidden space-y-3">
-                    <div>
-                        <label class="font-bold block mb-1">Upload Property Photos (Select Multiple)</label>
-                        <input type="file" id="p-files" accept="image/*" multiple class="w-full border p-2 rounded bg-slate-50">
-                        <p id="upload-status" class="text-[11px] text-blue-600 font-semibold mt-1 hidden">Uploading images...</p>
-                        <div id="image-previews" class="flex flex-wrap gap-2 mt-3"></div>
-                    </div>
+                <div>
+                    <label class="font-bold block mb-1">Description</label>
+                    <textarea id="p-desc" rows="2" class="w-full border p-2 rounded"></textarea>
                 </div>
 
-                <!-- TAB 4: AMENITIES -->
-                <div id="tab-amenities" class="tab-content hidden space-y-2">
-                    <label class="font-bold block mb-2">Select Amenities Available</label>
-                    <div class="grid grid-cols-3 gap-2">
-                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Parking"> Parking</label>
-                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Lift"> Lift</label>
-                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Power Backup"> Power Backup</label>
-                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Swimming Pool"> Swimming Pool</label>
-                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Gym"> Gym</label>
-                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Garden"> Garden</label>
-                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Club House"> Club House</label>
-                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Kids Play Area"> Kids Play Area</label>
-                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Security"> Security</label>
-                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="CCTV"> CCTV</label>
-                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="Temple"> Temple</label>
-                        <label class="flex items-center gap-1.5 p-2 border rounded bg-slate-50 cursor-pointer"><input type="checkbox" name="amenity" value="School Nearby"> School Nearby</label>
-                    </div>
+                <div>
+                    <label class="font-bold block mb-1">Upload Photos</label>
+                    <input type="file" id="p-files" accept="image/*" multiple class="w-full border p-2 rounded">
+                    <div id="image-previews" class="flex flex-wrap gap-2 mt-2"></div>
                 </div>
 
                 <div class="flex justify-end gap-2 pt-3 border-t">
@@ -229,76 +188,110 @@
         </div>
     </div>
 
+    <!-- MODAL 2: SERVICE FORM -->
+    <div id="service-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-2xl max-w-md w-full p-6">
+            <h3 id="s-modal-title" class="text-lg font-bold mb-4">Add Legal Service</h3>
+            <form id="service-form" class="text-xs space-y-3">
+                <input type="hidden" id="s-id">
+                <div><label class="font-bold block mb-1">Service Title</label><input type="text" id="s-title" required class="w-full border p-2 rounded"></div>
+                <div><label class="font-bold block mb-1">Description</label><textarea id="s-desc" rows="3" class="w-full border p-2 rounded"></textarea></div>
+                <div><label class="font-bold block mb-1">FontAwesome Icon Class</label><input type="text" id="s-icon" class="w-full border p-2 rounded" placeholder="fa-solid fa-file-contract"></div>
+                <div class="flex justify-end gap-2 pt-3">
+                    <button type="button" onclick="closeServiceForm()" class="border px-4 py-2 rounded font-bold">Cancel</button>
+                    <button type="submit" class="bg-blue-600 text-white font-bold px-6 py-2 rounded">Save Service</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: TESTIMONIAL FORM -->
+    <div id="testimonial-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-2xl max-w-md w-full p-6">
+            <h3 class="text-lg font-bold mb-4">Add Client Review</h3>
+            <form id="testimonial-form" class="text-xs space-y-3">
+                <div><label class="font-bold block mb-1">Client Name</label><input type="text" id="t-name" required class="w-full border p-2 rounded"></div>
+                <div><label class="font-bold block mb-1">Location</label><input type="text" id="t-loc" class="w-full border p-2 rounded" placeholder="Thane West"></div>
+                <div><label class="font-bold block mb-1">Review</label><textarea id="t-review" rows="3" required class="w-full border p-2 rounded"></textarea></div>
+                <div class="flex justify-end gap-2 pt-3">
+                    <button type="button" onclick="closeTestimonialForm()" class="border px-4 py-2 rounded font-bold">Cancel</button>
+                    <button type="submit" class="bg-blue-600 text-white font-bold px-6 py-2 rounded">Save Review</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- SCRIPT -->
     <script>
         const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
-
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
         let propertiesData = [];
+        let servicesData = [];
+        let testimonialsData = [];
         let currentUploadedImages = [];
 
         document.getElementById('login-form').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const pass = document.getElementById('password').value.trim();
-            if (pass === 'Tricore@2026') {
+            if (document.getElementById('password').value.trim() === 'Tricore@2026') {
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('dashboard-screen').classList.remove('hidden');
                 document.getElementById('dashboard-screen').classList.add('flex');
-                await fetchProperties();
-            } else {
-                alert('Invalid Password');
-            }
+                await fetchAllAdminData();
+            } else { alert('Invalid Password'); }
         });
 
         function handleLogout() { location.reload(); }
 
-        function switchAdminTab(tabId, el) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
-            document.querySelectorAll('.admin-tab').forEach(t => {
+        function switchAdminSection(secId, el) {
+            document.querySelectorAll('.admin-sec').forEach(s => s.classList.add('hidden'));
+            document.querySelectorAll('.admin-sec-tab').forEach(t => {
                 t.classList.remove('text-blue-600', 'border-blue-600');
                 t.classList.add('border-transparent');
             });
-            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById(secId).classList.remove('hidden');
             el.classList.add('text-blue-600', 'border-blue-600');
             el.classList.remove('border-transparent');
         }
 
-        async function fetchProperties() {
-            try {
-                const { data, error } = await supabaseClient.from('properties').select('*').order('created_at', { ascending: false });
-                if (error) { alert("Supabase Error: " + error.message); return; }
-                propertiesData = data || [];
-                renderProperties();
-            } catch (err) { alert("Connection failed: " + err.message); }
+        async function fetchAllAdminData() {
+            // Fetch Properties
+            const { data: pData } = await supabaseClient.from('properties').select('*').order('created_at', { ascending: false });
+            propertiesData = pData || [];
+            renderProperties();
+
+            // Fetch Services
+            const { data: sData } = await supabaseClient.from('services').select('*').order('created_at', { ascending: false });
+            servicesData = sData || [];
+            renderServices();
+
+            // Fetch Testimonials
+            const { data: tData } = await supabaseClient.from('testimonials').select('*').order('created_at', { ascending: false });
+            testimonialsData = tData || [];
+            renderTestimonials();
         }
 
         function renderProperties() {
             const list = document.getElementById('properties-list');
             document.getElementById('stat-total').innerText = propertiesData.length;
             document.getElementById('stat-published').innerText = propertiesData.filter(p => p.status === 'Published').length;
-            document.getElementById('stat-drafts').innerText = propertiesData.filter(p => p.status === 'Draft').length;
             document.getElementById('stat-featured').innerText = propertiesData.filter(p => p.is_featured).length;
 
             if (propertiesData.length === 0) {
-                list.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-400">No properties in database. Click + Add New Property.</td></tr>`;
+                list.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-400">No properties in database.</td></tr>`;
                 return;
             }
 
             list.innerHTML = '';
             propertiesData.forEach(item => {
-                const isFeatured = item.is_featured;
                 list.innerHTML += `
                     <tr class="hover:bg-slate-50">
                         <td class="p-3 font-bold text-slate-800">${item.title}</td>
                         <td class="p-3 text-slate-600">${item.region}</td>
                         <td class="p-3 text-blue-700 font-bold">${item.price}</td>
-                        <td class="p-3">
-                            <button onclick="toggleFeatured('${item.id}', ${isFeatured})" class="px-2 py-1 rounded text-[10px] font-bold ${isFeatured ? 'bg-purple-100 text-purple-700 border border-purple-300' : 'bg-slate-100 text-slate-500 border'}">
-                                ${isFeatured ? '★ Recommended' : '☆ Standard'}
-                            </button>
-                        </td>
-                        <td class="p-3"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px] font-bold">${item.status || 'Published'}</span></td>
+                        <td class="p-3"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-[10px] font-bold">${item.is_land ? 'Land Plot' : 'Residential/Comm'}</span></td>
+                        <td class="p-3"><span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-[10px] font-bold">${item.is_featured ? 'Recommended' : 'Standard'}</span></td>
                         <td class="p-3 text-right space-x-2">
                             <button onclick="editProperty('${item.id}')" class="text-blue-600 font-bold">Edit</button>
                             <button onclick="deleteProperty('${item.id}')" class="text-red-600 font-bold">Delete</button>
@@ -308,116 +301,61 @@
             });
         }
 
-        async function toggleFeatured(id, currentStatus) {
-            const { error } = await supabaseClient.from('properties').update({ is_featured: !currentStatus }).eq('id', id);
-            if (error) alert("Error toggling featured status: " + error.message);
-            else fetchProperties();
-        }
-
-        function openForm() { 
-            document.getElementById('p-id').value = '';
-            currentUploadedImages = [];
-            renderImagePreviews();
-            document.getElementById('property-form').reset();
-            document.querySelectorAll('input[name="amenity"]').forEach(cb => cb.checked = false);
-            document.getElementById('modal-title').innerText = 'Add New Property';
-            document.getElementById('property-modal').classList.remove('hidden'); 
-        }
-
-        function closeForm() { document.getElementById('property-modal').classList.add('hidden'); }
-
-        function renderImagePreviews() {
-            const container = document.getElementById('image-previews');
-            container.innerHTML = '';
-            currentUploadedImages.forEach((url, index) => {
-                container.innerHTML += `
-                    <div class="relative w-16 h-16 border rounded overflow-hidden">
-                        <img src="${url}" class="w-full h-full object-cover">
-                        <button type="button" onclick="removeImage(${index})" class="absolute top-0 right-0 bg-red-600 text-white text-[10px] px-1 font-bold">×</button>
-                    </div>
+        function renderServices() {
+            const list = document.getElementById('services-list');
+            if (servicesData.length === 0) {
+                list.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-slate-400">No services added yet.</td></tr>`;
+                return;
+            }
+            list.innerHTML = '';
+            servicesData.forEach(s => {
+                list.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-3 font-bold text-slate-800">${s.title}</td>
+                        <td class="p-3 text-slate-600">${s.description || '-'}</td>
+                        <td class="p-3 text-right space-x-2">
+                            <button onclick="deleteService('${s.id}')" class="text-red-600 font-bold">Delete</button>
+                        </td>
+                    </tr>
                 `;
             });
         }
 
-        function removeImage(index) {
-            currentUploadedImages.splice(index, 1);
-            renderImagePreviews();
-        }
-
-        function editProperty(id) {
-            const prop = propertiesData.find(p => p.id === id);
-            if (!prop) return;
-
-            document.getElementById('p-id').value = prop.id;
-            document.getElementById('p-title').value = prop.title || '';
-            document.getElementById('p-price').value = prop.price || '';
-            document.getElementById('p-region').value = prop.region || 'All Mumbai';
-            document.getElementById('p-location').value = prop.location || '';
-            document.getElementById('p-category').value = prop.category || '1, 2, 3, 4 BHK Flats';
-            document.getElementById('p-desc').value = prop.description || '';
-            document.getElementById('p-featured').checked = !!prop.is_featured;
-
-            document.getElementById('p-carpet').value = prop.carpet_area || '';
-            document.getElementById('p-bedrooms').value = prop.bedrooms || '';
-            document.getElementById('p-bathrooms').value = prop.bathrooms || '';
-            document.getElementById('p-balconies').value = prop.balconies || '';
-            document.getElementById('p-floor').value = prop.floor_no || '';
-            document.getElementById('p-total-floors').value = prop.total_floors || '';
-            document.getElementById('p-facing').value = prop.facing || 'East';
-            document.getElementById('p-parking').value = prop.parking || '';
-            document.getElementById('p-furnishing').value = prop.furnishing || 'Semi Furnished';
-            document.getElementById('p-possession').value = prop.possession_status || 'Ready Possession';
-            document.getElementById('p-ownership').value = prop.ownership_type || 'Co-operative Society';
-            document.getElementById('p-rera').value = prop.rera_number || '';
-            document.getElementById('p-highlights').value = prop.highlights || '';
-
-            const selectedAmenities = prop.amenities || [];
-            document.querySelectorAll('input[name="amenity"]').forEach(cb => {
-                cb.checked = selectedAmenities.includes(cb.value);
+        function renderTestimonials() {
+            const list = document.getElementById('testimonials-list');
+            if (testimonialsData.length === 0) {
+                list.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-slate-400">No reviews added yet.</td></tr>`;
+                return;
+            }
+            list.innerHTML = '';
+            testimonialsData.forEach(t => {
+                list.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-3 font-bold text-slate-800">${t.client_name} (${t.location || 'Mumbai'})</td>
+                        <td class="p-3 text-slate-600">${t.review}</td>
+                        <td class="p-3 text-right">
+                            <button onclick="deleteTestimonial('${t.id}')" class="text-red-600 font-bold">Delete</button>
+                        </td>
+                    </tr>
+                `;
             });
-
-            currentUploadedImages = prop.images || [];
-            renderImagePreviews();
-
-            document.getElementById('modal-title').innerText = 'Edit Property';
-            document.getElementById('property-modal').classList.remove('hidden');
         }
+
+        // PROPERTY FORM HANDLERS
+        function openForm() { document.getElementById('property-modal').classList.remove('hidden'); }
+        function closeForm() { document.getElementById('property-modal').classList.add('hidden'); }
 
         document.getElementById('property-form').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            const saveBtn = document.getElementById('save-btn');
             const fileInput = document.getElementById('p-files');
-            const statusText = document.getElementById('upload-status');
-
-            saveBtn.disabled = true;
-
             if (fileInput.files.length > 0) {
-                statusText.classList.remove('hidden');
                 for (let file of fileInput.files) {
-                    const fileExt = file.name.split('.').pop();
-                    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
-
-                    const { error } = await supabaseClient.storage.from('property-images').upload(fileName, file);
-                    if (error) {
-                        alert("Image Upload Error: " + error.message);
-                        statusText.classList.add('hidden');
-                        saveBtn.disabled = false;
-                        return;
-                    }
-
-                    const { data: publicUrlData } = supabaseClient.storage.from('property-images').getPublicUrl(fileName);
-                    currentUploadedImages.push(publicUrlData.publicUrl);
+                    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${file.name.split('.').pop()}`;
+                    await supabaseClient.storage.from('property-images').upload(fileName, file);
+                    const { data } = supabaseClient.storage.from('property-images').getPublicUrl(fileName);
+                    currentUploadedImages.push(data.publicUrl);
                 }
-                statusText.classList.add('hidden');
             }
-
-            if (currentUploadedImages.length === 0) {
-                currentUploadedImages.push('https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80');
-            }
-
-            const chosenAmenities = [];
-            document.querySelectorAll('input[name="amenity"]:checked').forEach(cb => chosenAmenities.push(cb.value));
 
             const id = document.getElementById('p-id').value;
             const payload = {
@@ -428,47 +366,68 @@
                 category: document.getElementById('p-category').value,
                 description: document.getElementById('p-desc').value,
                 is_featured: document.getElementById('p-featured').checked,
-                carpet_area: document.getElementById('p-carpet').value,
-                bedrooms: document.getElementById('p-bedrooms').value,
-                bathrooms: document.getElementById('p-bathrooms').value,
-                balconies: document.getElementById('p-balconies').value,
-                floor_no: document.getElementById('p-floor').value,
-                total_floors: document.getElementById('p-total-floors').value,
-                facing: document.getElementById('p-facing').value,
-                parking: document.getElementById('p-parking').value,
-                furnishing: document.getElementById('p-furnishing').value,
-                possession_status: document.getElementById('p-possession').value,
-                ownership_type: document.getElementById('p-ownership').value,
-                rera_number: document.getElementById('p-rera').value,
-                highlights: document.getElementById('p-highlights').value,
-                amenities: chosenAmenities,
-                images: currentUploadedImages,
+                is_land: document.getElementById('p-land').checked,
+                images: currentUploadedImages.length > 0 ? currentUploadedImages : ['https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80'],
                 status: 'Published'
             };
 
-            let res;
-            if (id) {
-                res = await supabaseClient.from('properties').update(payload).eq('id', id);
-            } else {
-                res = await supabaseClient.from('properties').insert([payload]);
-            }
+            if (id) await supabaseClient.from('properties').update(payload).eq('id', id);
+            else await supabaseClient.from('properties').insert([payload]);
 
-            saveBtn.disabled = false;
-
-            if (res.error) {
-                alert("Error saving property: " + res.error.message);
-            } else {
-                closeForm();
-                document.getElementById('property-form').reset();
-                fetchProperties();
-            }
+            closeForm();
+            fetchAllAdminData();
         });
 
         async function deleteProperty(id) {
-            if (confirm("Delete this property?")) {
-                const { error } = await supabaseClient.from('properties').delete().eq('id', id);
-                if (error) alert("Error deleting: " + error.message);
-                else fetchProperties();
+            if (confirm("Delete property?")) {
+                await supabaseClient.from('properties').delete().eq('id', id);
+                fetchAllAdminData();
+            }
+        }
+
+        // SERVICE FORM HANDLERS
+        function openServiceForm() { document.getElementById('service-modal').classList.remove('hidden'); }
+        function closeServiceForm() { document.getElementById('service-modal').classList.add('hidden'); }
+
+        document.getElementById('service-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const payload = {
+                title: document.getElementById('s-title').value,
+                description: document.getElementById('s-desc').value,
+                icon: document.getElementById('s-icon').value || 'fa-solid fa-file-contract'
+            };
+            await supabaseClient.from('services').insert([payload]);
+            closeServiceForm();
+            fetchAllAdminData();
+        });
+
+        async function deleteService(id) {
+            if (confirm("Delete service?")) {
+                await supabaseClient.from('services').delete().eq('id', id);
+                fetchAllAdminData();
+            }
+        }
+
+        // TESTIMONIAL FORM HANDLERS
+        function openTestimonialForm() { document.getElementById('testimonial-modal').classList.remove('hidden'); }
+        function closeTestimonialForm() { document.getElementById('testimonial-modal').classList.add('hidden'); }
+
+        document.getElementById('testimonial-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const payload = {
+                client_name: document.getElementById('t-name').value,
+                location: document.getElementById('t-loc').value,
+                review: document.getElementById('t-review').value
+            };
+            await supabaseClient.from('testimonials').insert([payload]);
+            closeTestimonialForm();
+            fetchAllAdminData();
+        });
+
+        async function deleteTestimonial(id) {
+            if (confirm("Delete review?")) {
+                await supabaseClient.from('testimonials').delete().eq('id', id);
+                fetchAllAdminData();
             }
         }
     </script>
