@@ -10,47 +10,235 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
-    <!-- NAVIGATION -->
-    <nav class="fixed w-full bg-white shadow-md z-50 top-0 left-0">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo (Acts as Home) -->
-            <a href="#home" class="text-2xl font-bold text-blue-900 flex items-center gap-2">
-                <i class="fa-solid font-bold fa-building text-blue-600"></i> TRICORE
+<!-- NAVIGATION HEADER -->
+<nav class="fixed w-full bg-white shadow-md z-50 top-0 left-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+        <!-- Logo (Acts as Home) -->
+        <a href="#home" class="text-2xl font-bold text-blue-900 flex items-center gap-2">
+            <i class="fa-solid fa-building text-blue-600"></i> TRICORE
+        </a>
+        
+        <!-- Menu Links -->
+        <div class="hidden md:flex space-x-8 font-medium text-gray-700">
+            <a href="#buy" class="hover:text-blue-600 transition">Buy</a>
+            <a href="#services" class="hover:text-blue-600 transition">Services</a>
+            <a href="#about" class="hover:text-blue-600 transition">About</a>
+            <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
+        </div>
+
+        <!-- Header CTA Hierarchy -->
+        <div class="flex items-center gap-3">
+            <!-- Tertiary CTA -->
+            <a href="#list-property" class="hidden lg:inline-block text-sm font-semibold text-gray-700 hover:text-blue-600 px-3 py-2 transition">
+                List Property
             </a>
+            <!-- Secondary CTA -->
+            <a href="https://wa.me/919876543210" target="_blank" class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2.5 rounded-md shadow-sm transition">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span class="hidden sm:inline">WhatsApp</span>
+            </a>
+            <!-- Primary CTA -->
+            <a href="#search-box" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2.5 rounded-md shadow-md transition">
+                Search Property
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section id="home" class="relative pt-20 min-h-[90vh] flex items-center overflow-hidden bg-gray-900">
+    
+    <!-- AUTOMATIC CAROUSEL BACKGROUND (6 IMAGES) -->
+    <div id="hero-carousel" class="absolute inset-0 w-full h-full">
+        <!-- Image 1: Mumbai Skyline -->
+        <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100 bg-cover bg-center" 
+             style="background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1920&q=80');"></div>
+        <!-- Image 2: Premium Gated Community -->
+        <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" 
+             style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1920&q=80');"></div>
+        <!-- Image 3: Drone Shot Project -->
+        <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" 
+             style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80');"></div>
+        <!-- Image 4: Luxury Villa Entrance -->
+        <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" 
+             style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');"></div>
+        <!-- Image 5: Family Receiving Keys -->
+        <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" 
+             style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1920&q=80');"></div>
+        <!-- Image 6: Modern Commercial District -->
+        <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" 
+             style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');"></div>
+    </div>
+
+    <!-- LEFT-FOCUSED GRADIENT OVERLAY (Keeps buildings visible on right) -->
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-transparent z-10"></div>
+
+    <!-- HERO CONTENT CONTAINER -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 py-12 w-full">
+        <div class="max-w-3xl">
             
-            <!-- Menu Links -->
-            <div class="hidden md:flex space-x-8 font-medium">
-                <a href="#buy" class="hover:text-blue-600 transition">Buy</a>
-                <a href="#services" class="hover:text-blue-600 transition">Services</a>
-                <a href="#about" class="hover:text-blue-600 transition">About</a>
-                <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
+            <!-- TYPOGRAPHY HIERARCHY -->
+            <div class="mb-4 flex flex-wrap gap-2 text-xs md:text-sm font-semibold tracking-wider text-blue-400 uppercase">
+                <span>Verified Properties</span> • 
+                <span>Legal Due Diligence</span> • 
+                <span>Registration Support</span> • 
+                <span class="text-amber-400">One Trusted Team</span>
             </div>
 
-            <!-- CTA Button -->
-            <a href="#contact" class="hidden md:inline-block bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition">Get Started</a>
-        </div>
-    </nav>
+            <!-- HEADLINE -->
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight mb-4 drop-shadow-sm">
+                Verified Properties. Clear Titles. <br class="hidden sm:inline"/>
+                <span class="text-blue-500">Expert Legal Guidance.</span>
+            </h1>
 
-    <!-- HERO SECTION (CAROUSEL SLIDER) -->
-    <section id="home" class="relative pt-20 h-[85vh] overflow-hidden">
-        <div id="carousel" class="relative w-full h-full">
-            <!-- Slide 1 -->
-            <div class="slide absolute inset-0 transition-opacity duration-1000 opacity-100 bg-cover bg-center flex items-center justify-center text-center" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80');">
-                <div class="text-white max-w-3xl px-4">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Find Your Dream Property</h1>
-                    <p class="text-lg md:text-xl mb-6">Expert real estate advisory and premium property sourcing tailored to your goals.</p>
-                    <a href="#buy" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Explore Properties</a>
+            <p class="text-gray-300 text-base sm:text-lg mb-8 max-w-2xl">
+                Serving home buyers and investors across <strong class="text-white">Mumbai</strong>, <strong class="text-white">Thane</strong>, and <strong class="text-white">Navi Mumbai</strong> with 100% RERA compliance.
+            </p>
+
+            <!-- SEARCH BOX CONTAINER -->
+            <div id="search-box" class="bg-white p-4 sm:p-6 rounded-[8px] shadow-2xl border border-gray-100 mb-6">
+                
+                <!-- SEARCH TABS -->
+                <div class="flex space-x-3 mb-4 border-b border-gray-200 pb-3">
+                    <button onclick="switchTab(this)" class="search-tab flex items-center gap-2 pb-2 text-sm font-bold text-blue-600 border-b-2 border-blue-600 transition-all duration-200">
+                        <i class="fa-solid fa-house"></i> Buy
+                    </button>
+                    <button onclick="switchTab(this)" class="search-tab flex items-center gap-2 pb-2 text-sm font-medium text-gray-500 hover:text-blue-600 border-b-2 border-transparent transition-all duration-200">
+                        <i class="fa-solid fa-building text-sm"></i> Commercial
+                    </button>
+                    <button onclick="switchTab(this)" class="search-tab flex items-center gap-2 pb-2 text-sm font-medium text-gray-500 hover:text-blue-600 border-b-2 border-transparent transition-all duration-200">
+                        <i class="fa-solid fa-chart-pie text-sm"></i> Investment
+                    </button>
+                </div>
+
+                <!-- FORM FIELDS -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                    <!-- Location -->
+                    <div class="relative border-r-0 sm:border-r border-gray-200 pr-0 sm:pr-2">
+                        <label class="block text-xs font-semibold text-gray-500 mb-1">LOCATION</label>
+                        <select class="w-full bg-transparent font-medium text-gray-800 text-sm focus:outline-none cursor-pointer">
+                            <option>All Locations</option>
+                            <option>Mumbai</option>
+                            <option>Thane</option>
+                            <option>Navi Mumbai</option>
+                        </select>
+                    </div>
+
+                    <!-- Property Type -->
+                    <div class="relative border-r-0 sm:border-r border-gray-200 pr-0 sm:pr-2">
+                        <label class="block text-xs font-semibold text-gray-500 mb-1">PROPERTY TYPE</label>
+                        <select class="w-full bg-transparent font-medium text-gray-800 text-sm focus:outline-none cursor-pointer">
+                            <option>Residential Apartment</option>
+                            <option>Luxury Villa</option>
+                            <option>Commercial Office</option>
+                            <option>Plot / Land</option>
+                        </select>
+                    </div>
+
+                    <!-- Budget -->
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 mb-1">BUDGET</label>
+                        <select class="w-full bg-transparent font-medium text-gray-800 text-sm focus:outline-none cursor-pointer">
+                            <option>₹50 Lakhs - ₹1 Cr</option>
+                            <option>₹1 Cr - ₹2.5 Cr</option>
+                            <option>₹2.5 Cr - ₹5 Cr</option>
+                            <option>₹5 Cr+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- PROMINENT SEARCH BUTTON -->
+                <button class="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-bold text-base rounded-[8px] flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-500/30 transition-all duration-300 transform hover:-translate-y-0.5">
+                    <span>Explore Properties</span>
+                    <i class="fa-solid fa-arrow-right text-sm"></i>
+                </button>
+            </div>
+
+            <!-- POPULAR LOCATION CHIPS WITH HOVER COUNTS -->
+            <div class="flex items-center flex-wrap gap-2 mb-8">
+                <span class="text-xs text-gray-400 font-medium mr-1">Popular:</span>
+                
+                <!-- Chip 1 -->
+                <div class="group relative bg-white/10 hover:bg-blue-600 text-white text-xs font-medium px-3 py-1.5 rounded-full cursor-pointer transition border border-white/10">
+                    <span>Thane</span>
+                    <span class="hidden group-hover:inline font-bold ml-1 text-amber-300 animate-fade-in">- 124 Properties</span>
+                </div>
+
+                <!-- Chip 2 -->
+                <div class="group relative bg-white/10 hover:bg-blue-600 text-white text-xs font-medium px-3 py-1.5 rounded-full cursor-pointer transition border border-white/10">
+                    <span>Navi Mumbai</span>
+                    <span class="hidden group-hover:inline font-bold ml-1 text-amber-300 animate-fade-in">- 98 Properties</span>
+                </div>
+
+                <!-- Chip 3 -->
+                <div class="group relative bg-white/10 hover:bg-blue-600 text-white text-xs font-medium px-3 py-1.5 rounded-full cursor-pointer transition border border-white/10">
+                    <span>Bandra West</span>
+                    <span class="hidden group-hover:inline font-bold ml-1 text-amber-300 animate-fade-in">- 45 Properties</span>
+                </div>
+
+                <!-- Chip 4 -->
+                <div class="group relative bg-white/10 hover:bg-blue-600 text-white text-xs font-medium px-3 py-1.5 rounded-full cursor-pointer transition border border-white/10">
+                    <span>Kharghar</span>
+                    <span class="hidden group-hover:inline font-bold ml-1 text-amber-300 animate-fade-in">- 62 Properties</span>
                 </div>
             </div>
-            <!-- Slide 2 -->
-            <div class="slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center flex items-center justify-center text-center" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80');">
-                <div class="text-white max-w-3xl px-4">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Strategic Real Estate Advisory</h1>
-                    <p class="text-lg md:text-xl mb-6">Maximizing return on investment with market-leading insights.</p>
-                    <a href="#services" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Our Services</a>
+
+            <!-- SECONDARY CTAs -->
+            <div class="flex flex-wrap items-center gap-4 mb-8">
+                <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-5 py-2.5 rounded-md text-sm transition shadow-md">
+                    Schedule a Free Consultation
+                </a>
+                <a href="#buy" class="text-white hover:text-blue-400 font-semibold text-sm underline underline-offset-4 transition">
+                    Browse Featured Projects &rarr;
+                </a>
+            </div>
+
+            <!-- TRUSTED BADGES & PARTNERS -->
+            <div class="pt-4 border-t border-white/10 flex flex-wrap items-center gap-6 text-xs text-gray-300">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-emerald-400 text-base"></i>
+                    <span>MahaRERA Guidance</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-users text-blue-400 text-base"></i>
+                    <span>Trusted by 500+ Buyers</span>
                 </div>
             </div>
+
         </div>
+    </div>
+</section>
+
+<!-- JAVASCRIPT FOR CAROUSEL & TABS -->
+<script>
+    // Automatic Carousel Script (5 Slides)
+    let currentHeroSlide = 0;
+    const heroSlides = document.querySelectorAll('.hero-slide');
+
+    function nextHeroSlide() {
+        heroSlides[currentHeroSlide].classList.remove('opacity-100');
+        heroSlides[currentHeroSlide].classList.add('opacity-0');
+        
+        currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+        
+        heroSlides[currentHeroSlide].classList.remove('opacity-0');
+        heroSlides[currentHeroSlide].classList.add('opacity-100');
+    }
+
+    setInterval(nextHeroSlide, 4500); // Transitions every 4.5 seconds
+
+    // Search Tab Switcher Script
+    function switchTab(element) {
+        const tabs = document.querySelectorAll('.search-tab');
+        tabs.forEach(tab => {
+            tab.classList.remove('text-blue-600', 'border-blue-600', 'font-bold');
+            tab.classList.add('text-gray-500', 'border-transparent', 'font-medium');
+        });
+        element.classList.remove('text-gray-500', 'border-transparent', 'font-medium');
+        element.classList.add('text-blue-600', 'border-blue-600', 'font-bold');
+    }
+</script>
+    
         <!-- Carousel Controls -->
         <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/40 p-3 rounded-full hover:bg-black/70"><i class="fa-solid fa-chevron-left"></i></button>
         <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/40 p-3 rounded-full hover:bg-black/70"><i class="fa-solid fa-chevron-right"></i></button>
