@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tricore | Real Estate & Advisory</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full bg-white shadow-md z-50 top-0 left-0">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo (Acts as Home) -->
+            <a href="#home" class="text-2xl font-bold text-blue-900 flex items-center gap-2">
+                <i class="fa-solid font-bold fa-building text-blue-600"></i> TRICORE
+            </a>
+            
+            <!-- Menu Links -->
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="#buy" class="hover:text-blue-600 transition">Buy</a>
+                <a href="#services" class="hover:text-blue-600 transition">Services</a>
+                <a href="#about" class="hover:text-blue-600 transition">About</a>
+                <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
+            </div>
+
+            <!-- CTA Button -->
+            <a href="#contact" class="hidden md:inline-block bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (CAROUSEL SLIDER) -->
+    <section id="home" class="relative pt-20 h-[85vh] overflow-hidden">
+        <div id="carousel" class="relative w-full h-full">
+            <!-- Slide 1 -->
+            <div class="slide absolute inset-0 transition-opacity duration-1000 opacity-100 bg-cover bg-center flex items-center justify-center text-center" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80');">
+                <div class="text-white max-w-3xl px-4">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Find Your Dream Property</h1>
+                    <p class="text-lg md:text-xl mb-6">Expert real estate advisory and premium property sourcing tailored to your goals.</p>
+                    <a href="#buy" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Explore Properties</a>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center flex items-center justify-center text-center" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80');">
+                <div class="text-white max-w-3xl px-4">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Strategic Real Estate Advisory</h1>
+                    <p class="text-lg md:text-xl mb-6">Maximizing return on investment with market-leading insights.</p>
+                    <a href="#services" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Our Services</a>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel Controls -->
+        <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/40 p-3 rounded-full hover:bg-black/70"><i class="fa-solid fa-chevron-left"></i></button>
+        <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/40 p-3 rounded-full hover:bg-black/70"><i class="fa-solid fa-chevron-right"></i></button>
+    </section>
+
+    <!-- WHY CHOOSE TRICORE -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Tricore</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-12">We combine real estate expertise with strategic financial advisory to deliver long-term value for buyers and investors.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 border rounded-xl hover:shadow-lg transition">
+                    <div class="text-blue-600 text-4xl mb-4"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Market Expertise</h3>
+                    <p class="text-gray-600">Deep local knowledge and industry trends to give you a competitive edge.</p>
+                </div>
+                <div class="p-8 border rounded-xl hover:shadow-lg transition">
+                    <div class="text-blue-600 text-4xl mb-4"><i class="fa-solid fa-handshake"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Transparent Advisory</h3>
+                    <p class="text-gray-600">Clear, honest guidance from consultation to property acquisition.</p>
+                </div>
+                <div class="p-8 border rounded-xl hover:shadow-lg transition">
+                    <div class="text-blue-600 text-4xl mb-4"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Tailored Solutions</h3>
+                    <p class="text-gray-600">Customized real estate investment strategies built around your portfolio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECOMMENDED PROPERTIES -->
+    <section id="buy" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Recommended Properties</h2>
+                    <p class="text-gray-600 mt-2">Explore our handpicked selection of premium listings.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Property Card 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
+                    <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80" class="w-full h-56 object-cover" alt="Modern Villa">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold uppercase bg-blue-100 text-blue-800 px-3 py-1 rounded-full">For Sale</span>
+                        <h3 class="text-xl font-bold mt-3">$1,250,000</h3>
+                        <p class="text-gray-600 font-medium">Luxury Modern Villa</p>
+                        <p class="text-sm text-gray-500 mt-1"><i class="fa-solid fa-location-dot"></i> Downtown Metropolitan</p>
+                        <div class="flex justify-between items-center text-sm text-gray-500 mt-4 pt-4 border-t">
+                            <span><i class="fa-solid fa-bed"></i> 4 Beds</span>
+                            <span><i class="fa-solid fa-bath"></i> 3 Baths</span>
+                            <span><i class="fa-solid fa-ruler-combined"></i> 3,200 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" class="w-full h-56 object-cover" alt="Executive Penthouse">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold uppercase bg-blue-100 text-blue-800 px-3 py-1 rounded-full">For Sale</span>
+                        <h3 class="text-xl font-bold mt-3">$850,000</h3>
+                        <p class="text-gray-600 font-medium">Skyline View Apartment</p>
+                        <p class="text-sm text-gray-500 mt-1"><i class="fa-solid fa-location-dot"></i> Financial District</p>
+                        <div class="flex justify-between items-center text-sm text-gray-500 mt-4 pt-4 border-t">
+                            <span><i class="fa-solid fa-bed"></i> 2 Beds</span>
+                            <span><i class="fa-solid fa-bath"></i> 2 Baths</span>
+                            <span><i class="fa-solid fa-ruler-combined"></i> 1,800 sqft</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80" class="w-full h-56 object-cover" alt="Suburban Home">
+                    <div class="p-6">
+                        <span class="text-xs font-semibold uppercase bg-blue-100 text-blue-800 px-3 py-1 rounded-full">For Sale</span>
+                        <h3 class="text-xl font-bold mt-3">$620,000</h3>
+                        <p class="text-gray-600 font-medium">Contemporary Family Residence</p>
+                        <p class="text-sm text-gray-500 mt-1"><i class="fa-solid fa-location-dot"></i> Green Valley Suburbs</p>
+                        <div class="flex justify-between items-center text-sm text-gray-500 mt-4 pt-4 border-t">
+                            <span><i class="fa-solid fa-bed"></i> 3 Beds</span>
+                            <span><i class="fa-solid fa-bath"></i> 2.5 Baths</span>
+                            <span><i class="fa-solid fa-ruler-combined"></i> 2,400 sqft</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POPULAR SERVICES -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Services</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-12">Comprehensive real estate solutions designed for individual buyers, sellers, and corporate investors.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="p-6 bg-gray-50 rounded-lg text-left border hover:border-blue-500 transition">
+                    <i class="fa-solid fa-house-user text-3xl text-blue-600 mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Property Buying</h3>
+                    <p class="text-sm text-gray-600">Full end-to-end assistance in searching, negotiating, and closing property deals.</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-lg text-left border hover:border-blue-500 transition">
+                    <i class="fa-solid fa-briefcase text-3xl text-blue-600 mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Real Estate Advisory</h3>
+                    <p class="text-sm text-gray-600">Strategic market intelligence for portfolio valuation and investment expansion.</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-lg text-left border hover:border-blue-500 transition">
+                    <i class="fa-solid fa-file-contract text-3xl text-blue-600 mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Legal & Documentation</h3>
+                    <p class="text-sm text-gray-600">Hassle-free title verification, legal compliance, and contract drafting support.</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-lg text-left border hover:border-blue-500 transition">
+                    <i class="fa-solid fa-key text-3xl text-blue-600 mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Property Management</h3>
+                    <p class="text-sm text-gray-600">Tenant sourcing, rent collection, and active maintenance for asset owners.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION (CTA) -->
+    <section id="contact" class="py-16 bg-blue-900 text-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Find Your Next Property?</h2>
+            <p class="text-blue-200 max-w-xl mx-auto mb-8">Schedule a consultation with our experts today to discuss your buying or investment needs.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="mailto:info@tricore.com" class="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Contact Advisor</a>
+                <a href="tel:+1234567890" class="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition">Call Us Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <a href="#home" class="text-2xl font-bold text-white flex items-center gap-2 mb-4">
+                    <i class="fa-solid fa-building text-blue-500"></i> TRICORE
+                </a>
+                <p class="text-sm">Your trusted partner in residential, commercial, and strategic real estate advisory.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#home" class="hover:text-white">Home</a></li>
+                    <li><a href="#buy" class="hover:text-white">Buy Properties</a></li>
+                    <li><a href="#services" class="hover:text-white">Services</a></li>
+                    <li><a href="#about" class="hover:text-white">About Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Contact Info</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><i class="fa-solid fa-location-dot mr-2"></i> 100 Financial Way, City Center</li>
+                    <li><i class="fa-solid fa-phone mr-2"></i> +1 (555) 019-2834</li>
+                    <li><i class="fa-solid fa-envelope mr-2"></i> contact@tricore.com</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Follow Us</h4>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-xl hover:text-white"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" class="text-xl hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="text-xl hover:text-white"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 border-t border-gray-800 mt-8 pt-6 text-xs text-center">
+            &copy; 2026 Tricore Real Estate & Advisory. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- LIGHTWEIGHT CAROUSEL JAVASCRIPT -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.opacity = i === index ? '1' : '0';
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Auto-advance every 5 seconds
+        setInterval(nextSlide, 5000);
+    </script>
+</body>
+</html>
