@@ -4,27 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tricore Realty & Advisory | Mumbai, Thane, Navi Mumbai, Virar & Lonavala</title>
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Supabase JS Client SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        navy: { 800: '#1e293b', 900: '#0f172a' },
-                        emerald: { 600: '#059669', 700: '#047857' },
-                        surface: '#F8FAFC',
-                        specbox: '#F3F6FA'
-                    }
+                    colors: { navy: { 800: '#1e293b', 900: '#0f172a' }, surface: '#F8FAFC' }
                 }
             }
         }
@@ -35,38 +25,31 @@
     <!-- NAVIGATION HEADER -->
     <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="index.html" class="text-2xl font-extrabold text-navy-900 flex items-center gap-2 tracking-tight">
+            <a href="index.html" class="text-2xl font-extrabold text-navy-900 flex items-center gap-2">
                 <i class="fa-solid fa-building text-blue-600"></i> TRICORE
             </a>
             
-            <!-- Menu -->
             <div class="hidden md:flex space-x-8 font-medium text-slate-700 text-sm">
                 <a href="buy.html" class="hover:text-blue-600 transition font-semibold">Buy Properties</a>
                 <a href="#land" class="hover:text-blue-600 transition">Land Investment</a>
-                <a href="#services" class="hover:text-blue-600 transition">Services</a>
+                <a href="services.html" class="hover:text-blue-600 transition">Services</a>
                 <a href="#about" class="hover:text-blue-600 transition">About</a>
                 <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
             </div>
 
-            <!-- Header CTAs -->
             <div class="flex items-center gap-3">
-                <a href="#contact" class="hidden lg:inline-block text-xs font-semibold text-slate-700 hover:text-blue-600 transition">
-                    List Property
-                </a>
-                <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20have%20a%20Real%20Estate%20enquiry." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-[8px] shadow-sm transition flex items-center gap-1.5">
+                <a href="https://wa.me/919987975429" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-[8px] transition flex items-center gap-1.5">
                     <i class="fa-brands fa-whatsapp text-base"></i> <span class="hidden sm:inline">WhatsApp</span>
                 </a>
-                <a href="buy.html" class="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-[8px] shadow-sm transition">
+                <a href="buy.html" class="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-[8px] transition">
                     Explore Properties
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION WITH CAROUSEL & SEARCH KIOSK -->
-    <section id="home" class="relative pt-20 min-h-[90vh] flex items-center overflow-hidden bg-navy-900">
-        <!-- Background Carousel -->
+    <!-- HERO SECTION -->
+    <section id="home" class="relative pt-20 min-h-[85vh] flex items-center overflow-hidden bg-navy-900">
         <div id="hero-carousel" class="absolute inset-0 w-full h-full">
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1920&q=80');"></div>
@@ -78,27 +61,23 @@
         <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 py-12 w-full">
             <div class="max-w-3xl">
                 <div class="mb-3 flex flex-wrap gap-2 text-xs font-bold tracking-wider text-blue-400 uppercase">
-                    <span>Verified Properties</span> • 
-                    <span>Legal Due Diligence</span> • 
-                    <span>Registration Support</span> • 
-                    <span class="text-amber-400">One Trusted Team</span>
+                    <span>Verified Properties</span> • <span>Legal Due Diligence</span> • <span>Registration Support</span>
                 </div>
 
-                <h1 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight mb-4 tracking-tight drop-shadow-sm">
+                <h1 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight mb-4 tracking-tight">
                     Verified Properties. Clear Titles. <br class="hidden sm:inline"/>
                     <span class="text-blue-400">Expert Legal Guidance.</span>
                 </h1>
 
                 <p class="text-slate-300 text-sm sm:text-base mb-6 max-w-2xl">
-                    Serving home buyers, land investors, and developers across <strong class="text-white">Mumbai</strong>, <strong class="text-white">Thane</strong>, <strong class="text-white">Navi Mumbai</strong>, <strong class="text-white">Virar</strong> & <strong class="text-white">Lonavala</strong> with 100% RERA & Revenue clearance.
+                    Serving home buyers, land investors, and developers across <strong class="text-white">Mumbai</strong>, <strong class="text-white">Thane</strong>, <strong class="text-white">Navi Mumbai</strong>, <strong class="text-white">Virar</strong> & <strong class="text-white">Lonavala</strong>.
                 </p>
 
-                <!-- Search Kiosk -->
-                <div id="search-box" class="bg-white p-5 rounded-[8px] shadow-2xl border border-slate-100 mb-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
-                        <div class="relative bg-slate-50 p-2.5 rounded-[6px] border border-slate-200">
-                            <label class="block text-[11px] font-bold text-slate-500 mb-1 tracking-wider uppercase">LOCATION</label>
-                            <select id="filter-region" class="w-full bg-transparent font-semibold text-slate-800 text-sm focus:outline-none cursor-pointer">
+                <div class="bg-white p-5 rounded-[8px] shadow-2xl border border-slate-100 mb-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-slate-50 p-2.5 rounded border">
+                            <label class="block text-[10px] font-bold text-slate-500 mb-1 uppercase">LOCATION</label>
+                            <select id="filter-region" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none">
                                 <option value="All">All Regions</option>
                                 <option value="All Mumbai">All Mumbai</option>
                                 <option value="All Thane">All Thane</option>
@@ -107,77 +86,267 @@
                                 <option value="Lonavala">Lonavala / Karjat</option>
                             </select>
                         </div>
-
-                        <div class="relative bg-slate-50 p-2.5 rounded-[6px] border border-slate-200">
-                            <label class="block text-[11px] font-bold text-slate-500 mb-1 tracking-wider uppercase">CATEGORY</label>
-                            <select id="filter-type" class="w-full bg-transparent font-semibold text-slate-800 text-sm focus:outline-none cursor-pointer">
+                        <div class="bg-slate-50 p-2.5 rounded border">
+                            <label class="block text-[10px] font-bold text-slate-500 mb-1 uppercase">CATEGORY</label>
+                            <select id="filter-type" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none">
                                 <option value="All">All Categories</option>
                                 <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
-                                <option value="Bungalows & Houses">Luxury Villa / House</option>
-                                <option value="Plots / Land">NA Plot / Agricultural Land</option>
-                                <option value="Commercial">Commercial Office / Shop</option>
+                                <option value="Bungalows & Houses">Bungalows / Villa</option>
+                                <option value="Plots / Land">Plots / Land</option>
+                                <option value="Commercial">Commercial</option>
                             </select>
                         </div>
-
-                        <div class="relative bg-slate-50 p-2.5 rounded-[6px] border border-slate-200">
-                            <label class="block text-[11px] font-bold text-slate-500 mb-1 tracking-wider uppercase">SERVICE NEEDED</label>
-                            <select id="filter-service" class="w-full bg-transparent font-semibold text-slate-800 text-sm focus:outline-none cursor-pointer">
+                        <div class="bg-slate-50 p-2.5 rounded border">
+                            <label class="block text-[10px] font-bold text-slate-500 mb-1 uppercase">SERVICE</label>
+                            <select id="filter-service" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none">
                                 <option value="Property Purchase">Property Purchase</option>
                                 <option value="7/12 Extract / CTS Card">7/12 Extract & Ferfar</option>
-                                <option value="Title Verification">Title Verification (30-100 Yrs)</option>
-                                <option value="Property Registration">Property Registration</option>
+                                <option value="Title Verification">Title Verification</option>
                             </select>
                         </div>
                     </div>
-
-                    <button onclick="handleKioskSearch()" class="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-bold text-base rounded-[8px] flex items-center justify-center gap-2 shadow-lg transition duration-200">
+                    <button onclick="handleKioskSearch()" class="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-[8px] flex items-center justify-center gap-2 transition">
                         <span>Explore Properties</span>
-                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
                     </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- RECOMMENDED PROPERTIES SECTION (SHOWS ADMIN-SELECTED FEATURED PROPERTIES ONLY) -->
+    <!-- TRUST FACTORS STRIP (BELOW HERO) -->
+    <section class="bg-white border-b border-slate-200 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-3">
+                    <i class="fa-solid fa-shield-halved text-emerald-600 text-2xl mb-2"></i>
+                    <h4 class="font-bold text-sm text-navy-900">MahaRERA Registered</h4>
+                    <p class="text-[11px] text-slate-500 mt-0.5">100% Legal RERA Compliance</p>
+                </div>
+                <div class="p-3">
+                    <i class="fa-solid fa-users text-blue-600 text-2xl mb-2"></i>
+                    <h4 class="font-bold text-sm text-navy-900">500+ Happy Families</h4>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Trusted Buyers across MMR</p>
+                </div>
+                <div class="p-3">
+                    <i class="fa-solid fa-file-contract text-amber-600 text-2xl mb-2"></i>
+                    <h4 class="font-bold text-sm text-navy-900">30–100 Year Search</h4>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Deep Title Verification</p>
+                </div>
+                <div class="p-3">
+                    <i class="fa-solid fa-circle-check text-purple-600 text-2xl mb-2"></i>
+                    <h4 class="font-bold text-sm text-navy-900">0 Dispute Record</h4>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Clear Chain of Title Guarantee</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1. LAND INVESTMENT SECTION -->
+    <section id="land" class="py-16 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-end mb-10">
+                <div>
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-1">Hero Product Showcase</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900">Verified Land Investment Opportunities</h2>
+                    <p class="text-slate-600 text-xs sm:text-sm mt-1">Direct clear-title agricultural & NA plots in Karjat, Lonavala & MMR belt.</p>
+                </div>
+                <a href="buy.html?type=Plots+/+Land" class="text-xs sm:text-sm font-bold text-blue-600 hover:underline">View All Land Plots &rarr;</a>
+            </div>
+
+            <div id="land-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="col-span-3 text-center py-8 text-slate-400">Loading land opportunities...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECOMMENDED PROPERTIES -->
     <section id="buy" class="py-16 bg-surface border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            
             <div class="flex justify-between items-end mb-10">
                 <div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900">Recommended Properties</h2>
-                    <p class="text-slate-600 text-xs sm:text-sm mt-1">Handpicked, title-verified residential and commercial listings.</p>
+                    <p class="text-slate-600 text-xs sm:text-sm mt-1">Handpicked residential and commercial listings.</p>
                 </div>
                 <a href="buy.html" class="text-xs sm:text-sm font-bold text-blue-600 hover:underline">View All Properties &rarr;</a>
             </div>
 
-            <!-- GRID SHOWING ONLY ADMIN-SELECTED FEATURED LISTINGS -->
             <div id="home-properties-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="col-span-3 text-center py-12 text-slate-500 font-medium">
-                    Loading featured properties...
-                </div>
+                <div class="col-span-3 text-center py-8 text-slate-400">Loading recommended properties...</div>
             </div>
-
-            <div class="mt-10 text-center">
-                <a href="buy.html" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-bold px-8 py-3 rounded-[8px] transition shadow-sm">
-                    <span>View All Listings on Buy Page</span>
-                    <i class="fa-solid fa-arrow-right text-xs"></i>
-                </a>
-            </div>
-
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 text-slate-400 py-8 text-xs border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+    <!-- 2. POPULAR SERVICES SECTION -->
+    <section id="services-sec" class="py-16 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-2">Our Managed Revenue & Legal Services</h2>
+                <p class="text-slate-600 text-xs sm:text-sm">Comprehensive legal documentation and revenue assistance under one roof.</p>
+            </div>
+
+            <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="col-span-3 text-center py-8 text-slate-400">Loading popular services...</div>
+            </div>
+
+            <div class="mt-10 text-center">
+                <a href="services.html" class="inline-flex items-center gap-2 bg-navy-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-[8px] transition">
+                    <span>View All Services Page</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. WHY TRICORE (LEFT INTERACTIVE HEADING + RIGHT IMAGE) -->
+    <section id="about" class="py-16 bg-surface border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- LEFT INTERACTIVE WRITEUP -->
+                <div>
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">The Tricore Advantage</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-6">Why Home Buyers & Investors Trust Tricore</h2>
+
+                    <div class="space-y-4">
+                        <div class="p-4 bg-white rounded-lg border border-slate-200 hover:border-blue-500 transition shadow-sm">
+                            <h3 class="font-bold text-sm text-navy-900 mb-1 flex items-center gap-2">
+                                <i class="fa-solid fa-file-shield text-blue-600"></i> In-House Revenue Legal Desk
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">Unlike typical brokers, our legal team verifies 7/12 extracts, CTS property cards, and Ferfar mutation entries directly at revenue offices before listing.</p>
+                        </div>
+
+                        <div class="p-4 bg-white rounded-lg border border-slate-200 hover:border-blue-500 transition shadow-sm">
+                            <h3 class="font-bold text-sm text-navy-900 mb-1 flex items-center gap-2">
+                                <i class="fa-solid fa-magnifying-glass-chart text-blue-600"></i> 100% Title Search & Zero Dispute Guarantee
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">We conduct 30 to 100-year historical title search reports to ensure your property purchase is free from family disputes or bank litigation.</p>
+                        </div>
+
+                        <div class="p-4 bg-white rounded-lg border border-slate-200 hover:border-blue-500 transition shadow-sm">
+                            <h3 class="font-bold text-sm text-navy-900 mb-1 flex items-center gap-2">
+                                <i class="fa-solid fa-handshake-angle text-blue-600"></i> End-to-End Registration Support
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">From initial token negotiation to Sub-Registrar stamp duty registration and name transfer on property cards, we handle everything.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE IMAGE -->
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80" class="rounded-xl shadow-xl w-full h-[450px] object-cover" alt="Tricore Office">
+                    <div class="absolute -bottom-6 -left-6 bg-blue-600 text-white p-6 rounded-xl shadow-lg hidden sm:block">
+                        <p class="text-3xl font-extrabold">100%</p>
+                        <p class="text-xs font-semibold uppercase tracking-wider">Title Verification Accuracy</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. HOW WE WORK SECTION -->
+    <section class="py-16 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-2">How We Work</h2>
+                <p class="text-slate-600 text-xs sm:text-sm">Transparent 4-step process from property discovery to key handover.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 relative">
+                <div class="p-6 bg-surface rounded-lg border text-center relative">
+                    <span class="w-8 h-8 bg-blue-600 text-white font-extrabold rounded-full flex items-center justify-center mx-auto mb-4 text-xs">1</span>
+                    <h3 class="font-bold text-sm text-navy-900 mb-2">Requirement Consultation</h3>
+                    <p class="text-xs text-slate-500">We analyze your budget, location choice, and legal requirements.</p>
+                </div>
+
+                <div class="p-6 bg-surface rounded-lg border text-center relative">
+                    <span class="w-8 h-8 bg-blue-600 text-white font-extrabold rounded-full flex items-center justify-center mx-auto mb-4 text-xs">2</span>
+                    <h3 class="font-bold text-sm text-navy-900 mb-2">Verified Property Shortlisting</h3>
+                    <p class="text-xs text-slate-500">We share handpicked options with pre-checked title reports.</p>
+                </div>
+
+                <div class="p-6 bg-surface rounded-lg border text-center relative">
+                    <span class="w-8 h-8 bg-blue-600 text-white font-extrabold rounded-full flex items-center justify-center mx-auto mb-4 text-xs">3</span>
+                    <h3 class="font-bold text-sm text-navy-900 mb-2">Revenue Legal Due Diligence</h3>
+                    <p class="text-xs text-slate-500">Our team verifies 7/12 extracts, Ferfar entries, and bank loan clearance.</p>
+                </div>
+
+                <div class="p-6 bg-surface rounded-lg border text-center relative">
+                    <span class="w-8 h-8 bg-blue-600 text-white font-extrabold rounded-full flex items-center justify-center mx-auto mb-4 text-xs">4</span>
+                    <h3 class="font-bold text-sm text-navy-900 mb-2">Registration & Key Handover</h3>
+                    <p class="text-xs text-slate-500">Complete stamp duty registration and seamless property card updates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. TESTIMONIALS SECTION -->
+    <section class="py-16 bg-surface border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-2">Client Testimonials</h2>
+                <p class="text-slate-600 text-xs sm:text-sm">Real stories from buyers and landowners across Mumbai, Thane & Lonavala.</p>
+            </div>
+
+            <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="col-span-3 text-center py-8 text-slate-400">Loading client reviews...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. FOOTER -->
+    <footer id="contact" class="bg-slate-950 text-slate-400 py-12 text-xs border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            
             <div>
-                <p class="text-white font-extrabold text-sm mb-1">Tricore Realty & Advisory</p>
-                <p>Serving Virar, Mumbai, Thane, Navi Mumbai, Karjat & Lonavala</p>
+                <a href="index.html" class="text-xl font-extrabold text-white flex items-center gap-2 mb-3">
+                    <i class="fa-solid fa-building text-blue-500"></i> TRICORE
+                </a>
+                <p class="leading-relaxed mb-4">Trusted partner in residential, commercial, and revenue legal record advisory across Mumbai Metropolitan Region & Lonavala.</p>
+                <div class="flex space-x-3 text-base text-slate-300">
+                    <a href="#" class="hover:text-white"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-white"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
             </div>
-            <div class="text-center sm:text-right">
-                <p>&copy; 2026 Tricore Realty & Advisory. All rights reserved.</p>
+
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">Quick Links</h4>
+                <ul class="space-y-2 font-medium">
+                    <li><a href="index.html" class="hover:text-white">Home</a></li>
+                    <li><a href="buy.html" class="hover:text-white">Buy Properties</a></li>
+                    <li><a href="#land" class="hover:text-white">Land Investment</a></li>
+                    <li><a href="services.html" class="hover:text-white">Revenue Legal Services</a></li>
+                    <li><a href="admin.html" class="hover:text-white text-slate-500">Admin Portal</a></li>
+                </ul>
             </div>
+
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">Locations Served</h4>
+                <ul class="space-y-2">
+                    <li>All Mumbai (Central, Western, South)</li>
+                    <li>All Thane (West, Ghodbunder, Kalyan)</li>
+                    <li>Navi Mumbai (Kharghar, Vashi, Panvel)</li>
+                    <li>Virar & Vasai Belt</li>
+                    <li>Lonavala & Karjat Land Belt</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold text-sm mb-3">Contact Us</h4>
+                <ul class="space-y-2 font-medium">
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-phone text-blue-500 mt-1"></i> <span><strong>Real Estate:</strong> +91 9987975429 / +91 9223585782</span></li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-scale-balanced text-emerald-500 mt-1"></i> <span><strong>Legal Advisory:</strong> +91 7715818373</span></li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-envelope text-blue-500 mt-1"></i> <span>contact@tricorerealty.com</span></li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-location-dot text-red-500 mt-1"></i> <span>City Center Office, Thane & Mumbai, Maharashtra</span></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 border-t border-slate-900 text-center text-slate-600">
+            &copy; 2026 Tricore Realty & Advisory. All rights reserved.
         </div>
     </footer>
 
@@ -185,10 +354,8 @@
     <script>
         const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
-
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // 1. CAROUSEL
         let currentSlide = 0;
         const slides = document.querySelectorAll('.hero-slide');
         if (slides.length > 0) {
@@ -201,93 +368,103 @@
             }, 4500);
         }
 
-        // 2. KIOSK SEARCH HANDLER
         function handleKioskSearch() {
             const region = document.getElementById('filter-region').value;
             const type = document.getElementById('filter-type').value;
-            const service = document.getElementById('filter-service').value;
-
-            if (service !== "Property Purchase") {
-                const message = encodeURIComponent(`Hi Tricore Legal Team, I need assistance with ${service} in region: ${region}.`);
-                window.open(`https://wa.me/917715818373?text=${message}`, '_blank');
-            } else {
-                window.location.href = `buy.html?region=${encodeURIComponent(region)}&type=${encodeURIComponent(type)}`;
-            }
+            window.location.href = `buy.html?region=${encodeURIComponent(region)}&type=${encodeURIComponent(type)}`;
         }
 
-        // 3. FETCH ONLY ADMIN FEATURED PROPERTIES FROM SUPABASE
-        async function loadHomeFeaturedProperties() {
-            const grid = document.getElementById('home-properties-grid');
+        async function initHomePage() {
+            // Load Land Investments
             try {
-                // First query: Get properties marked as is_featured = true
-                let { data, error } = await supabaseClient
-                    .from('properties')
-                    .select('*')
-                    .eq('is_featured', true)
-                    .order('created_at', { ascending: false })
-                    .limit(3);
-
-                if (error) throw error;
-
-                // Fallback: If no property is explicitly marked featured, show latest 3 properties
-                if (!data || data.length === 0) {
-                    const fallbackRes = await supabaseClient
-                        .from('properties')
-                        .select('*')
-                        .order('created_at', { ascending: false })
-                        .limit(3);
-                    data = fallbackRes.data || [];
-                }
-
-                if (data.length === 0) {
-                    grid.innerHTML = `<div class="col-span-3 text-center py-12 text-slate-500 font-medium bg-white rounded border">No properties added yet. Use the admin panel to add listings.</div>`;
-                    return;
-                }
-
-                grid.innerHTML = '';
-                data.forEach(item => {
-                    const displayImage = (item.images && item.images.length > 0 && item.images[0]) 
-                        ? item.images[0] 
-                        : 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80';
-
-                    const locationText = item.location || item.region;
-                    const encodedMsg = encodeURIComponent(`Hi Tricore, I am interested in ${item.title} (${locationText}). Price: ${item.price}`);
-                    const whatsappUrl = `https://wa.me/919987975429?text=${encodedMsg}`;
-                    const detailUrl = `property-detail.html?id=${item.id}`;
-
-                    grid.innerHTML += `
-                        <div class="bg-white rounded-[8px] border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition duration-200">
-                            <a href="${detailUrl}">
-                                <img src="${displayImage}" class="w-full h-48 object-cover cursor-pointer hover:opacity-95 transition" alt="${item.title}">
-                            </a>
-                            <div class="p-5">
-                                <span class="text-[10px] font-bold text-slate-500 uppercase">
-                                    <i class="fa-solid fa-location-dot text-red-500 mr-1"></i>${locationText}
-                                </span>
-                                <a href="${detailUrl}">
-                                    <h3 class="font-bold text-base text-navy-900 line-clamp-1 mt-1 mb-1 hover:text-blue-600 transition">${item.title}</h3>
-                                </a>
-                                <p class="text-lg font-extrabold text-blue-700 mb-3">${item.price}</p>
-                                
-                                <div class="grid grid-cols-2 gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 p-2 rounded-[6px] mb-4">
-                                    <span><i class="fa-solid fa-check text-emerald-600"></i> Legal Verified</span>
-                                    <span><i class="fa-solid fa-check text-emerald-600"></i> Clear Title</span>
+                const { data: landData } = await supabaseClient.from('properties').select('*').eq('is_land', true).limit(3);
+                const landGrid = document.getElementById('land-grid');
+                if (landData && landData.length > 0) {
+                    landGrid.innerHTML = '';
+                    landData.forEach(item => {
+                        const img = (item.images && item.images[0]) ? item.images[0] : 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80';
+                        landGrid.innerHTML += `
+                            <div class="bg-surface rounded-lg border overflow-hidden shadow-sm hover:shadow-md transition">
+                                <a href="property-detail.html?id=${item.id}"><img src="${img}" class="w-full h-48 object-cover"></a>
+                                <div class="p-5">
+                                    <span class="text-[10px] font-bold text-blue-600 uppercase"><i class="fa-solid fa-map-pin mr-1"></i>${item.location || item.region}</span>
+                                    <h3 class="font-bold text-base text-navy-900 mt-1 mb-1">${item.title}</h3>
+                                    <p class="text-lg font-extrabold text-blue-700 mb-3">${item.price}</p>
+                                    <a href="property-detail.html?id=${item.id}" class="w-full bg-blue-600 text-white font-bold py-2 rounded text-xs text-center block">View Details &rarr;</a>
                                 </div>
-
-                                <a href="${whatsappUrl}" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-[6px] text-xs text-center block transition">
-                                    <i class="fa-brands fa-whatsapp mr-1"></i> Enquire on WhatsApp
-                                </a>
                             </div>
-                        </div>
-                    `;
-                });
-            } catch (err) {
-                console.error("Error loading featured properties:", err);
-                grid.innerHTML = `<div class="col-span-3 text-center py-8 text-red-500 font-medium">Failed to load featured properties.</div>`;
-            }
+                        `;
+                    });
+                } else {
+                    landGrid.innerHTML = `<div class="col-span-3 text-center py-6 text-slate-400">No land listings added yet.</div>`;
+                }
+            } catch (e) { console.error(e); }
+
+            // Load Recommended Properties
+            try {
+                const { data: recData } = await supabaseClient.from('properties').select('*').eq('is_featured', true).limit(3);
+                const homeGrid = document.getElementById('home-properties-grid');
+                if (recData && recData.length > 0) {
+                    homeGrid.innerHTML = '';
+                    recData.forEach(item => {
+                        const img = (item.images && item.images[0]) ? item.images[0] : 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80';
+                        homeGrid.innerHTML += `
+                            <div class="bg-white rounded-lg border overflow-hidden shadow-sm hover:shadow-md transition">
+                                <a href="property-detail.html?id=${item.id}"><img src="${img}" class="w-full h-48 object-cover"></a>
+                                <div class="p-5">
+                                    <span class="text-[10px] font-bold text-slate-500 uppercase"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i>${item.location || item.region}</span>
+                                    <h3 class="font-bold text-base text-navy-900 mt-1 mb-1">${item.title}</h3>
+                                    <p class="text-lg font-extrabold text-blue-700 mb-3">${item.price}</p>
+                                    <a href="https://wa.me/919987975429?text=${encodeURIComponent('Hi Tricore, I am interested in ' + item.title)}" target="_blank" class="w-full bg-emerald-600 text-white font-bold py-2 rounded text-xs text-center block">Enquire on WhatsApp</a>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (e) { console.error(e); }
+
+            // Load Popular Services
+            try {
+                const { data: servData } = await supabaseClient.from('services').select('*').limit(6);
+                const servGrid = document.getElementById('services-grid');
+                if (servData && servData.length > 0) {
+                    servGrid.innerHTML = '';
+                    servData.forEach(s => {
+                        servGrid.innerHTML += `
+                            <div class="p-5 border rounded-lg bg-surface hover:border-blue-500 transition">
+                                <i class="${s.icon || 'fa-solid fa-file-contract'} text-2xl text-blue-600 mb-3 block"></i>
+                                <h3 class="font-bold text-sm text-navy-900 mb-1">${s.title}</h3>
+                                <p class="text-xs text-slate-500 mb-4 line-clamp-2">${s.description || 'Full legal and revenue record documentation support.'}</p>
+                                <a href="service-detail.html?id=${s.id}" class="text-xs font-bold text-emerald-700 hover:underline">Know More & WhatsApp &rarr;</a>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (e) { console.error(e); }
+
+            // Load Testimonials
+            try {
+                const { data: testData } = await supabaseClient.from('testimonials').select('*').limit(3);
+                const testGrid = document.getElementById('testimonials-grid');
+                if (testData && testData.length > 0) {
+                    testGrid.innerHTML = '';
+                    testData.forEach(t => {
+                        testGrid.innerHTML += `
+                            <div class="p-6 bg-white rounded-lg border shadow-sm">
+                                <div class="flex text-amber-400 text-xs mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                <p class="text-xs text-slate-600 leading-relaxed italic mb-4">"${t.review}"</p>
+                                <div>
+                                    <p class="font-bold text-xs text-navy-900">${t.client_name}</p>
+                                    <p class="text-[10px] text-slate-400">${t.location || 'Mumbai'}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (e) { console.error(e); }
         }
 
-        document.addEventListener('DOMContentLoaded', loadHomeFeaturedProperties);
+        document.addEventListener('DOMContentLoaded', initHomePage);
     </script>
 </body>
 </html>
