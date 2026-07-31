@@ -33,19 +33,14 @@
 
     <!-- NAVIGATION HEADER -->
     <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
             
-            <!-- Logo & Mobile Menu Toggle Button -->
-            <div class="flex items-center gap-3">
-                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-blue-600 focus:outline-none p-1" aria-label="Toggle Navigation Menu">
-                    <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
-                </button>
-                <a href="index.html" class="text-xl sm:text-2xl font-extrabold text-navy-900 flex items-center gap-2 tracking-tight">
-                    <i class="fa-solid fa-building text-blue-600"></i> TRICORE
-                </a>
-            </div>
+            <!-- Logo (Left Aligned) -->
+            <a href="index.html" class="text-xl sm:text-2xl font-extrabold text-navy-900 flex items-center gap-2 tracking-tight">
+                <i class="fa-solid fa-building text-blue-600"></i> TRICORE
+            </a>
             
-            <!-- Desktop Menu -->
+            <!-- Desktop Menu (Center) -->
             <div class="hidden md:flex space-x-8 font-medium text-slate-700 text-sm">
                 <a href="buy.html" class="hover:text-blue-600 transition font-semibold">Buy Properties</a>
                 <a href="#land" class="hover:text-blue-600 transition">Land Investment</a>
@@ -54,18 +49,23 @@
                 <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
             </div>
 
-            <!-- Header CTAs -->
+            <!-- Right Controls: Buttons & Mobile Hamburger Icon (Right Aligned) -->
             <div class="flex items-center gap-2 sm:gap-3">
-                <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20have%20a%20Real%20Estate%20enquiry." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold px-2.5 sm:px-3.5 py-2 rounded-[8px] transition flex items-center gap-1.5">
+                <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20have%20a%20Real%20Estate%20enquiry." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold p-2 sm:px-3.5 sm:py-2 rounded-[8px] transition flex items-center gap-1.5">
                     <i class="fa-brands fa-whatsapp text-base"></i> <span class="hidden sm:inline">WhatsApp</span>
                 </a>
-                <a href="buy.html" class="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-[8px] transition">
-                    Explore Properties
+                <a href="buy.html" class="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-2.5 sm:px-4 py-2 rounded-[8px] transition whitespace-nowrap">
+                    Explore
                 </a>
+                
+                <!-- Hamburger Button Moved to Right -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-blue-600 focus:outline-none p-1.5 border rounded-lg bg-slate-50" aria-label="Toggle Navigation Menu">
+                    <i id="menu-icon" class="fa-solid fa-bars text-lg"></i>
+                </button>
             </div>
         </div>
 
-        <!-- MOBILE MENU DRAWER (TOGGLED VIA HAMBURGER) -->
+        <!-- MOBILE MENU DRAWER -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-3 font-semibold text-sm text-slate-700 shadow-lg">
             <a href="buy.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100 text-blue-600 font-bold">
                 <i class="fa-solid fa-house-chimney text-blue-600 mr-2"></i> Buy Properties
@@ -91,7 +91,7 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION WITH CAROUSEL & SEARCH KIOSK -->
+    <!-- HERO SECTION -->
     <section id="home" class="relative pt-20 min-h-[85vh] flex items-center overflow-hidden bg-navy-900">
         <div id="hero-carousel" class="absolute inset-0 w-full h-full">
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1920&q=80');"></div>
@@ -302,4 +302,4 @@
                 <div class="p-5 bg-surface rounded-lg border text-center">
                     <span class="w-8 h-8 bg-blue-600 text-white font-extrabold rounded-full flex items-center justify-center mx-auto mb-3 text-xs">1</span>
                     <h3 class="font-bold text-sm text-navy-900 mb-1">Requirement Consultation</h3>
-                    <p class="
+   
