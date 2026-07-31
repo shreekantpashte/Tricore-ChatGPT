@@ -45,6 +45,13 @@
 
             <!-- SECTION 1: PROPERTIES & LAND -->
             <div id="sec-properties" class="admin-sec">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-slate-500 font-bold uppercase">Total Properties</p><p id="stat-total" class="text-2xl font-extrabold text-slate-800">0</p></div>
+                    <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-emerald-600 font-bold uppercase">Published</p><p id="stat-published" class="text-2xl font-extrabold text-emerald-600">0</p></div>
+                    <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-amber-600 font-bold uppercase">Drafts</p><p id="stat-drafts" class="text-2xl font-extrabold text-amber-600">0</p></div>
+                    <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-purple-600 font-bold uppercase">Recommended/Featured</p><p id="stat-featured" class="text-2xl font-extrabold text-purple-600">0</p></div>
+                </div>
+
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-lg font-bold text-slate-800">All Properties</h2>
                     <button onclick="openForm()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded transition">+ Add New Property</button>
@@ -256,20 +263,26 @@
         }
 
         async function fetchAllAdminData() {
-            // Fetch Properties
-            const { data: pData } = await supabaseClient.from('properties').select('*').order('created_at', { ascending: false });
-            propertiesData = pData || [];
-            renderProperties();
+            // 1. Fetch Properties (Isolated Error Protection)
+            try {
+                const { data, error } = await supabaseClient.from('properties').select('*').order('created_at', { ascending: false });
+                if (!error) propertiesData = data || [];
+                renderProperties();
+            } catch (err) { console.error("Properties Fetch Error:", err); }
 
-            // Fetch Services
-            const { data: sData } = await supabaseClient.from('services').select('*').order('created_at', { ascending: false });
-            servicesData = sData || [];
-            renderServices();
+            // 2. Fetch Services (Isolated Error Protection)
+            try {
+                const { data, error } = await supabaseClient.from('services').select('*').order('created_at', { ascending: false });
+                if (!error) servicesData = data || [];
+                renderServices();
+            } catch (err) { console.error("Services Fetch Error:", err); }
 
-            // Fetch Testimonials
-            const { data: tData } = await supabaseClient.from('testimonials').select('*').order('created_at', { ascending: false });
-            testimonialsData = tData || [];
-            renderTestimonials();
+            // 3. Fetch Testimonials (Isolated Error Protection)
+            try {
+                const { data, error } = await supabaseClient.from('testimonials').select('*').order('created_at', { ascending: false });
+                if (!error) testimonialsData = data || [];
+                renderTestimonials();
+            } catch (err) { console.error("Testimonials Fetch Error:", err); }
         }
 
         function renderProperties() {
@@ -279,7 +292,7 @@
             document.getElementById('stat-featured').innerText = propertiesData.filter(p => p.is_featured).length;
 
             if (propertiesData.length === 0) {
-                list.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-400">No properties in database.</td></tr>`;
+                list.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-400">No properties found. Click "+ Add New Property" above.</td></tr>`;
                 return;
             }
 
@@ -304,7 +317,7 @@
         function renderServices() {
             const list = document.getElementById('services-list');
             if (servicesData.length === 0) {
-                list.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-slate-400">No services added yet.</td></tr>`;
+                list.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-slate-400">No services added yet. Click "+ Add New Service" above.</td></tr>`;
                 return;
             }
             list.innerHTML = '';
@@ -313,7 +326,7 @@
                     <tr class="hover:bg-slate-50">
                         <td class="p-3 font-bold text-slate-800">${s.title}</td>
                         <td class="p-3 text-slate-600">${s.description || '-'}</td>
-                        <td class="p-3 text-right space-x-2">
+                        <td class="p-3 text-right">
                             <button onclick="deleteService('${s.id}')" class="text-red-600 font-bold">Delete</button>
                         </td>
                     </tr>
@@ -324,7 +337,7 @@
         function renderTestimonials() {
             const list = document.getElementById('testimonials-list');
             if (testimonialsData.length === 0) {
-                list.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-slate-400">No reviews added yet.</td></tr>`;
+                list.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-slate-400">No reviews added yet. Click "+ Add Review" above.</td></tr>`;
                 return;
             }
             list.innerHTML = '';
@@ -342,8 +355,42 @@
         }
 
         // PROPERTY FORM HANDLERS
-        function openForm() { document.getElementById('property-modal').classList.remove('hidden'); }
+        function openForm() { 
+            document.getElementById('p-id').value = '';
+            currentUploadedImages = [];
+            document.getElementById('image-previews').innerHTML = '';
+            document.getElementById('property-form').reset();
+            document.getElementById('modal-title').innerText = 'Add Property';
+            document.getElementById('property-modal').classList.remove('hidden'); 
+        }
+
         function closeForm() { document.getElementById('property-modal').classList.add('hidden'); }
+
+        function editProperty(id) {
+            const prop = propertiesData.find(p => p.id === id);
+            if (!prop) return;
+
+            document.getElementById('p-id').value = prop.id;
+            document.getElementById('p-title').value = prop.title || '';
+            document.getElementById('p-price').value = prop.price || '';
+            document.getElementById('p-region').value = prop.region || 'All Mumbai';
+            document.getElementById('p-location').value = prop.location || '';
+            document.getElementById('p-category').value = prop.category || '1, 2, 3, 4 BHK Flats';
+            document.getElementById('p-desc').value = prop.description || '';
+            document.getElementById('p-featured').checked = !!prop.is_featured;
+            document.getElementById('p-land').checked = !!prop.is_land;
+
+            currentUploadedImages = prop.images || [];
+            
+            const container = document.getElementById('image-previews');
+            container.innerHTML = '';
+            currentUploadedImages.forEach((url, i) => {
+                container.innerHTML += `<img src="${url}" class="w-12 h-12 object-cover rounded border">`;
+            });
+
+            document.getElementById('modal-title').innerText = 'Edit Property';
+            document.getElementById('property-modal').classList.remove('hidden');
+        }
 
         document.getElementById('property-form').addEventListener('submit', async function(e) {
             e.preventDefault();
