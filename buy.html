@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Properties for Sale | Tricore Realty & Advisory</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { navy: { 800: '#1e293b', 900: '#0f172a' }, surface: '#F8FAFC' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-slate-800 font-sans antialiased">
+
+    <!-- NAVIGATION HEADER -->
+    <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-extrabold text-navy-900 flex items-center gap-2">
+                <i class="fa-solid fa-building text-blue-600"></i> TRICORE
+            </a>
+            
+            <div class="hidden md:flex space-x-8 font-medium text-slate-700 text-sm">
+                <a href="index.html" class="hover:text-blue-600 transition">Home</a>
+                <a href="buy.html" class="text-blue-600 font-bold transition">Buy Properties</a>
+                <a href="index.html#services" class="hover:text-blue-600 transition">Services</a>
+                <a href="index.html#contact" class="hover:text-blue-600 transition">Contact</a>
+            </div>
+
+            <a href="https://wa.me/919987975429" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-[8px]">
+                <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp Us
+            </a>
+        </div>
+    </nav>
+
+    <!-- HEADER SPACER -->
+    <div class="pt-24 pb-6 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-navy-900">Verified Properties for Sale</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-1">Browse clear title listings across Mumbai, Thane, Navi Mumbai, Virar & Lonavala.</p>
+        </div>
+    </div>
+
+    <!-- MAIN PAGE CONTENT WITH FILTER BAR AND GRID -->
+    <section class="py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            
+            <!-- FILTER BAR -->
+            <div class="bg-white p-4 rounded-[8px] border border-slate-200 shadow-sm mb-8 flex flex-wrap gap-4 items-center justify-between">
+                <div class="flex flex-wrap gap-4 items-center flex-1">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Region</label>
+                        <select id="buy-filter-region" onchange="applyFilters()" class="bg-slate-50 border border-slate-200 text-xs font-semibold rounded p-2 text-slate-800">
+                            <option value="All">All Regions</option>
+                            <option value="All Mumbai">All Mumbai</option>
+                            <option value="All Thane">All Thane</option>
+                            <option value="Navi Mumbai">Navi Mumbai</option>
+                            <option value="Virar & Vasai">Virar & Vasai</option>
+                            <option value="Lonavala">Lonavala / Karjat</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Category</label>
+                        <select id="buy-filter-type" onchange="applyFilters()" class="bg-slate-50 border border-slate-200 text-xs font-semibold rounded p-2 text-slate-800">
+                            <option value="All">All Categories</option>
+                            <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
+                            <option value="Bungalows & Houses">Bungalows / Villa</option>
+                            <option value="Plots / Land">Plots / Land</option>
+                            <option value="Commercial">Commercial</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="text-xs font-medium text-slate-500">
+                    Showing <span id="property-count" class="font-bold text-navy-900">0</span> properties
+                </div>
+            </div>
+
+            <!-- ALL PROPERTIES GRID -->
+            <div id="buy-properties-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="col-span-3 text-center py-12 text-slate-500">Loading properties...</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 py-8 text-xs border-t border-slate-800 mt-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            &copy; 2026 Tricore Realty & Advisory. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC FOR BUY.HTML -->
+    <script>
+        let allProperties = [];
+
+        // Parse URL Parameters passed from index.html
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                region: params.get('region') || 'All',
+                type: params.get('type') || 'All'
+            };
+        }
+
+        async function initBuyPage() {
+            const urlFilters = getUrlParams();
+            document.getElementById('buy-filter-region').value = urlFilters.region;
+            document.getElementById('buy-filter-type').value = urlFilters.type;
+
+            try {
+                const response = await fetch('./properties.json');
+                if (!response.ok) throw new Error("Failed to load");
+                allProperties = await response.json();
+                applyFilters();
+            } catch (err) {
+                console.error(err);
+                document.getElementById('buy-properties-grid').innerHTML = `<div class="col-span-3 text-center py-8 text-red-500">Failed to load property listings.</div>`;
+            }
+        }
+
+        function applyFilters() {
+            const selectedRegion = document.getElementById('buy-filter-region').value;
+            const selectedType = document.getElementById('buy-filter-type').value;
+
+            const filtered = allProperties.filter(item => {
+                const matchesRegion = (selectedRegion === 'All' || item.region === selectedRegion);
+                const matchesType = (selectedType === 'All' || item.type === selectedType);
+                return matchesRegion && matchesType;
+            });
+
+            document.getElementById('property-count').innerText = filtered.length;
+            renderProperties(filtered);
+        }
+
+        function renderProperties(items) {
+            const grid = document.getElementById('buy-properties-grid');
+            if (items.length === 0) {
+                grid.innerHTML = `<div class="col-span-3 text-center py-12 text-slate-500 font-medium">No properties found matching your search criteria.</div>`;
+                return;
+            }
+
+            grid.innerHTML = '';
+            items.forEach(item => {
+                const encodedMsg = encodeURIComponent(item.whatsappText || `Hi Tricore, I am interested in ${item.title} (${item.id})`);
+                const whatsappUrl = `https://wa.me/919987975429?text=${encodedMsg}`;
+
+                grid.innerHTML += `
+                    <div class="bg-white rounded-[8px] border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+                        <img src="${item.image}" class="w-full h-48 object-cover" alt="${item.title}">
+                        <div class="p-5">
+                            <span class="text-[10px] font-bold text-slate-500 uppercase"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i>${item.location}</span>
+                            <h3 class="font-bold text-base text-navy-900 line-clamp-1 mt-1 mb-1">${item.title}</h3>
+                            <p class="text-lg font-extrabold text-blue-700 mb-3">${item.price}</p>
+                            <a href="${whatsappUrl}" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-[6px] text-xs text-center block transition">
+                                <i class="fa-brands fa-whatsapp mr-1"></i> Enquire on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initBuyPage);
+    </script>
+</body>
+</html>
