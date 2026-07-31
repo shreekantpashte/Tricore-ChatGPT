@@ -6,8 +6,14 @@
     <title>All Properties for Sale | Tricore Realty & Advisory</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Supabase JS Client SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -49,7 +55,7 @@
         </div>
     </div>
 
-    <!-- MAIN PAGE CONTENT WITH FILTER BAR AND GRID -->
+    <!-- MAIN CONTENT WITH FILTER BAR AND GRID -->
     <section class="py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             
@@ -58,7 +64,7 @@
                 <div class="flex flex-wrap gap-4 items-center flex-1">
                     <div>
                         <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Region</label>
-                        <select id="buy-filter-region" onchange="applyFilters()" class="bg-slate-50 border border-slate-200 text-xs font-semibold rounded p-2 text-slate-800">
+                        <select id="buy-filter-region" onchange="applyFilters()" class="bg-slate-50 border border-slate-200 text-xs font-semibold rounded p-2 text-slate-800 focus:outline-none">
                             <option value="All">All Regions</option>
                             <option value="All Mumbai">All Mumbai</option>
                             <option value="All Thane">All Thane</option>
@@ -70,7 +76,7 @@
 
                     <div>
                         <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Category</label>
-                        <select id="buy-filter-type" onchange="applyFilters()" class="bg-slate-50 border border-slate-200 text-xs font-semibold rounded p-2 text-slate-800">
+                        <select id="buy-filter-type" onchange="applyFilters()" class="bg-slate-50 border border-slate-200 text-xs font-semibold rounded p-2 text-slate-800 focus:outline-none">
                             <option value="All">All Categories</option>
                             <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
                             <option value="Bungalows & Houses">Bungalows / Villa</option>
@@ -85,9 +91,11 @@
                 </div>
             </div>
 
-            <!-- ALL PROPERTIES GRID -->
+            <!-- DYNAMIC PROPERTIES GRID -->
             <div id="buy-properties-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="col-span-3 text-center py-12 text-slate-500">Loading properties...</div>
+                <div class="col-span-3 text-center py-12 text-slate-500 font-medium">
+                    Loading live properties from database...
+                </div>
             </div>
 
         </div>
@@ -100,11 +108,16 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC FOR BUY.HTML -->
+    <!-- COMPLETE LIVE SUPABASE SCRIPT -->
     <script>
+        // 1. SUPABASE CREDENTIALS
+        const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co/rest/v1/";
+        const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
+
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         let allProperties = [];
 
-        // Parse URL Parameters passed from index.html
+        // 2. PARSE URL PARAMETERS FROM INDEX.HTML KIOSK
         function getUrlParams() {
             const params = new URLSearchParams(window.location.search);
             return {
@@ -113,29 +126,41 @@
             };
         }
 
+        // 3. FETCH PROPERTIES LIVE FROM SUPABASE
         async function initBuyPage() {
             const urlFilters = getUrlParams();
             document.getElementById('buy-filter-region').value = urlFilters.region;
             document.getElementById('buy-filter-type').value = urlFilters.type;
 
             try {
-                const response = await fetch('./properties.json');
-                if (!response.ok) throw new Error("Failed to load");
-                allProperties = await response.json();
+                // Fetch only Published properties
+                const { data, error } = await supabaseClient
+                    .from('properties')
+                    .select('*')
+                    .eq('status', 'Published')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+                
+                allProperties = data || [];
                 applyFilters();
             } catch (err) {
-                console.error(err);
-                document.getElementById('buy-properties-grid').innerHTML = `<div class="col-span-3 text-center py-8 text-red-500">Failed to load property listings.</div>`;
+                console.error("Error fetching properties from Supabase:", err);
+                document.getElementById('buy-properties-grid').innerHTML = `
+                    <div class="col-span-3 text-center py-12 text-red-500 font-medium">
+                        Failed to load live properties. Please verify your Supabase URL and Keys.
+                    </div>`;
             }
         }
 
+        // 4. APPLY REGION & CATEGORY FILTERS
         function applyFilters() {
             const selectedRegion = document.getElementById('buy-filter-region').value;
             const selectedType = document.getElementById('buy-filter-type').value;
 
             const filtered = allProperties.filter(item => {
                 const matchesRegion = (selectedRegion === 'All' || item.region === selectedRegion);
-                const matchesType = (selectedType === 'All' || item.type === selectedType);
+                const matchesType = (selectedType === 'All' || item.category === selectedType);
                 return matchesRegion && matchesType;
             });
 
@@ -143,25 +168,46 @@
             renderProperties(filtered);
         }
 
+        // 5. RENDER PROPERTY CARDS TO DOM
         function renderProperties(items) {
             const grid = document.getElementById('buy-properties-grid');
             if (items.length === 0) {
-                grid.innerHTML = `<div class="col-span-3 text-center py-12 text-slate-500 font-medium">No properties found matching your search criteria.</div>`;
+                grid.innerHTML = `
+                    <div class="col-span-3 text-center py-12 text-slate-500 font-medium bg-white rounded border border-slate-200">
+                        No properties found matching your search criteria.
+                    </div>`;
                 return;
             }
 
             grid.innerHTML = '';
             items.forEach(item => {
-                const encodedMsg = encodeURIComponent(item.whatsappText || `Hi Tricore, I am interested in ${item.title} (${item.id})`);
+                // Fallback image if array is empty
+                const displayImage = (item.images && item.images.length > 0 && item.images[0]) 
+                    ? item.images[0] 
+                    : 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80';
+
+                const locationText = item.location || item.region;
+                const encodedMsg = encodeURIComponent(`Hi Tricore, I am interested in property: ${item.title} (${locationText}). Price: ${item.price}`);
                 const whatsappUrl = `https://wa.me/919987975429?text=${encodedMsg}`;
 
                 grid.innerHTML += `
-                    <div class="bg-white rounded-[8px] border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
-                        <img src="${item.image}" class="w-full h-48 object-cover" alt="${item.title}">
+                    <div class="bg-white rounded-[8px] border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition duration-200">
+                        <div class="relative">
+                            <img src="${displayImage}" class="w-full h-48 object-cover" alt="${item.title}">
+                            ${item.is_featured ? `<span class="absolute top-2.5 left-2.5 bg-purple-900 text-white text-[10px] font-bold px-2 py-0.5 rounded tracking-wider uppercase">FEATURED</span>` : ''}
+                        </div>
                         <div class="p-5">
-                            <span class="text-[10px] font-bold text-slate-500 uppercase"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i>${item.location}</span>
+                            <span class="text-[10px] font-bold text-slate-500 uppercase">
+                                <i class="fa-solid fa-location-dot text-red-500 mr-1"></i>${locationText}
+                            </span>
                             <h3 class="font-bold text-base text-navy-900 line-clamp-1 mt-1 mb-1">${item.title}</h3>
                             <p class="text-lg font-extrabold text-blue-700 mb-3">${item.price}</p>
+                            
+                            <div class="grid grid-cols-2 gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 p-2 rounded-[6px] mb-4">
+                                <span><i class="fa-solid fa-check text-emerald-600"></i> Legal Verified</span>
+                                <span><i class="fa-solid fa-check text-emerald-600"></i> Clear Title</span>
+                            </div>
+
                             <a href="${whatsappUrl}" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded-[6px] text-xs text-center block transition">
                                 <i class="fa-brands fa-whatsapp mr-1"></i> Enquire on WhatsApp
                             </a>
