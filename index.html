@@ -6,148 +6,253 @@
     <title>Tricore Realty & Advisory | Mumbai, Thane, Navi Mumbai, Virar & Lonavala</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
                     colors: {
                         navy: { 800: '#1e293b', 900: '#0f172a' },
-                        emerald: { 600: '#059669', 700: '#047857' }
+                        emerald: { 600: '#059669', 700: '#047857' },
+                        surface: '#F8FAFC',
+                        specbox: '#F3F6FA'
                     }
                 }
             }
         }
     </script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.2s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+<body class="bg-surface text-slate-800 font-sans antialiased">
 
     <!-- NAVIGATION HEADER -->
-    <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+    <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
             <!-- Logo (Acts as Home) -->
-            <a href="#" class="text-2xl font-bold text-navy-900 flex items-center gap-2 tracking-tight">
+            <a href="#" class="text-2xl font-extrabold text-navy-900 flex items-center gap-2 tracking-tight">
                 <i class="fa-solid fa-building text-blue-600"></i> TRICORE
             </a>
             
             <!-- Minimal Menu -->
-            <div class="hidden md:flex space-x-8 font-medium text-slate-700">
+            <div class="hidden md:flex space-x-8 font-medium text-slate-700 text-sm">
                 <a href="#buy" class="hover:text-blue-600 transition">Buy</a>
+                <a href="#land" class="hover:text-blue-600 transition">Land Investment</a>
                 <a href="#services" class="hover:text-blue-600 transition">Services</a>
                 <a href="#about" class="hover:text-blue-600 transition">About</a>
                 <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
             </div>
 
-            <!-- Header WhatsApp Actions -->
-            <div class="flex items-center gap-2">
-                <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20have%20a%20Real%20Estate%20enquiry." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold px-3 py-2 rounded transition flex items-center gap-1.5">
-                    <i class="fa-brands fa-whatsapp text-base"></i> Real Estate
+            <!-- Header CTA Hierarchy -->
+            <div class="flex items-center gap-3">
+                <a href="#contact" class="hidden lg:inline-block text-xs font-semibold text-slate-700 hover:text-blue-600 transition">
+                    List Property
                 </a>
-                <a href="https://wa.me/917715818373?text=Hi%20Tricore,%20I%20have%20a%20Legal/Revenue%20record%20enquiry." target="_blank" class="bg-navy-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold px-3 py-2 rounded transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-scale-balanced text-xs"></i> Legal
+                <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20have%20a%20Real%20Estate%20enquiry." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-[8px] shadow-sm transition flex items-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp text-base"></i> <span class="hidden sm:inline">WhatsApp</span>
+                </a>
+                <a href="#search-box" class="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-[8px] shadow-sm transition">
+                    Search Property
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION WITH CAROUSEL & SEARCH KIOSK -->
-    <section class="relative pt-20 min-h-[85vh] flex items-center justify-center overflow-hidden bg-navy-900">
-        <!-- Carousel Background Images -->
+    <!-- HERO SECTION WITH MUMBAI HIGH-RISE IMAGE CAROUSEL & SEARCH KIOSK -->
+    <section id="home" class="relative pt-20 min-h-[90vh] flex items-center overflow-hidden bg-navy-900">
+        
+        <!-- AUTOMATIC CAROUSEL BACKGROUND (MUMBAI & NEW HIGH-RISE CONSTRUCTIONS) -->
         <div id="hero-carousel" class="absolute inset-0 w-full h-full">
+            <!-- 1. Mumbai Skyline at Sunset -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1920&q=80');"></div>
+            <!-- 2. Premium Gated Community High-Rise -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1920&q=80');"></div>
+            <!-- 3. Drone Shot Aerial Land Plot / Project -->
+            <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80');"></div>
+            <!-- 4. Modern Commercial District (BKC Vibe) -->
+            <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');"></div>
+            <!-- 5. Luxury High-Rise Living -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80');"></div>
         </div>
 
-        <!-- Soft Overlay -->
-        <div class="absolute inset-0 bg-navy-900/65 z-10"></div>
+        <!-- LEFT-FOCUSED GRADIENT OVERLAY (Keeps buildings visible on right) -->
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/75 to-transparent z-10"></div>
 
-        <!-- Hero Content & Search Kiosk -->
-        <div class="relative z-20 max-w-5xl mx-auto px-4 py-12 text-center w-full">
-            <h1 class="text-3xl sm:text-5xl font-extrabold text-white mb-4 tracking-tight">
-                Verified Properties. Clear Titles.
-            </h1>
-            <p class="text-slate-200 text-base sm:text-lg mb-8 max-w-2xl mx-auto">
-                Properties & Revenue Record Legal Advisory across <span class="text-amber-400 font-semibold">Mumbai, Thane, Navi Mumbai, Virar & Lonavala</span>.
-            </p>
+        <!-- HERO CONTENT CONTAINER -->
+        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 py-12 w-full">
+            <div class="max-w-3xl">
+                
+                <!-- TYPOGRAPHY HIERARCHY SPECIFIED -->
+                <div class="mb-3 flex flex-wrap gap-2 text-xs font-bold tracking-wider text-blue-400 uppercase">
+                    <span>Verified Properties</span> • 
+                    <span>Legal Due Diligence</span> • 
+                    <span>Registration Support</span> • 
+                    <span class="text-amber-400">One Trusted Team</span>
+                </div>
 
-            <!-- Search Kiosk -->
-            <div class="bg-white p-4 sm:p-6 rounded-lg border border-slate-200 text-left max-w-4xl mx-auto shadow-sm">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Location</label>
-                        <select id="filter-region" class="w-full bg-slate-50 border border-slate-200 rounded p-2.5 text-sm font-medium focus:outline-none">
-                            <option value="All">All Regions</option>
-                            <option value="Virar & Vasai">Virar & Vasai</option>
-                            <option value="All Mumbai">All Mumbai</option>
-                            <option value="All Thane">All Thane</option>
-                            <option value="Navi Mumbai">Navi Mumbai</option>
-                            <option value="Lonavala">Lonavala</option>
-                        </select>
+                <!-- SPECIFIED HEADLINE -->
+                <h1 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight mb-4 tracking-tight drop-shadow-sm">
+                    Verified Properties. Clear Titles. <br class="hidden sm:inline"/>
+                    <span class="text-blue-400">Expert Legal Guidance.</span>
+                </h1>
+
+                <p class="text-slate-300 text-sm sm:text-base mb-6 max-w-2xl">
+                    Serving home buyers, land investors, and developers across <strong class="text-white">Mumbai</strong>, <strong class="text-white">Thane</strong>, <strong class="text-white">Navi Mumbai</strong>, <strong class="text-white">Virar</strong> & <strong class="text-white">Lonavala</strong> with 100% RERA & Revenue clearance.
+                </p>
+
+                <!-- SEARCH KIOSK (8px Radius, Strong Shadow, Better Spacing) -->
+                <div id="search-box" class="bg-white p-5 rounded-[8px] shadow-2xl border border-slate-100 mb-6">
+                    
+                    <!-- DISTINCT SEARCH TABS -->
+                    <div class="flex space-x-6 mb-4 border-b border-slate-200 pb-3">
+                        <button onclick="switchTab(this)" class="search-tab flex items-center gap-2 pb-1 text-sm font-bold text-blue-600 border-b-2 border-blue-600 transition-all">
+                            <i class="fa-solid fa-house"></i> Buy Flat
+                        </button>
+                        <button onclick="switchTab(this)" class="search-tab flex items-center gap-2 pb-1 text-sm font-medium text-slate-500 hover:text-blue-600 border-b-2 border-transparent transition-all">
+                            <i class="fa-solid fa-map"></i> Land Investment
+                        </button>
+                        <button onclick="switchTab(this)" class="search-tab flex items-center gap-2 pb-1 text-sm font-medium text-slate-500 hover:text-blue-600 border-b-2 border-transparent transition-all">
+                            <i class="fa-solid fa-scale-balanced"></i> Legal Service
+                        </button>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Category</label>
-                        <select id="filter-type" class="w-full bg-slate-50 border border-slate-200 rounded p-2.5 text-sm font-medium focus:outline-none">
-                            <option value="All">All Types</option>
-                            <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
-                            <option value="Bungalows & Houses">Bungalows & Houses</option>
-                            <option value="Plots / Land">Plots / Land</option>
-                            <option value="Commercial">Commercial</option>
-                        </select>
+
+                    <!-- FORM FIELDS WITH BETTER VISUAL SEPARATION -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+                        <div class="relative bg-slate-50 p-2.5 rounded-[6px] border border-slate-200">
+                            <label class="block text-[11px] font-bold text-slate-500 mb-1 tracking-wider uppercase">LOCATION</label>
+                            <select id="filter-region" class="w-full bg-transparent font-semibold text-slate-800 text-sm focus:outline-none cursor-pointer">
+                                <option value="All">All Regions</option>
+                                <option value="All Mumbai">All Mumbai</option>
+                                <option value="All Thane">All Thane</option>
+                                <option value="Navi Mumbai">Navi Mumbai</option>
+                                <option value="Virar & Vasai">Virar & Vasai</option>
+                                <option value="Lonavala">Lonavala / Karjat</option>
+                            </select>
+                        </div>
+
+                        <div class="relative bg-slate-50 p-2.5 rounded-[6px] border border-slate-200">
+                            <label class="block text-[11px] font-bold text-slate-500 mb-1 tracking-wider uppercase">CATEGORY</label>
+                            <select id="filter-type" class="w-full bg-transparent font-semibold text-slate-800 text-sm focus:outline-none cursor-pointer">
+                                <option value="All">All Categories</option>
+                                <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
+                                <option value="Bungalows & Houses">Luxury Villa / House</option>
+                                <option value="Plots / Land">NA Plot / Agricultural Land</option>
+                                <option value="Commercial">Commercial Office / Shop</option>
+                            </select>
+                        </div>
+
+                        <div class="relative bg-slate-50 p-2.5 rounded-[6px] border border-slate-200">
+                            <label class="block text-[11px] font-bold text-slate-500 mb-1 tracking-wider uppercase">SERVICE NEEDED</label>
+                            <select id="filter-service" class="w-full bg-transparent font-semibold text-slate-800 text-sm focus:outline-none cursor-pointer">
+                                <option value="Property Buying">Property Purchase</option>
+                                <option value="7/12 Extract / CTS Card">7/12 Extract & Ferfar</option>
+                                <option value="Title Verification / Search">Title Verification (30-100 Yrs)</option>
+                                <option value="Property Registration">Property Registration</option>
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Service Needed</label>
-                        <select id="filter-service" class="w-full bg-slate-50 border border-slate-200 rounded p-2.5 text-sm font-medium focus:outline-none">
-                            <option value="Property Buying">Property Buying</option>
-                            <option value="7/12 Extract / CTS Card">7/12 Extract / CTS Card</option>
-                            <option value="Title Verification / Search">Title Verification / Search</option>
-                            <option value="Property Registration">Property Registration</option>
-                        </select>
+
+                    <!-- PROMINENT SEARCH BUTTON -->
+                    <button onclick="handleKioskSearch()" class="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-bold text-base rounded-[8px] flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-0.5">
+                        <span>Explore Properties</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+
+                <!-- POPULAR LOCATION CHIPS WITH HOVER LISTING COUNTS -->
+                <div class="flex items-center flex-wrap gap-2 mb-6">
+                    <span class="text-xs text-slate-400 font-medium mr-1">Popular:</span>
+                    <div class="group relative bg-white/10 hover:bg-blue-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full cursor-pointer transition border border-white/10">
+                        <span>Thane</span>
+                        <span class="hidden group-hover:inline font-bold ml-1 text-amber-300 animate-fade-in">- 124 Properties</span>
+                    </div>
+                    <div class="group relative bg-white/10 hover:bg-blue-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full cursor-pointer transition border border-white/10">
+                        <span>Navi Mumbai</span>
+                        <span class="hidden group-hover:inline font-bold ml-1 text-amber-300 animate-fade-in">- 98 Properties</span>
+                    </div>
+                    <div class="group relative bg-white/10 hover:bg-blue-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full cursor-pointer transition border border-white/10">
+                        <span>Virar West</span>
+                        <span class="hidden group-hover:inline font-bold ml-1 text-amber-300 animate-fade-in">- 65 Properties</span>
+                    </div>
+                    <div class="group relative bg-white/10 hover:bg-blue-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full cursor-pointer transition border border-white/10">
+                        <span>Lonavala Land</span>
+                        <span class="hidden group-hover:inline font-bold ml-1 text-amber-300 animate-fade-in">- 42 Plots</span>
                     </div>
                 </div>
-                <button onclick="handleKioskSearch()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded text-center block transition">
-                    <i class="fa-brands fa-whatsapp mr-2"></i> Search & Enquire via WhatsApp
-                </button>
+
+                <!-- SECONDARY CTAs -->
+                <div class="flex flex-wrap items-center gap-4 mb-6">
+                    <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-5 py-2.5 rounded-[8px] text-xs sm:text-sm transition shadow-md">
+                        Schedule a Free Consultation
+                    </a>
+                    <a href="#buy" class="text-white hover:text-blue-400 font-semibold text-xs sm:text-sm underline underline-offset-4 transition">
+                        Browse Featured Projects &rarr;
+                    </a>
+                </div>
+
+                <!-- TRUST BADGES -->
+                <div class="pt-4 border-t border-white/10 flex flex-wrap items-center gap-6 text-xs text-slate-300">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-emerald-400 text-sm"></i>
+                        <span class="font-medium">MahaRERA Guidance</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-users text-blue-400 text-sm"></i>
+                        <span class="font-medium">Trusted by 500+ Buyers</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- WHY CHOOSE TRICORE -->
+    <!-- WHY CHOOSE TRICORE (TRUST STRIP) -->
     <section id="about" class="py-16 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center max-w-2xl mx-auto mb-12">
-                <h2 class="text-2xl sm:text-3xl font-bold text-navy-900 mb-3">Why Choose Tricore</h2>
-                <p class="text-slate-600">Combining real estate sales with complete revenue legal verification under one roof.</p>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-2">Why Choose Tricore</h2>
+                <p class="text-slate-600 text-sm">We remove the biggest financial and legal risks in real estate transactions.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-6 rounded border border-slate-200 bg-slate-50">
-                    <div class="text-blue-600 text-3xl mb-3"><i class="fa-solid fa-shield-halved"></i></div>
-                    <h3 class="font-bold text-lg text-navy-900 mb-2">Clear Title Guarantee</h3>
-                    <p class="text-sm text-slate-600">Every property listing comes backed by thorough 30 to 100-year revenue title search reports.</p>
+                <div class="p-6 rounded-[8px] border border-slate-200 bg-surface">
+                    <div class="text-blue-600 text-3xl mb-3"><i class="fa-solid fa-file-shield"></i></div>
+                    <h3 class="font-bold text-base text-navy-900 mb-2">30–100 Year Title Search</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Every property comes pre-verified against revenue department litigation, encumbrance, and title disputes.</p>
                 </div>
-                <div class="p-6 rounded border border-slate-200 bg-slate-50">
-                    <div class="text-blue-600 text-3xl mb-3"><i class="fa-solid fa-file-contract"></i></div>
-                    <h3 class="font-bold text-lg text-navy-900 mb-2">In-House Revenue Legal Services</h3>
-                    <p class="text-sm text-slate-600">From 7/12 Extracts and Ferfar entries to High Court Probate copies, we manage all paperwork directly.</p>
+                <div class="p-6 rounded-[8px] border border-slate-200 bg-surface">
+                    <div class="text-blue-600 text-3xl mb-3"><i class="fa-solid fa-stamp"></i></div>
+                    <h3 class="font-bold text-base text-navy-900 mb-2">In-House Revenue Consultancy</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Direct execution of 7/12 extracts, Ferfar entries, CTS Cards, and legal heir updates with local Revenue offices.</p>
                 </div>
-                <div class="p-6 rounded border border-slate-200 bg-slate-50">
+                <div class="p-6 rounded-[8px] border border-slate-200 bg-surface">
                     <div class="text-blue-600 text-3xl mb-3"><i class="fa-solid fa-map-location-dot"></i></div>
-                    <h3 class="font-bold text-lg text-navy-900 mb-2">MMR & Belt Expertise</h3>
-                    <p class="text-sm text-slate-600">Focused specialization in Virar, Mumbai, Thane, Navi Mumbai, and Lonavala growth corridors.</p>
+                    <h3 class="font-bold text-base text-navy-900 mb-2">MMR & Corridor Focus</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">Hyper-local valuation and development potential insights across Mumbai, Thane, Navi Mumbai, Virar, and Lonavala.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- RECOMMENDED PROPERTIES (DYNAMICALLY LOADED FROM PROPERTIES.JSON) -->
-    <section id="buy" class="py-16 bg-slate-50 border-b border-slate-200">
+    <!-- FEATURED PROPERTIES SECTION -->
+    <section id="buy" class="py-16 bg-surface border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="flex justify-between items-end mb-10">
-                <div>
-                    <h2 class="text-2xl sm:text-3xl font-bold text-navy-900">Recommended Properties</h2>
-                    <p class="text-slate-600 text-sm mt-1">Handpicked, title-verified residential, commercial & plot options.</p>
-                </div>
+            
+            <div class="max-w-2xl mb-10">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900">Verified Properties Recommended by Our Experts</h2>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2">
+                    Every listing below has been reviewed by our team for documentation, ownership clarity, location potential, and investment value before being featured.
+                </p>
             </div>
 
             <!-- DYNAMIC PROPERTIES GRID -->
@@ -156,190 +261,347 @@
                     Loading verified properties...
                 </div>
             </div>
+
+            <!-- VIEW ALL PROPERTIES CONTEXTUAL FOOTER -->
+            <div class="mt-12 text-center pt-8 border-t border-slate-200/80">
+                <p class="text-xs sm:text-sm text-slate-600 mb-3 font-medium">Discover more verified listings across Mumbai, Thane, Navi Mumbai & Karjat.</p>
+                <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20please%20send%20me%20all%20available%20verified%20properties." target="_blank" class="inline-flex items-center gap-2 bg-navy-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-bold px-6 py-3 rounded-[8px] transition shadow-sm">
+                    <span>Browse All Properties</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LAND INVESTMENT SHOWCASE (HERO PRODUCT) -->
+    <section id="land" class="py-16 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4">
+                <div>
+                    <span class="text-xs font-bold text-blue-600 tracking-wider uppercase mb-1 block">Hero Product Showcase</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900">Verified Land Investment Opportunities</h2>
+                    <p class="text-slate-600 text-xs sm:text-sm mt-1">Direct clear-title agricultural & NA plots with high appreciation potential in Karjat & Lonavala belt.</p>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 px-4 py-2 rounded-[6px]">
+                    <span class="text-xs font-medium text-slate-600 block">Starting From</span>
+                    <span class="text-lg font-extrabold text-blue-900">₹3,50,000 / Guntha</span>
+                </div>
+            </div>
+
+            <!-- LAND INVESTMENT FEATURE CARD GRID -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- LAND CARD 1 -->
+                <div class="bg-surface rounded-[8px] border border-slate-200 overflow-hidden hover:border-blue-300 transition duration-300 shadow-sm hover:shadow-md">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" class="w-full h-64 object-cover" alt="Karjat Land">
+                        <span class="absolute top-3 left-3 bg-navy-900/90 text-white text-[10px] font-bold px-2.5 py-1 rounded tracking-wider uppercase">80 Acre Agricultural Land</span>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="text-xl font-bold text-navy-900">Prime Agricultural & Villa Plot Belt</h3>
+                                <p class="text-xs font-medium text-slate-500 mt-0.5"><i class="fa-solid fa-location-dot text-red-500"></i> Mandavane, Karjat (Raigad District)</p>
+                            </div>
+                            <span class="text-lg font-extrabold text-blue-700">₹1.12 Cr <span class="text-xs font-normal text-slate-500">Negotiable</span></span>
+                        </div>
+
+                        <!-- TRUST CARD INDICATOR -->
+                        <div class="mb-4 bg-emerald-50 border border-emerald-200 p-2.5 rounded-[6px] text-xs text-emerald-900 font-semibold flex flex-wrap gap-x-4 gap-y-1">
+                            <span><i class="fa-solid fa-check text-emerald-600 mr-1"></i> Single Ownership</span>
+                            <span><i class="fa-solid fa-check text-emerald-600 mr-1"></i> Clear Chain of Title</span>
+                            <span><i class="fa-solid fa-check text-emerald-600 mr-1"></i> Legal Verification Completed</span>
+                        </div>
+
+                        <!-- SPECIFICATION BOX (CLEAN SURFACE #F3F6FA) -->
+                        <div class="bg-specbox p-3 rounded-[6px] grid grid-cols-3 gap-2 text-center text-xs font-semibold text-slate-700 mb-4 border border-slate-200/60">
+                            <div>
+                                <span class="block text-[10px] text-slate-400 font-normal uppercase">Village</span>
+                                <span>Mandavane</span>
+                            </div>
+                            <div class="border-x border-slate-200">
+                                <span class="block text-[10px] text-slate-400 font-normal uppercase">District</span>
+                                <span>Raigad</span>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] text-slate-400 font-normal uppercase">Total Area</span>
+                                <span>80 Acres</span>
+                            </div>
+                        </div>
+
+                        <!-- HIGHLIGHT ICONS -->
+                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-600 mb-6">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-road text-slate-400"></i> Road Touch Access</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-water text-slate-400"></i> River / Water Body Access</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-wheat-awn text-slate-400"></i> Fertile Soil Zone</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-chart-line text-slate-400"></i> High Appreciation Corridor</span>
+                        </div>
+
+                        <!-- ACTION BUTTONS -->
+                        <div class="flex items-center gap-3">
+                            <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20am%20interested%20in%20the%2080%20Acre%20Karjat%20Land." target="_blank" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-[6px] text-xs text-center transition flex items-center justify-center gap-1.5">
+                                <span>View Details</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </a>
+                            <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20want%20to%20talk%20to%20an%20advisor%20regarding%20Karjat%20plots." target="_blank" class="border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold px-4 py-2.5 rounded-[6px] text-xs transition flex items-center gap-1.5">
+                                <i class="fa-brands fa-whatsapp text-emerald-600 text-sm"></i> WhatsApp Expert
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- LAND CARD 2 -->
+                <div class="bg-surface rounded-[8px] border border-slate-200 overflow-hidden hover:border-blue-300 transition duration-300 shadow-sm hover:shadow-md">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" class="w-full h-64 object-cover" alt="Lonavala Plot">
+                        <span class="absolute top-3 left-3 bg-navy-900/90 text-white text-[10px] font-bold px-2.5 py-1 rounded tracking-wider uppercase">NA Gated Villa Plot</span>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="text-xl font-bold text-navy-900">Hilltop NA Plots for Farmhouse</h3>
+                                <p class="text-xs font-medium text-slate-500 mt-0.5"><i class="fa-solid fa-location-dot text-red-500"></i> Kurvande, Lonavala</p>
+                            </div>
+                            <span class="text-lg font-extrabold text-blue-700">₹85 Lakhs</span>
+                        </div>
+
+                        <!-- TRUST CARD INDICATOR -->
+                        <div class="mb-4 bg-emerald-50 border border-emerald-200 p-2.5 rounded-[6px] text-xs text-emerald-900 font-semibold flex flex-wrap gap-x-4 gap-y-1">
+                            <span><i class="fa-solid fa-check text-emerald-600 mr-1"></i> Collector Approved NA</span>
+                            <span><i class="fa-solid fa-check text-emerald-600 mr-1"></i> Demarcated Plots</span>
+                            <span><i class="fa-solid fa-check text-emerald-600 mr-1"></i> Electricity & Water Connection</span>
+                        </div>
+
+                        <!-- SPECIFICATION BOX -->
+                        <div class="bg-specbox p-3 rounded-[6px] grid grid-cols-3 gap-2 text-center text-xs font-semibold text-slate-700 mb-4 border border-slate-200/60">
+                            <div>
+                                <span class="block text-[10px] text-slate-400 font-normal uppercase">Location</span>
+                                <span>Kurvande</span>
+                            </div>
+                            <div class="border-x border-slate-200">
+                                <span class="block text-[10px] text-slate-400 font-normal uppercase">District</span>
+                                <span>Pune</span>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] text-slate-400 font-normal uppercase">Plot Area</span>
+                                <span>11,000 Sq.ft</span>
+                            </div>
+                        </div>
+
+                        <!-- HIGHLIGHT ICONS -->
+                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-600 mb-6">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-mountain text-slate-400"></i> Scenic Valley View</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield text-slate-400"></i> Gated Boundary Wall</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-file-signature text-slate-400"></i> Immediate Registration</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-house-chimney text-slate-400"></i> Farmhouse Potential</span>
+                        </div>
+
+                        <!-- ACTION BUTTONS -->
+                        <div class="flex items-center gap-3">
+                            <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20am%20interested%20in%20Lonavala%20NA%20plots." target="_blank" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-[6px] text-xs text-center transition flex items-center justify-center gap-1.5">
+                                <span>View Details</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </a>
+                            <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20want%20to%20talk%20to%20an%20advisor%20regarding%20Lonavala%20plots." target="_blank" class="border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold px-4 py-2.5 rounded-[6px] text-xs transition flex items-center gap-1.5">
+                                <i class="fa-brands fa-whatsapp text-emerald-600 text-sm"></i> WhatsApp Expert
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- SECTION BOTTOM CTA -->
+            <div class="mt-8 text-center">
+                <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20want%20to%20enquire%20about%20Land%20Title%20Verification%20and%207/12%20records." target="_blank" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 hover:text-blue-600 transition">
+                    <span>Looking for 7/12 extract title verification for your existing land?</span>
+                    <strong class="text-blue-600 underline">Consult Legal Advisory &rarr;</strong>
+                </a>
+            </div>
+
         </div>
     </section>
 
     <!-- COMPLETE PROPERTY & REVENUE RECORD SERVICES (27 SERVICES) -->
-    <section id="services" class="py-16 bg-white border-b border-slate-200">
+    <section id="services" class="py-16 bg-surface border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center max-w-2xl mx-auto mb-12">
-                <h2 class="text-2xl sm:text-3xl font-bold text-navy-900 mb-3">Property & Revenue Record Services</h2>
-                <p class="text-slate-600 text-sm">Direct legal & documentation support across government offices and revenue departments.</p>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-2">Property & Revenue Record Services</h2>
+                <p class="text-slate-600 text-xs sm:text-sm">Direct legal & documentation support across Sub-Registrar and Revenue offices.</p>
             </div>
 
-            <!-- 27 SERVICES GRID -->
+            <!-- 27 SERVICES GRID WITH HOVER EFFECT -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">7/12 Extract (Old / New)</h4>
                     <p class="text-xs text-slate-500 mb-3">Land entitlement & revenue records.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%207/12%20Extract." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%207/12%20Extract." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">Kami Jast Patrak</h4>
                     <p class="text-xs text-slate-500 mb-3">More or less area sheet verification.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Kami%20Jast%20Patrak." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Kami%20Jast%20Patrak." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">Aakar Phod Patrak</h4>
                     <p class="text-xs text-slate-500 mb-3">Sub-division blister sheet verification.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Aakar%20Phod%20Patrak." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Aakar%20Phod%20Patrak." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">Mutation Entry (Ferfar)</h4>
                     <p class="text-xs text-slate-500 mb-3">Ownership title change entry.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Mutation%20Entry%20(Ferfar)." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Mutation%20Entry%20(Ferfar)." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">Automatic Mutation Indexing</h4>
                     <p class="text-xs text-slate-500 mb-3">Swayam Suchika auto indexing.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Automatic%20Mutation%20Indexing." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Automatic%20Mutation%20Indexing." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">CTS Property Card</h4>
                     <p class="text-xs text-slate-500 mb-3">City Survey urban land title record.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20CTS%20Property%20Card." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20CTS%20Property%20Card." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">Municipal Survey Index</h4>
                     <p class="text-xs text-slate-500 mb-3">Swayam Suchika municipal survey.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Municipal%20Survey%20Index." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Municipal%20Survey%20Index." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">CTS DP Plan & Remarks</h4>
                     <p class="text-xs text-slate-500 mb-3">Development Plan reservation remarks.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20CTS%20DP%20Plan%20%26%20Remarks." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20CTS%20DP%20Plan%20%26%20Remarks." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">CTS Survey Map</h4>
                     <p class="text-xs text-slate-500 mb-3">Official CTS map copies.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20CTS%20Survey%20Map." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20CTS%20Survey%20Map." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">Village & Gut Book Map</h4>
                     <p class="text-xs text-slate-500 mb-3">Village maps and gut boundary maps.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Village%20and%20Gut%20Book%20Map." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Village%20and%20Gut%20Book%20Map." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">Aerial CTS Survey Map</h4>
                     <p class="text-xs text-slate-500 mb-3">Location & CTS number-wise aerial map.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Aerial%20CTS%20Survey%20Map." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20assistance%20with%20Aerial%20CTS%20Survey%20Map." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">Certified Document Copies</h4>
                     <p class="text-xs text-slate-500 mb-3">Old/New copies from Sub-Registrar.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Certified%20Copies%20from%20Sub-Registrar." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Certified%20Copies%20from%20Sub-Registrar." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">High Court Probate</h4>
                     <p class="text-xs text-slate-500 mb-3">Testamentary & probate certified copies.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20High%20Court%20Probate%20Certified%20Copies." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20High%20Court%20Probate%20Certified%20Copies." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">Land Acquisition Award</h4>
                     <p class="text-xs text-slate-500 mb-3">Collector Office land award copies.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Land%20Acquisition%20Award%20Copy." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Land%20Acquisition%20Award%20Copy." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">Tahsil / RTS Orders</h4>
                     <p class="text-xs text-slate-500 mb-3">Tahsil, Talathi, & RTS certified orders.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Tahsil/Talathi/RTS%20Orders." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Tahsil/Talathi/RTS%20Orders." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
+                <div class="group p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition duration-200 shadow-sm">
                     <h4 class="font-bold text-sm text-navy-900 mb-1">Property Search Report</h4>
                     <p class="text-xs text-slate-500 mb-3">30 Yrs / 60 Yrs / 100 Yrs title reports.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20a%20Property%20Search%20Report." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
-                </div>
-
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
-                    <h4 class="font-bold text-sm text-navy-900 mb-1">Name Transfer on 7/12</h4>
-                    <p class="text-xs text-slate-500 mb-3">7/12 extract name amendment.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Name%20Transfer%20on%207/12%20Extract." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
-                </div>
-
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
-                    <h4 class="font-bold text-sm text-navy-900 mb-1">Name Transfer on Property Card</h4>
-                    <p class="text-xs text-slate-500 mb-3">City survey property card name update.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Name%20Transfer%20on%20Property%20Card." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
-                </div>
-
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
-                    <h4 class="font-bold text-sm text-navy-900 mb-1">Legal Heir Registration</h4>
-                    <p class="text-xs text-slate-500 mb-3">Waris entry & legal succession support.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Legal%20Heir%20Registration." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
-                </div>
-
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
-                    <h4 class="font-bold text-sm text-navy-900 mb-1">Property Registration</h4>
-                    <p class="text-xs text-slate-500 mb-3">Sub-registrar office registration assistance.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Property%20Registration%20Assistance." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
-                </div>
-
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
-                    <h4 class="font-bold text-sm text-navy-900 mb-1">Property Legal Verification</h4>
-                    <p class="text-xs text-slate-500 mb-3">Full title & document due diligence.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Property%20Legal%20Verification." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
-                </div>
-
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
-                    <h4 class="font-bold text-sm text-navy-900 mb-1">Title Verification</h4>
-                    <p class="text-xs text-slate-500 mb-3">Clear ownership title checks.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Title%20Verification." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
-                </div>
-
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
-                    <h4 class="font-bold text-sm text-navy-900 mb-1">Revenue Record Verification</h4>
-                    <p class="text-xs text-slate-500 mb-3">Verification of historical revenue entries.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Revenue%20Record%20Verification." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
-                </div>
-
-                <div class="p-4 border border-slate-200 rounded bg-slate-50 hover:border-blue-500 transition">
-                    <h4 class="font-bold text-sm text-navy-900 mb-1">Property Due Diligence</h4>
-                    <p class="text-xs text-slate-500 mb-3">End-to-end legal & physical safety check.</p>
-                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20Property%20Due%20Diligence." target="_blank" class="text-xs font-bold text-emerald-700 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Enquire &rarr;</a>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal,%20I%20need%20a%20Property%20Search%20Report." target="_blank" class="text-xs font-bold text-blue-600 group-hover:text-emerald-700 transition flex items-center gap-1">
+                        <span>Learn More</span> <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
 
             </div>
+
+            <!-- ONE STRONG SECTION CTA BUTTON -->
+            <div class="mt-10 text-center">
+                <a href="https://wa.me/917715818373?text=Hi%20Tricore%20Legal%20Advisory,%20I%20need%20a%20custom%20revenue%20document%20verification." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm px-8 py-3.5 rounded-[8px] shadow-sm transition inline-flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Talk to Revenue Legal Advisor (7715818373)</span>
+                </a>
+            </div>
+
         </div>
     </section>
 
     <!-- CALL TO ACTION SECTION -->
     <section id="contact" class="py-12 bg-navy-900 text-white">
         <div class="max-w-5xl mx-auto px-4 text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold mb-3">Need Property or Legal Consultation?</h2>
-            <p class="text-slate-300 text-sm mb-6 max-w-xl mx-auto">Connect directly with our advisory specialists on WhatsApp for immediate guidance.</p>
+            <h2 class="text-2xl sm:text-3xl font-extrabold mb-3">Need Property or Legal Consultation?</h2>
+            <p class="text-slate-300 text-xs sm:text-sm mb-6 max-w-xl mx-auto">Connect directly with our advisory specialists on WhatsApp for immediate guidance.</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20would%20like%20a%20Real%20Estate%20consultation." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded text-sm transition">
-                    <i class="fa-brands fa-whatsapp mr-1.5"></i> Real Estate: 9987975429 / 9223585782
+                <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20would%20like%20a%20Real%20Estate%20consultation." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-[8px] text-xs sm:text-sm transition flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp"></i> Real Estate: 9987975429 / 9223585782
                 </a>
-                <a href="https://wa.me/917715818373?text=Hi%20Tricore,%20I%20would%20like%20a%20Legal%20consultation." target="_blank" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-6 py-2.5 rounded text-sm transition">
-                    <i class="fa-solid fa-scale-balanced mr-1.5"></i> Legal Consultancy: 7715818373
+                <a href="https://wa.me/917715818373?text=Hi%20Tricore,%20I%20would%20like%20a%20Legal%20consultation." target="_blank" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-6 py-2.5 rounded-[8px] text-xs sm:text-sm transition flex items-center gap-2">
+                    <i class="fa-solid fa-scale-balanced"></i> Legal Consultancy: 7715818373
                 </a>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-400 py-8 text-xs">
+    <footer class="bg-slate-950 text-slate-400 py-8 text-xs border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div>
-                <p class="text-white font-bold text-sm mb-1">Tricore Realty & Advisory</p>
-                <p>Serving Virar, Mumbai, Thane, Navi Mumbai & Lonavala</p>
+                <p class="text-white font-extrabold text-sm mb-1">Tricore Realty & Advisory</p>
+                <p>Serving Virar, Mumbai, Thane, Navi Mumbai, Karjat & Lonavala</p>
             </div>
             <div class="text-center sm:text-right">
                 <p>&copy; 2026 Tricore Realty & Advisory. All rights reserved.</p>
@@ -349,7 +611,7 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // 1. CAROUSEL JS
+        // 1. MUMBAI HIGH-RISE CAROUSEL JS
         let currentSlide = 0;
         const slides = document.querySelectorAll('.hero-slide');
         if (slides.length > 0) {
@@ -359,10 +621,21 @@
                 currentSlide = (currentSlide + 1) % slides.length;
                 slides[currentSlide].classList.remove('opacity-0');
                 slides[currentSlide].classList.add('opacity-100');
-            }, 4000);
+            }, 4500);
         }
 
-        // 2. DYNAMIC PROPERTY FETCH & RENDER
+        // 2. SEARCH TAB SWITCHER
+        function switchTab(element) {
+            const tabs = document.querySelectorAll('.search-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('text-blue-600', 'border-blue-600', 'font-bold');
+                tab.classList.add('text-slate-500', 'border-transparent', 'font-medium');
+            });
+            element.classList.remove('text-slate-500', 'border-transparent', 'font-medium');
+            element.classList.add('text-blue-600', 'border-blue-600', 'font-bold');
+        }
+
+        // 3. DYNAMIC PROPERTY FETCH & RENDER WITH ENHANCED CARD HIERARCHY
         async function loadProperties() {
             const grid = document.getElementById('properties-grid');
             try {
@@ -377,21 +650,34 @@
                     const whatsappUrl = `https://wa.me/919987975429?text=${encodedMsg}`;
 
                     const cardHtml = `
-                        <div class="bg-white rounded border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
-                            <img src="${item.image}" class="w-full h-48 object-cover" alt="${item.title}">
+                        <div class="bg-white rounded-[8px] border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition duration-200">
+                            <div class="relative">
+                                <img src="${item.image}" class="w-full h-52 object-cover" alt="${item.title}">
+                                <span class="absolute top-2.5 left-2.5 bg-blue-900/90 text-white text-[10px] font-bold px-2 py-0.5 rounded tracking-wider uppercase">FEATURED / VERIFIED</span>
+                            </div>
                             <div class="p-5">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded uppercase">${item.location}</span>
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold text-slate-500 uppercase"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i>${item.location}</span>
                                     <span class="text-[10px] font-bold text-slate-400">ID: ${item.id}</span>
                                 </div>
-                                <h3 class="font-bold text-lg text-navy-900">${item.title}</h3>
-                                <p class="text-sm font-semibold text-slate-700">${item.price}</p>
-                                <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center">
-                                    <span class="text-xs text-emerald-700 font-semibold">
-                                        <i class="fa-solid fa-circle-check"></i> ${item.verifiedText || 'Title Verified'}
-                                    </span>
-                                    <a href="${whatsappUrl}" target="_blank" class="text-xs font-bold text-emerald-700 hover:underline flex items-center gap-1">
-                                        <i class="fa-brands fa-whatsapp"></i> WhatsApp &rarr;
+                                <h3 class="font-bold text-base text-navy-900 line-clamp-1 mb-1">${item.title}</h3>
+                                <p class="text-lg font-extrabold text-blue-700 mb-3">${item.price}</p>
+                                
+                                <!-- TRUST INDICATORS -->
+                                <div class="grid grid-cols-2 gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 p-2 rounded-[6px] mb-4">
+                                    <span><i class="fa-solid fa-check text-emerald-600"></i> Legal Verified</span>
+                                    <span><i class="fa-solid fa-check text-emerald-600"></i> Clear Title</span>
+                                    <span><i class="fa-solid fa-check text-emerald-600"></i> Registration Ready</span>
+                                    <span><i class="fa-solid fa-check text-emerald-600"></i> Loan Eligible</span>
+                                </div>
+
+                                <!-- BUTTONS HIERARCHY -->
+                                <div class="flex items-center gap-2">
+                                    <a href="${whatsappUrl}" target="_blank" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-[6px] text-xs text-center transition">
+                                        View Details
+                                    </a>
+                                    <a href="${whatsappUrl}" target="_blank" class="border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold px-3 py-2 rounded-[6px] text-xs transition flex items-center gap-1">
+                                        <i class="fa-brands fa-whatsapp text-emerald-600"></i> WhatsApp
                                     </a>
                                 </div>
                             </div>
@@ -405,18 +691,16 @@
             }
         }
 
-        // 3. SEARCH KIOSK HANDLER
+        // 4. SEARCH KIOSK HANDLER
         function handleKioskSearch() {
             const region = document.getElementById('filter-region').value;
             const type = document.getElementById('filter-type').value;
             const service = document.getElementById('filter-service').value;
 
             if (service !== "Property Buying") {
-                // Route to Legal Consultancy Number
                 const message = encodeURIComponent(`Hi Tricore Legal Team, I need assistance with ${service} in region: ${region}.`);
                 window.open(`https://wa.me/917715818373?text=${message}`, '_blank');
             } else {
-                // Route to Real Estate Number
                 const message = encodeURIComponent(`Hi Tricore, I am looking for ${type} in ${region}. Please share available listings.`);
                 window.open(`https://wa.me/919987975429?text=${message}`, '_blank');
             }
