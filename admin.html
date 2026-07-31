@@ -71,15 +71,16 @@
         </div>
     </div>
 
-    <!-- MODAL FORM WITH FILE UPLOAD -->
+    <!-- MODAL FORM -->
     <div id="property-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg shadow-2xl max-w-xl w-full p-6 max-h-[90vh] overflow-y-auto">
+        <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
             <h3 id="modal-title" class="text-lg font-bold mb-4">Add New Property</h3>
             <form id="property-form" class="space-y-3 text-xs">
                 <input type="hidden" id="p-id">
                 <div><label class="font-bold">Title</label><input type="text" id="p-title" required class="w-full border p-2 rounded"></div>
+                
                 <div class="grid grid-cols-2 gap-3">
-                    <div><label class="font-bold">Price</label><input type="text" id="p-price" required class="w-full border p-2 rounded" placeholder="e.g. ₹1.12 Cr"></div>
+                    <div><label class="font-bold">Price (e.g. ₹98 L or ₹1.12 Cr)</label><input type="text" id="p-price" required class="w-full border p-2 rounded"></div>
                     <div>
                         <label class="font-bold">Region</label>
                         <select id="p-region" class="w-full border p-2 rounded">
@@ -91,8 +92,9 @@
                         </select>
                     </div>
                 </div>
+
                 <div class="grid grid-cols-2 gap-3">
-                    <div><label class="font-bold">Location Details</label><input type="text" id="p-location" required class="w-full border p-2 rounded" placeholder="e.g. Thane West"></div>
+                    <div><label class="font-bold">Location Details</label><input type="text" id="p-location" required class="w-full border p-2 rounded" placeholder="e.g. Ghodbunder Road, Thane"></div>
                     <div>
                         <label class="font-bold">Category</label>
                         <select id="p-category" class="w-full border p-2 rounded">
@@ -104,15 +106,23 @@
                     </div>
                 </div>
 
-                <!-- DIRECT FILE UPLOAD FIELD -->
+                <div class="grid grid-cols-3 gap-3">
+                    <div><label class="font-bold">Area (sq.ft.)</label><input type="text" id="p-area" class="w-full border p-2 rounded" placeholder="690 sq.ft."></div>
+                    <div><label class="font-bold">Configuration</label><input type="text" id="p-config" class="w-full border p-2 rounded" placeholder="2 Bed • 2 Bath"></div>
+                    <div><label class="font-bold">RERA No.</label><input type="text" id="p-rera" class="w-full border p-2 rounded" placeholder="P5170303"></div>
+                </div>
+
                 <div>
-                    <label class="font-bold block mb-1">Select Property Image File</label>
-                    <input type="file" id="p-file" accept="image/*" class="w-full border p-2 rounded bg-slate-50">
-                    <p id="upload-status" class="text-[11px] text-blue-600 font-semibold mt-1 hidden">Uploading image to server...</p>
-                    <input type="hidden" id="p-image-url">
-                    <div id="image-preview-container" class="mt-2 hidden">
-                        <img id="image-preview" class="h-20 w-32 object-cover rounded border">
-                    </div>
+                    <label class="font-bold">Description</label>
+                    <textarea id="p-desc" rows="2" class="w-full border p-2 rounded" placeholder="Short description about location, connectivity, amenities..."></textarea>
+                </div>
+
+                <!-- MULTIPLE FILE UPLOAD -->
+                <div>
+                    <label class="font-bold block mb-1">Select Property Photos (Select Multiple)</label>
+                    <input type="file" id="p-files" accept="image/*" multiple class="w-full border p-2 rounded bg-slate-50">
+                    <p id="upload-status" class="text-[11px] text-blue-600 font-semibold mt-1 hidden">Uploading images...</p>
+                    <div id="image-previews" class="flex flex-wrap gap-2 mt-2"></div>
                 </div>
 
                 <div class="flex justify-end gap-2 pt-3">
@@ -128,14 +138,9 @@
         const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
 
-        let supabaseClient;
-        try {
-            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        } catch (e) {
-            console.error("Supabase Init Error:", e);
-        }
-
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         let propertiesData = [];
+        let currentUploadedImages = [];
 
         document.getElementById('login-form').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -147,26 +152,19 @@
                 document.getElementById('dashboard-screen').classList.add('flex');
                 await fetchProperties();
             } else {
-                alert('Invalid Password. Please enter: Tricore@2026');
+                alert('Invalid Password');
             }
         });
 
-        function handleLogout() {
-            location.reload();
-        }
+        function handleLogout() { location.reload(); }
 
         async function fetchProperties() {
             try {
                 const { data, error } = await supabaseClient.from('properties').select('*').order('created_at', { ascending: false });
-                if (error) {
-                    alert("Supabase Fetch Error: " + error.message);
-                    return;
-                }
+                if (error) { alert("Supabase Error: " + error.message); return; }
                 propertiesData = data || [];
                 renderProperties();
-            } catch (err) {
-                alert("Connection failed: " + err.message);
-            }
+            } catch (err) { alert("Connection failed: " + err.message); }
         }
 
         function renderProperties() {
@@ -177,7 +175,7 @@
             document.getElementById('stat-featured').innerText = propertiesData.filter(p => p.is_featured).length;
 
             if (propertiesData.length === 0) {
-                list.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No properties in database. Click "+ Add New Property" above.</td></tr>`;
+                list.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No properties in database. Click + Add New Property.</td></tr>`;
                 return;
             }
 
@@ -200,15 +198,31 @@
 
         function openForm() { 
             document.getElementById('p-id').value = '';
-            document.getElementById('p-image-url').value = '';
-            document.getElementById('image-preview-container').classList.add('hidden');
+            currentUploadedImages = [];
+            renderImagePreviews();
             document.getElementById('property-form').reset();
             document.getElementById('modal-title').innerText = 'Add New Property';
             document.getElementById('property-modal').classList.remove('hidden'); 
         }
 
-        function closeForm() { 
-            document.getElementById('property-modal').classList.add('hidden'); 
+        function closeForm() { document.getElementById('property-modal').classList.add('hidden'); }
+
+        function renderImagePreviews() {
+            const container = document.getElementById('image-previews');
+            container.innerHTML = '';
+            currentUploadedImages.forEach((url, index) => {
+                container.innerHTML += `
+                    <div class="relative w-16 h-16 border rounded overflow-hidden">
+                        <img src="${url}" class="w-full h-full object-cover">
+                        <button type="button" onclick="removeImage(${index})" class="absolute top-0 right-0 bg-red-600 text-white text-[10px] px-1 font-bold">×</button>
+                    </div>
+                `;
+            });
+        }
+
+        function removeImage(index) {
+            currentUploadedImages.splice(index, 1);
+            renderImagePreviews();
         }
 
         function editProperty(id) {
@@ -221,14 +235,11 @@
             document.getElementById('p-region').value = prop.region || 'All Mumbai';
             document.getElementById('p-location').value = prop.location || '';
             document.getElementById('p-category').value = prop.category || '1, 2, 3, 4 BHK Flats';
-            
-            const existingUrl = (prop.images && prop.images[0]) ? prop.images[0] : '';
-            document.getElementById('p-image-url').value = existingUrl;
-            
-            if (existingUrl) {
-                document.getElementById('image-preview').src = existingUrl;
-                document.getElementById('image-preview-container').classList.remove('hidden');
-            }
+            document.getElementById('p-area').value = prop.description ? (prop.description.match(/Area:\s*([^|]+)/) || [])[1] || '' : '';
+            document.getElementById('p-desc').value = prop.description || '';
+
+            currentUploadedImages = prop.images || [];
+            renderImagePreviews();
 
             document.getElementById('modal-title').innerText = 'Edit Property';
             document.getElementById('property-modal').classList.remove('hidden');
@@ -238,35 +249,34 @@
             e.preventDefault();
             
             const saveBtn = document.getElementById('save-btn');
-            const fileInput = document.getElementById('p-file');
+            const fileInput = document.getElementById('p-files');
             const statusText = document.getElementById('upload-status');
-            let imageUrl = document.getElementById('p-image-url').value;
 
             saveBtn.disabled = true;
 
-            // HANDLE FILE UPLOAD TO SUPABASE STORAGE
+            // UPLOAD NEW FILES
             if (fileInput.files.length > 0) {
                 statusText.classList.remove('hidden');
-                const file = fileInput.files[0];
-                const fileExt = file.name.split('.').pop();
-                const fileName = `${Date.now()}.${fileExt}`;
+                for (let file of fileInput.files) {
+                    const fileExt = file.name.split('.').pop();
+                    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
 
-                const { data, error } = await supabaseClient.storage.from('property-images').upload(fileName, file);
+                    const { error } = await supabaseClient.storage.from('property-images').upload(fileName, file);
+                    if (error) {
+                        alert("Image Upload Error: " + error.message + "\nPlease run the SQL policy provided.");
+                        statusText.classList.add('hidden');
+                        saveBtn.disabled = false;
+                        return;
+                    }
 
-                if (error) {
-                    alert("Image Upload Error: " + error.message + "\nMake sure you created a public bucket named 'property-images' in Supabase.");
-                    statusText.classList.add('hidden');
-                    saveBtn.disabled = false;
-                    return;
+                    const { data: publicUrlData } = supabaseClient.storage.from('property-images').getPublicUrl(fileName);
+                    currentUploadedImages.push(publicUrlData.publicUrl);
                 }
-
-                const { data: publicUrlData } = supabaseClient.storage.from('property-images').getPublicUrl(fileName);
-                imageUrl = publicUrlData.publicUrl;
                 statusText.classList.add('hidden');
             }
 
-            if (!imageUrl) {
-                imageUrl = 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80';
+            if (currentUploadedImages.length === 0) {
+                currentUploadedImages.push('https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80');
             }
 
             const id = document.getElementById('p-id').value;
@@ -276,7 +286,8 @@
                 region: document.getElementById('p-region').value,
                 location: document.getElementById('p-location').value,
                 category: document.getElementById('p-category').value,
-                images: [imageUrl],
+                description: document.getElementById('p-desc').value,
+                images: currentUploadedImages,
                 status: 'Published'
             };
 
