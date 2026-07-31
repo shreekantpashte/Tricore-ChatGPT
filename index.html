@@ -3,328 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tricore | Real Estate & Advisory</title>
+    <title>Tricore Realty & Advisory | Mumbai, Thane, Navi Mumbai & Lonavala</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 800: '#1e293b', 900: '#0f172a' },
+                        emerald: { 600: '#059669', 700: '#047857' }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-<!-- NAVIGATION HEADER -->
-<nav class="fixed w-full bg-white shadow-md z-50 top-0 left-0">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-        <!-- Logo (Acts as Home) -->
-        <a href="#home" class="text-2xl font-bold text-blue-900 flex items-center gap-2">
-            <i class="fa-solid fa-building text-blue-600"></i> TRICORE
-        </a>
-        
-        <!-- Menu Links -->
-        <div class="hidden md:flex space-x-8 font-medium text-gray-700">
-            <a href="#buy" class="hover:text-blue-600 transition">Buy</a>
-            <a href="#services" class="hover:text-blue-600 transition">Services</a>
-            <a href="#about" class="hover:text-blue-600 transition">About</a>
-            <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
-        </div>
-
-        <!-- Header CTA Hierarchy -->
-        <div class="flex items-center gap-3">
-            <!-- Tertiary CTA -->
-            <a href="#list-property" class="hidden lg:inline-block text-sm font-semibold text-gray-700 hover:text-blue-600 px-3 py-2 transition">
-                List Property
+    <!-- NAVIGATION HEADER -->
+    <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <!-- Logo (Acts as Home) -->
+            <a href="#" class="text-2xl font-bold text-navy-900 flex items-center gap-2 tracking-tight">
+                <i class="fa-solid fa-building text-blue-600"></i> TRICORE
             </a>
-            <!-- Secondary CTA -->
-            <a href="https://wa.me/919876543210" target="_blank" class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2.5 rounded-md shadow-sm transition">
-                <i class="fa-brands fa-whatsapp text-lg"></i>
-                <span class="hidden sm:inline">WhatsApp</span>
-            </a>
-            <!-- Primary CTA -->
-            <a href="#search-box" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2.5 rounded-md shadow-md transition">
-                Search Property
-            </a>
-        </div>
-    </div>
-</nav>
-
-<!-- HERO SECTION -->
-<section id="home" class="relative pt-20 min-h-[90vh] flex items-center overflow-hidden bg-gray-900">
-    
-    <!-- AUTOMATIC CAROUSEL BACKGROUND (6 IMAGES) -->
-    <div id="hero-carousel" class="absolute inset-0 w-full h-full">
-        <!-- Image 1: Mumbai Skyline -->
-        <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100 bg-cover bg-center" 
-             style="background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1920&q=80');"></div>
-        <!-- Image 2: Premium Gated Community -->
-        <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" 
-             style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1920&q=80');"></div>
-        <!-- Image 3: Drone Shot Project -->
-        <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" 
-             style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80');"></div>
-        <!-- Image 4: Luxury Villa Entrance -->
-        <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" 
-             style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');"></div>
-        <!-- Image 5: Family Receiving Keys -->
-        <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" 
-             style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1920&q=80');"></div>
-        <!-- Image 6: Modern Commercial District -->
-        <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" 
-             style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');"></div>
-    </div>
-
-    <!-- LEFT-FOCUSED GRADIENT OVERLAY (Keeps buildings visible on right) -->
-    <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-transparent z-10"></div>
-
-    <!-- HERO CONTENT CONTAINER -->
-    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 py-12 w-full">
-        <div class="max-w-3xl">
             
-            <!-- TYPOGRAPHY HIERARCHY -->
-            <div class="mb-4 flex flex-wrap gap-2 text-xs md:text-sm font-semibold tracking-wider text-blue-400 uppercase">
-                <span>Verified Properties</span> • 
-                <span>Legal Due Diligence</span> • 
-                <span>Registration Support</span> • 
-                <span class="text-amber-400">One Trusted Team</span>
+            <!-- Minimal Menu -->
+            <div class="hidden md:flex space-x-8 font-medium text-slate-700">
+                <a href="#buy" class="hover:text-blue-600 transition">Buy</a>
+                <a href="#services" class="hover:text-blue-600 transition">Services</a>
+                <a href="#about" class="hover:text-blue-600 transition">About</a>
+                <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
             </div>
 
-            <!-- HEADLINE -->
-            <h1 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight mb-4 drop-shadow-sm">
-                Verified Properties. Clear Titles. <br class="hidden sm:inline"/>
-                <span class="text-blue-500">Expert Legal Guidance.</span>
-            </h1>
+            <!-- Header WhatsApp Actions -->
+            <div class="flex items-center gap-2">
+                <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20have%20a%20Real%20Estate%20enquiry." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold px-3 py-2 rounded transition flex items-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp text-base"></i> Real Estate
+                </a>
+                <a href="https://wa.me/917715818373?text=Hi%20Tricore,%20I%20have%20a%20Legal/Revenue%20record%20enquiry." target="_blank" class="bg-navy-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold px-3 py-2 rounded transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-scale-balanced text-xs"></i> Legal
+                </a>
+            </div>
+        </div>
+    </nav>
 
-            <p class="text-gray-300 text-base sm:text-lg mb-8 max-w-2xl">
-                Serving home buyers and investors across <strong class="text-white">Mumbai</strong>, <strong class="text-white">Thane</strong>, and <strong class="text-white">Navi Mumbai</strong> with 100% RERA compliance.
+    <!-- HERO SECTION WITH CAROUSEL & SEARCH KIOSK -->
+    <section class="relative pt-20 min-h-[85vh] flex items-center justify-center overflow-hidden bg-navy-900">
+        <!-- Carousel Background Images -->
+        <div id="hero-carousel" class="absolute inset-0 w-full h-full">
+            <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80');"></div>
+        </div>
+
+        <!-- Soft Overlay -->
+        <div class="absolute inset-0 bg-navy-900/65 z-10"></div>
+
+        <!-- Hero Content & Search Kiosk -->
+        <div class="relative z-20 max-w-5xl mx-auto px-4 py-12 text-center w-full">
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white mb-4 tracking-tight">
+                Verified Properties. Clear Titles.
+            </h1>
+            <p class="text-slate-200 text-base sm:text-lg mb-8 max-w-2xl mx-auto">
+                Properties & Revenue Record Legal Advisory across <span class="text-amber-400 font-semibold">Mumbai, Thane, Navi Mumbai, Virar & Lonavala</span>.
             </p>
 
-            <!-- SEARCH BOX CONTAINER -->
-            <div id="search-box" class="bg-white p-4 sm:p-6 rounded-[8px] shadow-2xl border border-gray-100 mb-6">
-                
-                <!-- SEARCH TABS -->
-                <div class="flex space-x-3 mb-4 border-b border-gray-200 pb-3">
-                    <button onclick="switchTab(this)" class="search-tab flex items-center gap-2 pb-2 text-sm font-bold text-blue-600 border-b-2 border-blue-600 transition-all duration-200">
-                        <i class="fa-solid fa-house"></i> Buy
-                    </button>
-                    <button onclick="switchTab(this)" class="search-tab flex items-center gap-2 pb-2 text-sm font-medium text-gray-500 hover:text-blue-600 border-b-2 border-transparent transition-all duration-200">
-                        <i class="fa-solid fa-building text-sm"></i> Commercial
-                    </button>
-                    <button onclick="switchTab(this)" class="search-tab flex items-center gap-2 pb-2 text-sm font-medium text-gray-500 hover:text-blue-600 border-b-2 border-transparent transition-all duration-200">
-                        <i class="fa-solid fa-chart-pie text-sm"></i> Investment
-                    </button>
-                </div>
-
-                <!-- FORM FIELDS -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-                    <!-- Location -->
-                    <div class="relative border-r-0 sm:border-r border-gray-200 pr-0 sm:pr-2">
-                        <label class="block text-xs font-semibold text-gray-500 mb-1">LOCATION</label>
-                        <select class="w-full bg-transparent font-medium text-gray-800 text-sm focus:outline-none cursor-pointer">
-                            <option>All Locations</option>
-                            <option>Mumbai</option>
-                            <option>Thane</option>
-                            <option>Navi Mumbai</option>
-                        </select>
-                    </div>
-
-                    <!-- Property Type -->
-                    <div class="relative border-r-0 sm:border-r border-gray-200 pr-0 sm:pr-2">
-                        <label class="block text-xs font-semibold text-gray-500 mb-1">PROPERTY TYPE</label>
-                        <select class="w-full bg-transparent font-medium text-gray-800 text-sm focus:outline-none cursor-pointer">
-                            <option>Residential Apartment</option>
-                            <option>Luxury Villa</option>
-                            <option>Commercial Office</option>
-                            <option>Plot / Land</option>
-                        </select>
-                    </div>
-
-                    <!-- Budget -->
+            <!-- Search Kiosk -->
+            <div class="bg-white p-4 sm:p-6 rounded-lg border border-slate-200 text-left max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-500 mb-1">BUDGET</label>
-                        <select class="w-full bg-transparent font-medium text-gray-800 text-sm focus:outline-none cursor-pointer">
-                            <option>₹50 Lakhs - ₹1 Cr</option>
-                            <option>₹1 Cr - ₹2.5 Cr</option>
-                            <option>₹2.5 Cr - ₹5 Cr</option>
-                            <option>₹5 Cr+</option>
+                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Location</label>
+                        <select class="w-full bg-slate-50 border border-slate-200 rounded p-2.5 text-sm font-medium focus:outline-none">
+                            <option>All Regions</option>
+                            <option>Virar & Vasai</option>
+                            <option>All Mumbai</option>
+                            <option>All Thane</option>
+                            <option>Navi Mumbai</option>
+                            <option>Lonavala</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Category</label>
+                        <select class="w-full bg-slate-50 border border-slate-200 rounded p-2.5 text-sm font-medium focus:outline-none">
+                            <option>All Types</option>
+                            <option>1, 2, 3, 4 BHK Flats</option>
+                            <option>Bungalows & Houses</option>
+                            <option>Plots / Land</option>
+                            <option>Commercial</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1 uppercase">Service Needed</label>
+                        <select class="w-full bg-slate-50 border border-slate-200 rounded p-2.5 text-sm font-medium focus:outline-none">
+                            <option>Property Buying</option>
+                            <option>7/12 Extract / CTS Card</option>
+                            <option>Title Verification / Search</option>
+                            <option>Property Registration</option>
                         </select>
                     </div>
                 </div>
-
-                <!-- PROMINENT SEARCH BUTTON -->
-                <button class="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-bold text-base rounded-[8px] flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-500/30 transition-all duration-300 transform hover:-translate-y-0.5">
-                    <span>Explore Properties</span>
-                    <i class="fa-solid fa-arrow-right text-sm"></i>
-                </button>
-            </div>
-
-            <!-- POPULAR LOCATION CHIPS WITH HOVER COUNTS -->
-            <div class="flex items-center flex-wrap gap-2 mb-8">
-                <span class="text-xs text-gray-400 font-medium mr-1">Popular:</span>
-                
-                <!-- Chip 1 -->
-                <div class="group relative bg-white/10 hover:bg-blue-600 text-white text-xs font-medium px-3 py-1.5 rounded-full cursor-pointer transition border border-white/10">
-                    <span>Thane</span>
-                    <span class="hidden group-hover:inline font-bold ml-1 text-amber-300 animate-fade-in">- 124 Properties</span>
-                </div>
-
-                <!-- Chip 2 -->
-                <div class="group relative bg-white/10 hover:bg-blue-600 text-white text-xs font-medium px-3 py-1.5 rounded-full cursor-pointer transition border border-white/10">
-                    <span>Navi Mumbai</span>
-                    <span class="hidden group-hover:inline font-bold ml-1 text-amber-300 animate-fade-in">- 98 Properties</span>
-                </div>
-
-                <!-- Chip 3 -->
-                <div class="group relative bg-white/10 hover:bg-blue-600 text-white text-xs font-medium px-3 py-1.5 rounded-full cursor-pointer transition border border-white/10">
-                    <span>Bandra West</span>
-                    <span class="hidden group-hover:inline font-bold ml-1 text-amber-300 animate-fade-in">- 45 Properties</span>
-                </div>
-
-                <!-- Chip 4 -->
-                <div class="group relative bg-white/10 hover:bg-blue-600 text-white text-xs font-medium px-3 py-1.5 rounded-full cursor-pointer transition border border-white/10">
-                    <span>Kharghar</span>
-                    <span class="hidden group-hover:inline font-bold ml-1 text-amber-300 animate-fade-in">- 62 Properties</span>
-                </div>
-            </div>
-
-            <!-- SECONDARY CTAs -->
-            <div class="flex flex-wrap items-center gap-4 mb-8">
-                <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-5 py-2.5 rounded-md text-sm transition shadow-md">
-                    Schedule a Free Consultation
-                </a>
-                <a href="#buy" class="text-white hover:text-blue-400 font-semibold text-sm underline underline-offset-4 transition">
-                    Browse Featured Projects &rarr;
+                <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20want%20to%20enquire%20about%20properties/services." target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded text-center block transition">
+                    <i class="fa-brands fa-whatsapp mr-2"></i> Search & Enquire via WhatsApp
                 </a>
             </div>
-
-            <!-- TRUSTED BADGES & PARTNERS -->
-            <div class="pt-4 border-t border-white/10 flex flex-wrap items-center gap-6 text-xs text-gray-300">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-shield-halved text-emerald-400 text-base"></i>
-                    <span>MahaRERA Guidance</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-users text-blue-400 text-base"></i>
-                    <span>Trusted by 500+ Buyers</span>
-                </div>
-            </div>
-
         </div>
-    </div>
-</section>
-
-<!-- JAVASCRIPT FOR CAROUSEL & TABS -->
-<script>
-    // Automatic Carousel Script (5 Slides)
-    let currentHeroSlide = 0;
-    const heroSlides = document.querySelectorAll('.hero-slide');
-
-    function nextHeroSlide() {
-        heroSlides[currentHeroSlide].classList.remove('opacity-100');
-        heroSlides[currentHeroSlide].classList.add('opacity-0');
-        
-        currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
-        
-        heroSlides[currentHeroSlide].classList.remove('opacity-0');
-        heroSlides[currentHeroSlide].classList.add('opacity-100');
-    }
-
-    setInterval(nextHeroSlide, 4500); // Transitions every 4.5 seconds
-
-    // Search Tab Switcher Script
-    function switchTab(element) {
-        const tabs = document.querySelectorAll('.search-tab');
-        tabs.forEach(tab => {
-            tab.classList.remove('text-blue-600', 'border-blue-600', 'font-bold');
-            tab.classList.add('text-gray-500', 'border-transparent', 'font-medium');
-        });
-        element.classList.remove('text-gray-500', 'border-transparent', 'font-medium');
-        element.classList.add('text-blue-600', 'border-blue-600', 'font-bold');
-    }
-</script>
-    
-        <!-- Carousel Controls -->
-        <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/40 p-3 rounded-full hover:bg-black/70"><i class="fa-solid fa-chevron-left"></i></button>
-        <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/40 p-3 rounded-full hover:bg-black/70"><i class="fa-solid fa-chevron-right"></i></button>
     </section>
 
     <!-- WHY CHOOSE TRICORE -->
-    <section id="about" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Tricore</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto mb-12">We combine real estate expertise with strategic financial advisory to deliver long-term value for buyers and investors.</p>
-            
+    <section id="about" class="py-16 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold text-navy-900 mb-3">Why Choose Tricore</h2>
+                <p class="text-slate-600">Combining real estate sales with complete revenue legal verification under one roof.</p>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-8 border rounded-xl hover:shadow-lg transition">
-                    <div class="text-blue-600 text-4xl mb-4"><i class="fa-solid fa-chart-line"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Market Expertise</h3>
-                    <p class="text-gray-600">Deep local knowledge and industry trends to give you a competitive edge.</p>
+                <div class="p-6 rounded border border-slate-200 bg-slate-50">
+                    <div class="text-blue-600 text-3xl mb-3"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="font-bold text-lg text-navy-900 mb-2">Clear Title Guarantee</h3>
+                    <p class="text-sm text-slate-600">Every property listing comes backed by thorough 30 to 100-year revenue title search reports.</p>
                 </div>
-                <div class="p-8 border rounded-xl hover:shadow-lg transition">
-                    <div class="text-blue-600 text-4xl mb-4"><i class="fa-solid fa-handshake"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Transparent Advisory</h3>
-                    <p class="text-gray-600">Clear, honest guidance from consultation to property acquisition.</p>
+                <div class="p-6 rounded border border-slate-200 bg-slate-50">
+                    <div class="text-blue-600 text-3xl mb-3"><i class="fa-solid fa-file-contract"></i></div>
+                    <h3 class="font-bold text-lg text-navy-900 mb-2">In-House Revenue Legal Services</h3>
+                    <p class="text-sm text-slate-600">From 7/12 Extracts and Ferfar entries to High Court Probate copies, we manage all paperwork directly.</p>
                 </div>
-                <div class="p-8 border rounded-xl hover:shadow-lg transition">
-                    <div class="text-blue-600 text-4xl mb-4"><i class="fa-solid fa-shield-halved"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Tailored Solutions</h3>
-                    <p class="text-gray-600">Customized real estate investment strategies built around your portfolio.</p>
+                <div class="p-6 rounded border border-slate-200 bg-slate-50">
+                    <div class="text-blue-600 text-3xl mb-3"><i class="fa-solid fa-map-location-dot"></i></div>
+                    <h3 class="font-bold text-lg text-navy-900 mb-2">MMR & Belt Expertise</h3>
+                    <p class="text-sm text-slate-600">Focused specialization in Virar, Mumbai, Thane, Navi Mumbai, and Lonavala growth corridors.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- RECOMMENDED PROPERTIES -->
-    <section id="buy" class="py-20 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-end mb-12">
+    <section id="buy" class="py-16 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-end mb-10">
                 <div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Recommended Properties</h2>
-                    <p class="text-gray-600 mt-2">Explore our handpicked selection of premium listings.</p>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-navy-900">Recommended Properties</h2>
+                    <p class="text-slate-600 text-sm mt-1">Handpicked, title-verified residential and commercial options.</p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Property Card 1 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
-                    <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80" class="w-full h-56 object-cover" alt="Modern Villa">
-                    <div class="p-6">
-                        <span class="text-xs font-semibold uppercase bg-blue-100 text-blue-800 px-3 py-1 rounded-full">For Sale</span>
-                        <h3 class="text-xl font-bold mt-3">$1,250,000</h3>
-                        <p class="text-gray-600 font-medium">Luxury Modern Villa</p>
-                        <p class="text-sm text-gray-500 mt-1"><i class="fa-solid fa-location-dot"></i> Downtown Metropolitan</p>
-                        <div class="flex justify-between items-center text-sm text-gray-500 mt-4 pt-4 border-t">
-                            <span><i class="fa-solid fa-bed"></i> 4 Beds</span>
-                            <span><i class="fa-solid fa-bath"></i> 3 Baths</span>
-                            <span><i class="fa-solid fa-ruler-combined"></i> 3,200 sqft</span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded border border-slate-200 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover" alt="Apartment">
+                    <div class="p-5">
+                        <span class="text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">THANE WEST</span>
+                        <h3 class="font-bold text-lg text-navy-900 mt-2">2 BHK Premium Residence</h3>
+                        <p class="text-sm font-semibold text-slate-700">₹1.15 Cr</p>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center">
+                            <span class="text-xs text-emerald-700 font-semibold"><i class="fa-solid fa-circle-check"></i> Title Verified</span>
+                            <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20am%20interested%20in%202%20BHK%20Thane%20West." target="_blank" class="text-xs font-bold text-emerald-700 hover:underline">WhatsApp &rarr;</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Property Card 2 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
-                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" class="w-full h-56 object-cover" alt="Executive Penthouse">
-                    <div class="p-6">
-                        <span class="text-xs font-semibold uppercase bg-blue-100 text-blue-800 px-3 py-1 rounded-full">For Sale</span>
-                        <h3 class="text-xl font-bold mt-3">$850,000</h3>
-                        <p class="text-gray-600 font-medium">Skyline View Apartment</p>
-                        <p class="text-sm text-gray-500 mt-1"><i class="fa-solid fa-location-dot"></i> Financial District</p>
-                        <div class="flex justify-between items-center text-sm text-gray-500 mt-4 pt-4 border-t">
-                            <span><i class="fa-solid fa-bed"></i> 2 Beds</span>
-                            <span><i class="fa-solid fa-bath"></i> 2 Baths</span>
-                            <span><i class="fa-solid fa-ruler-combined"></i> 1,800 sqft</span>
+                <!-- Card 2 -->
+                <div class="bg-white rounded border border-slate-200 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover" alt="Villa Plot">
+                    <div class="p-5">
+                        <span class="text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">LONAVALA</span>
+                        <h3 class="font-bold text-lg text-navy-900 mt-2">NA Villa Plot / Land</h3>
+                        <p class="text-sm font-semibold text-slate-700">₹85 Lakhs</p>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center">
+                            <span class="text-xs text-emerald-700 font-semibold"><i class="fa-solid fa-circle-check"></i> 7/12 Clear</span>
+                            <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20am%20interested%20in%20Lonavala%20Plot." target="_blank" class="text-xs font-bold text-emerald-700 hover:underline">WhatsApp &rarr;</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Property Card 3 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
-                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80" class="w-full h-56 object-cover" alt="Suburban Home">
-                    <div class="p-6">
-                        <span class="text-xs font-semibold uppercase bg-blue-100 text-blue-800 px-3 py-1 rounded-full">For Sale</span>
-                        <h3 class="text-xl font-bold mt-3">$620,000</h3>
-                        <p class="text-gray-600 font-medium">Contemporary Family Residence</p>
-                        <p class="text-sm text-gray-500 mt-1"><i class="fa-solid fa-location-dot"></i> Green Valley Suburbs</p>
-                        <div class="flex justify-between items-center text-sm text-gray-500 mt-4 pt-4 border-t">
-                            <span><i class="fa-solid fa-bed"></i> 3 Beds</span>
-                            <span><i class="fa-solid fa-bath"></i> 2.5 Baths</span>
-                            <span><i class="fa-solid fa-ruler-combined"></i> 2,400 sqft</span>
+                <!-- Card 3 -->
+                <div class="bg-white rounded border border-slate-200 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80" class="w-full h-48 object-cover" alt="Navi Mumbai">
+                    <div class="p-5">
+                        <span class="text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded">NAVI MUMBAI (KHARGHAR)</span>
+                        <h3 class="font-bold text-lg text-navy-900 mt-2">3 BHK Modern Flat</h3>
+                        <p class="text-sm font-semibold text-slate-700">₹1.65 Cr</p>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center">
+                            <span class="text-xs text-emerald-700 font-semibold"><i class="fa-solid fa-circle-check"></i> Title Verified</span>
+                            <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20am%20interested%20in%203%20BHK%20Kharghar." target="_blank" class="text-xs font-bold text-emerald-700 hover:underline">WhatsApp &rarr;</a>
                         </div>
                     </div>
                 </div>
@@ -332,112 +196,82 @@
         </div>
     </section>
 
-    <!-- POPULAR SERVICES -->
-    <section id="services" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Services</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto mb-12">Comprehensive real estate solutions designed for individual buyers, sellers, and corporate investors.</p>
+    <!-- POPULAR SERVICES (REVENUE & LEGAL RECORD SERVICES) -->
+    <section id="services" class="py-16 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold text-navy-900 mb-3">Property & Revenue Record Services</h2>
+                <p class="text-slate-600 text-sm">Direct assistance with land records, registration, and title verification.</p>
+            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="p-6 bg-gray-50 rounded-lg text-left border hover:border-blue-500 transition">
-                    <i class="fa-solid fa-house-user text-3xl text-blue-600 mb-4"></i>
-                    <h3 class="font-bold text-lg mb-2">Property Buying</h3>
-                    <p class="text-sm text-gray-600">Full end-to-end assistance in searching, negotiating, and closing property deals.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="p-4 border border-slate-200 rounded bg-slate-50">
+                    <h4 class="font-bold text-sm text-navy-900 mb-1">7/12 Extract (Old/New)</h4>
+                    <p class="text-xs text-slate-500 mb-3">Name transfer, Ferfar, & Swayam Suchika.</p>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore,%20I%20need%20help%20with%207/12%20Extract." target="_blank" class="text-xs font-bold text-emerald-700">Enquire Legal &rarr;</a>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-lg text-left border hover:border-blue-500 transition">
-                    <i class="fa-solid fa-briefcase text-3xl text-blue-600 mb-4"></i>
-                    <h3 class="font-bold text-lg mb-2">Real Estate Advisory</h3>
-                    <p class="text-sm text-gray-600">Strategic market intelligence for portfolio valuation and investment expansion.</p>
+
+                <div class="p-4 border border-slate-200 rounded bg-slate-50">
+                    <h4 class="font-bold text-sm text-navy-900 mb-1">CTS Property Card</h4>
+                    <p class="text-xs text-slate-500 mb-3">Survey maps, DP plans, & city survey index.</p>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore,%20I%20need%20help%20with%20CTS%20Property%20Card." target="_blank" class="text-xs font-bold text-emerald-700">Enquire Legal &rarr;</a>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-lg text-left border hover:border-blue-500 transition">
-                    <i class="fa-solid fa-file-contract text-3xl text-blue-600 mb-4"></i>
-                    <h3 class="font-bold text-lg mb-2">Legal & Documentation</h3>
-                    <p class="text-sm text-gray-600">Hassle-free title verification, legal compliance, and contract drafting support.</p>
+
+                <div class="p-4 border border-slate-200 rounded bg-slate-50">
+                    <h4 class="font-bold text-sm text-navy-900 mb-1">30–100 Yr Search Report</h4>
+                    <p class="text-xs text-slate-500 mb-3">Complete title diligence & legal checks.</p>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore,%20I%20need%20a%20Property%20Search%20Report." target="_blank" class="text-xs font-bold text-emerald-700">Enquire Legal &rarr;</a>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-lg text-left border hover:border-blue-500 transition">
-                    <i class="fa-solid fa-key text-3xl text-blue-600 mb-4"></i>
-                    <h3 class="font-bold text-lg mb-2">Property Management</h3>
-                    <p class="text-sm text-gray-600">Tenant sourcing, rent collection, and active maintenance for asset owners.</p>
+
+                <div class="p-4 border border-slate-200 rounded bg-slate-50">
+                    <h4 class="font-bold text-sm text-navy-900 mb-1">Registration & Probate</h4>
+                    <p class="text-xs text-slate-500 mb-3">Legal heir registration & High Court probate copies.</p>
+                    <a href="https://wa.me/917715818373?text=Hi%20Tricore,%20I%20need%20Registration/Probate%20help." target="_blank" class="text-xs font-bold text-emerald-700">Enquire Legal &rarr;</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CALL TO ACTION (CTA) -->
-    <section id="contact" class="py-16 bg-blue-900 text-white">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Find Your Next Property?</h2>
-            <p class="text-blue-200 max-w-xl mx-auto mb-8">Schedule a consultation with our experts today to discuss your buying or investment needs.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="mailto:info@tricore.com" class="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Contact Advisor</a>
-                <a href="tel:+1234567890" class="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition">Call Us Now</a>
+    <!-- CALL TO ACTION SECTION -->
+    <section id="contact" class="py-12 bg-navy-900 text-white">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-3">Need Property or Legal Consultation?</h2>
+            <p class="text-slate-300 text-sm mb-6 max-w-xl mx-auto">Connect directly with our advisory specialists on WhatsApp for immediate guidance.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20would%20like%20a%20Real%20Estate%20consultation." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded text-sm transition">
+                    <i class="fa-brands fa-whatsapp mr-1.5"></i> Real Estate: 9987975429
+                </a>
+                <a href="https://wa.me/917715818373?text=Hi%20Tricore,%20I%20would%20like%20a%20Legal%20consultation." target="_blank" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-6 py-2.5 rounded text-sm transition">
+                    <i class="fa-solid fa-scale-balanced mr-1.5"></i> Legal Consultancy: 7715818373
+                </a>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-gray-900 text-gray-400 py-12">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer class="bg-slate-900 text-slate-400 py-8 text-xs">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div>
-                <a href="#home" class="text-2xl font-bold text-white flex items-center gap-2 mb-4">
-                    <i class="fa-solid fa-building text-blue-500"></i> TRICORE
-                </a>
-                <p class="text-sm">Your trusted partner in residential, commercial, and strategic real estate advisory.</p>
+                <p class="text-white font-bold text-sm mb-1">Tricore Realty & Advisory</p>
+                <p>Serving Virar, Mumbai, Thane, Navi Mumbai & Lonavala</p>
             </div>
-            <div>
-                <h4 class="text-white font-semibold mb-4">Quick Links</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#home" class="hover:text-white">Home</a></li>
-                    <li><a href="#buy" class="hover:text-white">Buy Properties</a></li>
-                    <li><a href="#services" class="hover:text-white">Services</a></li>
-                    <li><a href="#about" class="hover:text-white">About Us</a></li>
-                </ul>
+            <div class="text-center sm:text-right">
+                <p>&copy; 2026 Tricore Realty. All rights reserved.</p>
             </div>
-            <div>
-                <h4 class="text-white font-semibold mb-4">Contact Info</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><i class="fa-solid fa-location-dot mr-2"></i> 100 Financial Way, City Center</li>
-                    <li><i class="fa-solid fa-phone mr-2"></i> +1 (555) 019-2834</li>
-                    <li><i class="fa-solid fa-envelope mr-2"></i> contact@tricore.com</li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-white font-semibold mb-4">Follow Us</h4>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-xl hover:text-white"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#" class="text-xl hover:text-white"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="text-xl hover:text-white"><i class="fa-brands fa-facebook"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-6 border-t border-gray-800 mt-8 pt-6 text-xs text-center">
-            &copy; 2026 Tricore Real Estate & Advisory. All rights reserved.
         </div>
     </footer>
 
-    <!-- LIGHTWEIGHT CAROUSEL JAVASCRIPT -->
+    <!-- LIGHTWEIGHT CAROUSEL JS -->
     <script>
         let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.style.opacity = i === index ? '1' : '0';
-            });
-        }
-
-        function nextSlide() {
+        const slides = document.querySelectorAll('.hero-slide');
+        setInterval(() => {
+            slides[currentSlide].classList.remove('opacity-100');
+            slides[currentSlide].classList.add('opacity-0');
             currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(currentSlide);
-        }
-
-        // Auto-advance every 5 seconds
-        setInterval(nextSlide, 5000);
+            slides[currentSlide].classList.remove('opacity-0');
+            slides[currentSlide].classList.add('opacity-100');
+        }, 4000);
     </script>
 </body>
 </html>
