@@ -25,7 +25,7 @@
                 <label class="block text-xs font-bold text-slate-500 mb-1">PASSWORD</label>
                 <input type="password" id="password" required class="w-full border p-2.5 rounded text-sm focus:outline-none focus:border-blue-600" placeholder="Enter password">
             </div>
-            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded text-sm transition">Login to Dashboard</button>
+            <button type="submit" id="login-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded text-sm transition">Login to Dashboard</button>
         </form>
     </div>
 
@@ -113,22 +113,30 @@
 
     <!-- SCRIPT -->
     <script>
-        const SUPABASE_URL = "YOUR_SUPABASE_URL";
-        const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+        // UPDATE THESE TWO LINES WITH YOUR ACTUAL KEYS
+        const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co/rest/v1/";
+        const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
 
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        let supabaseClient;
+        try {
+            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        } catch (e) {
+            console.error("Supabase Init Error:", e);
+        }
+
         let propertiesData = [];
 
-        document.getElementById('login-form').addEventListener('submit', function(e) {
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const pass = document.getElementById('password').value;
+            const pass = document.getElementById('password').value.trim();
+
             if (pass === 'Tricore@2026') {
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('dashboard-screen').classList.remove('hidden');
                 document.getElementById('dashboard-screen').classList.add('flex');
-                fetchProperties();
+                await fetchProperties();
             } else {
-                alert('Invalid Password. Please try again.');
+                alert('Invalid Password. Please enter: Tricore@2026');
             }
         });
 
@@ -137,10 +145,16 @@
         }
 
         async function fetchProperties() {
-            const { data, error } = await supabaseClient.from('properties').select('*').order('created_at', { ascending: false });
-            if (data) {
-                propertiesData = data;
+            try {
+                const { data, error } = await supabaseClient.from('properties').select('*').order('created_at', { ascending: false });
+                if (error) {
+                    alert("Supabase Fetch Error: " + error.message);
+                    return;
+                }
+                propertiesData = data || [];
                 renderProperties();
+            } catch (err) {
+                alert("Connection failed: " + err.message);
             }
         }
 
@@ -152,7 +166,7 @@
             document.getElementById('stat-featured').innerText = propertiesData.filter(p => p.is_featured).length;
 
             if (propertiesData.length === 0) {
-                list.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No properties found in database. Click + Add New Property.</td></tr>`;
+                list.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No properties in database. Click "+ Add New Property" above.</td></tr>`;
                 return;
             }
 
@@ -198,9 +212,10 @@
         });
 
         async function deleteProperty(id) {
-            if (confirm("Delete property?")) {
-                await supabaseClient.from('properties').delete().eq('id', id);
-                fetchProperties();
+            if (confirm("Delete this property?")) {
+                const { error } = await supabaseClient.from('properties').delete().eq('id', id);
+                if (error) alert("Error deleting: " + error.message);
+                else fetchProperties();
             }
         }
     </script>
