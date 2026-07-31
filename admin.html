@@ -15,7 +15,7 @@
 
     <!-- LOGIN SCREEN -->
     <div id="login-screen" class="min-h-screen flex items-center justify-center bg-slate-900 p-4">
-        <form onsubmit="handleLogin(event)" class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
+        <form id="login-form" class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
             <h1 class="text-2xl font-extrabold text-slate-900 mb-6 text-center">TRICORE Admin Portal</h1>
             <div class="mb-4">
                 <label class="block text-xs font-bold text-slate-500 mb-1">ADMIN EMAIL</label>
@@ -23,7 +23,7 @@
             </div>
             <div class="mb-6">
                 <label class="block text-xs font-bold text-slate-500 mb-1">PASSWORD</label>
-                <input type="password" id="password" required class="w-full border p-2.5 rounded text-sm focus:outline-none focus:border-blue-600">
+                <input type="password" id="password" required class="w-full border p-2.5 rounded text-sm focus:outline-none focus:border-blue-600" placeholder="Enter password">
             </div>
             <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded text-sm transition">Login to Dashboard</button>
         </form>
@@ -75,8 +75,7 @@
     <div id="property-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-lg shadow-2xl max-w-xl w-full p-6">
             <h3 id="modal-title" class="text-lg font-bold mb-4">Add New Property</h3>
-            <form onsubmit="saveProperty(event)" class="space-y-3 text-xs">
-                <input type="hidden" id="edit-id">
+            <form id="property-form" class="space-y-3 text-xs">
                 <div><label class="font-bold">Title</label><input type="text" id="p-title" required class="w-full border p-2 rounded"></div>
                 <div class="grid grid-cols-2 gap-3">
                     <div><label class="font-bold">Price</label><input type="text" id="p-price" required class="w-full border p-2 rounded" placeholder="e.g. ₹1.12 Cr"></div>
@@ -97,7 +96,7 @@
                         <label class="font-bold">Category</label>
                         <select id="p-category" class="w-full border p-2 rounded">
                             <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
-                            <option value="Bungalows & Houses">Bungalow / House</option>
+                            <option value="Bungalows & Houses">Bungalows & Houses</option>
                             <option value="Plots / Land">Plots / Land</option>
                             <option value="Commercial">Commercial</option>
                         </select>
@@ -106,7 +105,7 @@
                 <div><label class="font-bold">Image URL</label><input type="text" id="p-image" required class="w-full border p-2 rounded" placeholder="https://images.unsplash.com/..."></div>
                 <div class="flex justify-end gap-2 pt-3">
                     <button type="button" onclick="closeForm()" class="border px-4 py-2 rounded font-bold">Cancel</button>
-                    <button type="submit" class="bg-blue-600 text-white font-bold px-6 py-2 rounded">Save</button>
+                    <button type="submit" class="bg-blue-600 text-white font-bold px-6 py-2 rounded">Save Property</button>
                 </div>
             </form>
         </div>
@@ -114,14 +113,13 @@
 
     <!-- SCRIPT -->
     <script>
-        // REPLACE WITH YOUR ACTUAL SUPABASE CREDENTIALS
         const SUPABASE_URL = "YOUR_SUPABASE_URL";
-        const SUPABASE_ANON_KEY = "sb_publishable_JVqfpJWwmLrAMk7_nXp0pA_OwsvT...";
+        const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
 
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         let propertiesData = [];
 
-        function handleLogin(e) {
+        document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const pass = document.getElementById('password').value;
             if (pass === 'Tricore@2026') {
@@ -130,16 +128,16 @@
                 document.getElementById('dashboard-screen').classList.add('flex');
                 fetchProperties();
             } else {
-                alert('Invalid Password');
+                alert('Invalid Password. Please try again.');
             }
-        }
+        });
 
         function handleLogout() {
             location.reload();
         }
 
         async function fetchProperties() {
-            const { data, error } = await supabase.from('properties').select('*').order('created_at', { ascending: false });
+            const { data, error } = await supabaseClient.from('properties').select('*').order('created_at', { ascending: false });
             if (data) {
                 propertiesData = data;
                 renderProperties();
@@ -154,7 +152,7 @@
             document.getElementById('stat-featured').innerText = propertiesData.filter(p => p.is_featured).length;
 
             if (propertiesData.length === 0) {
-                list.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No properties in database.</td></tr>`;
+                list.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No properties found in database. Click + Add New Property.</td></tr>`;
                 return;
             }
 
@@ -177,7 +175,7 @@
         function openForm() { document.getElementById('property-modal').classList.remove('hidden'); }
         function closeForm() { document.getElementById('property-modal').classList.add('hidden'); }
 
-        async function saveProperty(e) {
+        document.getElementById('property-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const payload = {
                 title: document.getElementById('p-title').value,
@@ -189,14 +187,19 @@
                 status: 'Published'
             };
 
-            await supabase.from('properties').insert([payload]);
-            closeForm();
-            fetchProperties();
-        }
+            const { error } = await supabaseClient.from('properties').insert([payload]);
+            if (error) {
+                alert("Error saving property: " + error.message);
+            } else {
+                closeForm();
+                document.getElementById('property-form').reset();
+                fetchProperties();
+            }
+        });
 
         async function deleteProperty(id) {
             if (confirm("Delete property?")) {
-                await supabase.from('properties').delete().eq('id', id);
+                await supabaseClient.from('properties').delete().eq('id', id);
                 fetchProperties();
             }
         }
