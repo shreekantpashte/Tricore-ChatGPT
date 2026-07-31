@@ -108,16 +108,14 @@
         </div>
     </footer>
 
-    <!-- COMPLETE LIVE SUPABASE SCRIPT -->
+    <!-- SCRIPT -->
     <script>
-        // 1. SUPABASE CREDENTIALS
-        const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co/rest/v1/";
+        const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
 
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         let allProperties = [];
 
-        // 2. PARSE URL PARAMETERS FROM INDEX.HTML KIOSK
         function getUrlParams() {
             const params = new URLSearchParams(window.location.search);
             return {
@@ -126,18 +124,15 @@
             };
         }
 
-        // 3. FETCH PROPERTIES LIVE FROM SUPABASE
         async function initBuyPage() {
             const urlFilters = getUrlParams();
             document.getElementById('buy-filter-region').value = urlFilters.region;
             document.getElementById('buy-filter-type').value = urlFilters.type;
 
             try {
-                // Fetch only Published properties
                 const { data, error } = await supabaseClient
                     .from('properties')
                     .select('*')
-                    .eq('status', 'Published')
                     .order('created_at', { ascending: false });
 
                 if (error) throw error;
@@ -148,12 +143,11 @@
                 console.error("Error fetching properties from Supabase:", err);
                 document.getElementById('buy-properties-grid').innerHTML = `
                     <div class="col-span-3 text-center py-12 text-red-500 font-medium">
-                        Failed to load live properties. Please verify your Supabase URL and Keys.
+                        Failed to load live properties. Please try refreshing.
                     </div>`;
             }
         }
 
-        // 4. APPLY REGION & CATEGORY FILTERS
         function applyFilters() {
             const selectedRegion = document.getElementById('buy-filter-region').value;
             const selectedType = document.getElementById('buy-filter-type').value;
@@ -168,7 +162,6 @@
             renderProperties(filtered);
         }
 
-        // 5. RENDER PROPERTY CARDS TO DOM
         function renderProperties(items) {
             const grid = document.getElementById('buy-properties-grid');
             if (items.length === 0) {
@@ -181,7 +174,6 @@
 
             grid.innerHTML = '';
             items.forEach(item => {
-                // Fallback image if array is empty
                 const displayImage = (item.images && item.images.length > 0 && item.images[0]) 
                     ? item.images[0] 
                     : 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80';
