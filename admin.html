@@ -39,7 +39,7 @@
                 <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-slate-500 font-bold uppercase">Total Properties</p><p id="stat-total" class="text-2xl font-extrabold text-slate-800">0</p></div>
                 <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-emerald-600 font-bold uppercase">Published</p><p id="stat-published" class="text-2xl font-extrabold text-emerald-600">0</p></div>
                 <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-amber-600 font-bold uppercase">Drafts</p><p id="stat-drafts" class="text-2xl font-extrabold text-amber-600">0</p></div>
-                <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-purple-600 font-bold uppercase">Featured</p><p id="stat-featured" class="text-2xl font-extrabold text-purple-600">0</p></div>
+                <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-purple-600 font-bold uppercase">Recommended/Featured</p><p id="stat-featured" class="text-2xl font-extrabold text-purple-600">0</p></div>
             </div>
 
             <div class="flex justify-between items-center mb-4">
@@ -54,19 +54,20 @@
                             <th class="p-3">Title</th>
                             <th class="p-3">Region</th>
                             <th class="p-3">Price</th>
+                            <th class="p-3">Recommended</th>
                             <th class="p-3">Status</th>
                             <th class="p-3 text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="properties-list" class="divide-y divide-slate-100 font-medium">
-                        <tr><td colspan="5" class="p-4 text-center text-slate-400">Loading properties...</td></tr>
+                        <tr><td colspan="6" class="p-4 text-center text-slate-400">Loading properties...</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <!-- MODAL FORM WITH TABBED NAVIGATION -->
+    <!-- MODAL FORM -->
     <div id="property-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-lg shadow-2xl max-w-3xl w-full p-6 max-h-[92vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-4 border-b pb-3">
@@ -74,7 +75,6 @@
                 <button type="button" onclick="closeForm()" class="text-slate-400 hover:text-slate-700 font-bold text-xl">×</button>
             </div>
 
-            <!-- TABS HEADER -->
             <div class="flex space-x-4 border-b mb-4 text-xs font-bold text-slate-500">
                 <button type="button" onclick="switchAdminTab('tab-basic', this)" class="admin-tab text-blue-600 border-b-2 border-blue-600 pb-2">Basic</button>
                 <button type="button" onclick="switchAdminTab('tab-details', this)" class="admin-tab border-b-2 border-transparent pb-2 hover:text-blue-600">Details</button>
@@ -122,6 +122,13 @@
                             </select>
                         </div>
                     </div>
+                    
+                    <!-- RECOMMENDED / FEATURED TOGGLE CHECKBOX -->
+                    <div class="bg-amber-50 border border-amber-200 p-3 rounded flex items-center gap-2">
+                        <input type="checkbox" id="p-featured" class="w-4 h-4 text-blue-600 rounded cursor-pointer">
+                        <label for="p-featured" class="font-bold text-amber-900 cursor-pointer">Show this property in Home Page Recommended Properties section</label>
+                    </div>
+
                     <div>
                         <label class="font-bold block mb-1">Description</label>
                         <textarea id="p-desc" rows="3" class="w-full border p-2 rounded" placeholder="Short description about location, connectivity, amenities..."></textarea>
@@ -274,17 +281,23 @@
             document.getElementById('stat-featured').innerText = propertiesData.filter(p => p.is_featured).length;
 
             if (propertiesData.length === 0) {
-                list.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No properties in database. Click + Add New Property.</td></tr>`;
+                list.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-400">No properties in database. Click + Add New Property.</td></tr>`;
                 return;
             }
 
             list.innerHTML = '';
             propertiesData.forEach(item => {
+                const isFeatured = item.is_featured;
                 list.innerHTML += `
                     <tr class="hover:bg-slate-50">
                         <td class="p-3 font-bold text-slate-800">${item.title}</td>
                         <td class="p-3 text-slate-600">${item.region}</td>
                         <td class="p-3 text-blue-700 font-bold">${item.price}</td>
+                        <td class="p-3">
+                            <button onclick="toggleFeatured('${item.id}', ${isFeatured})" class="px-2 py-1 rounded text-[10px] font-bold ${isFeatured ? 'bg-purple-100 text-purple-700 border border-purple-300' : 'bg-slate-100 text-slate-500 border'}">
+                                ${isFeatured ? '★ Recommended' : '☆ Standard'}
+                            </button>
+                        </td>
                         <td class="p-3"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px] font-bold">${item.status || 'Published'}</span></td>
                         <td class="p-3 text-right space-x-2">
                             <button onclick="editProperty('${item.id}')" class="text-blue-600 font-bold">Edit</button>
@@ -293,6 +306,12 @@
                     </tr>
                 `;
             });
+        }
+
+        async function toggleFeatured(id, currentStatus) {
+            const { error } = await supabaseClient.from('properties').update({ is_featured: !currentStatus }).eq('id', id);
+            if (error) alert("Error toggling featured status: " + error.message);
+            else fetchProperties();
         }
 
         function openForm() { 
@@ -336,6 +355,7 @@
             document.getElementById('p-location').value = prop.location || '';
             document.getElementById('p-category').value = prop.category || '1, 2, 3, 4 BHK Flats';
             document.getElementById('p-desc').value = prop.description || '';
+            document.getElementById('p-featured').checked = !!prop.is_featured;
 
             document.getElementById('p-carpet').value = prop.carpet_area || '';
             document.getElementById('p-bedrooms').value = prop.bedrooms || '';
@@ -407,6 +427,7 @@
                 location: document.getElementById('p-location').value,
                 category: document.getElementById('p-category').value,
                 description: document.getElementById('p-desc').value,
+                is_featured: document.getElementById('p-featured').checked,
                 carpet_area: document.getElementById('p-carpet').value,
                 bedrooms: document.getElementById('p-bedrooms').value,
                 bathrooms: document.getElementById('p-bathrooms').value,
