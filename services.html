@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property & Revenue Legal Services | Tricore Advisory</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] }, colors: { navy: { 800: '#1e293b', 900: '#0f172a' }, surface: '#F8FAFC' } } } }
+    </script>
+</head>
+<body class="bg-surface text-slate-800 font-sans antialiased">
+
+    <!-- NAVIGATION HEADER -->
+    <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-extrabold text-navy-900 flex items-center gap-2">
+                <i class="fa-solid fa-building text-blue-600"></i> TRICORE
+            </a>
+            
+            <div class="hidden md:flex space-x-8 font-medium text-slate-700 text-sm">
+                <a href="index.html">Home</a>
+                <a href="buy.html">Buy Properties</a>
+                <a href="services.html" class="text-blue-600 font-bold">Services</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+
+            <a href="https://wa.me/917715818373" target="_blank" class="bg-emerald-600 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-[8px]">
+                <i class="fa-solid fa-scale-balanced text-xs mr-1"></i> Legal Advisory
+            </a>
+        </div>
+    </nav>
+
+    <div class="pt-24 pb-6 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-navy-900">Property & Revenue Record Services</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-1">Direct legal & documentation support across government offices and revenue departments.</p>
+        </div>
+    </div>
+
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div id="all-services-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="col-span-4 text-center py-8 text-slate-400">Loading services directory...</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function loadServices() {
+            const grid = document.getElementById('all-services-grid');
+            try {
+                const { data, error } = await supabaseClient.from('services').select('*').order('created_at', { ascending: false });
+                if (data && data.length > 0) {
+                    grid.innerHTML = '';
+                    data.forEach(s => {
+                        grid.innerHTML += `
+                            <div class="p-4 border border-slate-200 rounded-[8px] bg-white hover:border-blue-500 transition shadow-sm">
+                                <i class="${s.icon || 'fa-solid fa-file-contract'} text-xl text-blue-600 mb-2 block"></i>
+                                <h4 class="font-bold text-sm text-navy-900 mb-1">${s.title}</h4>
+                                <p class="text-xs text-slate-500 mb-3 line-clamp-2">${s.description || 'Revenue record verification and support.'}</p>
+                                <a href="service-detail.html?id=${s.id}" class="text-xs font-bold text-emerald-700 flex items-center gap-1">Know More & WhatsApp &rarr;</a>
+                            </div>
+                        `;
+                    });
+                } else {
+                    grid.innerHTML = `<div class="col-span-4 text-center py-8 text-slate-400">No managed services found. Use admin.html to add services.</div>`;
+                }
+            } catch (err) { console.error(err); }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadServices);
+    </script>
+</body>
+</html>
