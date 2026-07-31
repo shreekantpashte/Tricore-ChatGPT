@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tricore Admin Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-slate-100 font-sans antialiased">
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="min-h-screen flex items-center justify-center bg-slate-900 p-4">
+        <form onsubmit="handleLogin(event)" class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
+            <h1 class="text-2xl font-extrabold text-slate-900 mb-6 text-center">TRICORE Admin Portal</h1>
+            <div class="mb-4">
+                <label class="block text-xs font-bold text-slate-500 mb-1">ADMIN EMAIL</label>
+                <input type="email" id="email" required class="w-full border p-2.5 rounded text-sm focus:outline-none focus:border-blue-600" value="admin@tricorerealty.com">
+            </div>
+            <div class="mb-6">
+                <label class="block text-xs font-bold text-slate-500 mb-1">PASSWORD</label>
+                <input type="password" id="password" required class="w-full border p-2.5 rounded text-sm focus:outline-none focus:border-blue-600">
+            </div>
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded text-sm transition">Login to Dashboard</button>
+        </form>
+    </div>
+
+    <!-- DASHBOARD PANEL -->
+    <div id="dashboard-screen" class="hidden min-h-screen flex-col">
+        <!-- HEADER -->
+        <header class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center shadow-md">
+            <h1 class="text-xl font-extrabold">TRICORE Admin Control Panel</h1>
+            <button onclick="handleLogout()" class="bg-red-600 hover:bg-red-700 text-xs font-bold px-3 py-1.5 rounded transition">Logout</button>
+        </header>
+
+        <!-- STATS OVERVIEW -->
+        <div class="max-w-7xl mx-auto w-full px-6 pt-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-slate-500 font-bold uppercase">Total Properties</p><p id="stat-total" class="text-2xl font-extrabold text-slate-800">0</p></div>
+                <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-emerald-600 font-bold uppercase">Published</p><p id="stat-published" class="text-2xl font-extrabold text-emerald-600">0</p></div>
+                <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-amber-600 font-bold uppercase">Drafts</p><p id="stat-drafts" class="text-2xl font-extrabold text-amber-600">0</p></div>
+                <div class="bg-white p-4 rounded border text-center"><p class="text-xs text-purple-600 font-bold uppercase">Featured</p><p id="stat-featured" class="text-2xl font-extrabold text-purple-600">0</p></div>
+            </div>
+
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold text-slate-800">All Properties</h2>
+                <button onclick="openForm()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded transition">+ Add New Property</button>
+            </div>
+
+            <!-- TABLE -->
+            <div class="bg-white rounded border overflow-x-auto shadow-sm">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead class="bg-slate-50 border-b text-slate-500 font-bold uppercase">
+                        <tr>
+                            <th class="p-3">Title</th>
+                            <th class="p-3">Region</th>
+                            <th class="p-3">Price</th>
+                            <th class="p-3">Status</th>
+                            <th class="p-3 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="properties-list" class="divide-y divide-slate-100 font-medium">
+                        <tr><td colspan="5" class="p-4 text-center text-slate-400">Loading properties...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FORM -->
+    <div id="property-modal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-2xl max-w-xl w-full p-6">
+            <h3 id="modal-title" class="text-lg font-bold mb-4">Add New Property</h3>
+            <form onsubmit="saveProperty(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="edit-id">
+                <div><label class="font-bold">Title</label><input type="text" id="p-title" required class="w-full border p-2 rounded"></div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div><label class="font-bold">Price</label><input type="text" id="p-price" required class="w-full border p-2 rounded" placeholder="e.g. ₹1.12 Cr"></div>
+                    <div>
+                        <label class="font-bold">Region</label>
+                        <select id="p-region" class="w-full border p-2 rounded">
+                            <option value="All Mumbai">All Mumbai</option>
+                            <option value="All Thane">All Thane</option>
+                            <option value="Navi Mumbai">Navi Mumbai</option>
+                            <option value="Virar & Vasai">Virar & Vasai</option>
+                            <option value="Lonavala">Lonavala</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div><label class="font-bold">Location Details</label><input type="text" id="p-location" required class="w-full border p-2 rounded" placeholder="e.g. Thane West"></div>
+                    <div>
+                        <label class="font-bold">Category</label>
+                        <select id="p-category" class="w-full border p-2 rounded">
+                            <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
+                            <option value="Bungalows & Houses">Bungalow / House</option>
+                            <option value="Plots / Land">Plots / Land</option>
+                            <option value="Commercial">Commercial</option>
+                        </select>
+                    </div>
+                </div>
+                <div><label class="font-bold">Image URL</label><input type="text" id="p-image" required class="w-full border p-2 rounded" placeholder="https://images.unsplash.com/..."></div>
+                <div class="flex justify-end gap-2 pt-3">
+                    <button type="button" onclick="closeForm()" class="border px-4 py-2 rounded font-bold">Cancel</button>
+                    <button type="submit" class="bg-blue-600 text-white font-bold px-6 py-2 rounded">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        // REPLACE WITH YOUR ACTUAL SUPABASE CREDENTIALS
+        const SUPABASE_URL = "YOUR_SUPABASE_URL";
+        const SUPABASE_ANON_KEY = "sb_publishable_JVqfpJWwmLrAMk7_nXp0pA_OwsvT...";
+
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        let propertiesData = [];
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('password').value;
+            if (pass === 'Tricore@2026') {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('dashboard-screen').classList.remove('hidden');
+                document.getElementById('dashboard-screen').classList.add('flex');
+                fetchProperties();
+            } else {
+                alert('Invalid Password');
+            }
+        }
+
+        function handleLogout() {
+            location.reload();
+        }
+
+        async function fetchProperties() {
+            const { data, error } = await supabase.from('properties').select('*').order('created_at', { ascending: false });
+            if (data) {
+                propertiesData = data;
+                renderProperties();
+            }
+        }
+
+        function renderProperties() {
+            const list = document.getElementById('properties-list');
+            document.getElementById('stat-total').innerText = propertiesData.length;
+            document.getElementById('stat-published').innerText = propertiesData.filter(p => p.status === 'Published').length;
+            document.getElementById('stat-drafts').innerText = propertiesData.filter(p => p.status === 'Draft').length;
+            document.getElementById('stat-featured').innerText = propertiesData.filter(p => p.is_featured).length;
+
+            if (propertiesData.length === 0) {
+                list.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-400">No properties in database.</td></tr>`;
+                return;
+            }
+
+            list.innerHTML = '';
+            propertiesData.forEach(item => {
+                list.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-3 font-bold text-slate-800">${item.title}</td>
+                        <td class="p-3 text-slate-600">${item.region}</td>
+                        <td class="p-3 text-blue-700 font-bold">${item.price}</td>
+                        <td class="p-3"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px] font-bold">${item.status || 'Published'}</span></td>
+                        <td class="p-3 text-right space-x-2">
+                            <button onclick="deleteProperty('${item.id}')" class="text-red-600 font-bold">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function openForm() { document.getElementById('property-modal').classList.remove('hidden'); }
+        function closeForm() { document.getElementById('property-modal').classList.add('hidden'); }
+
+        async function saveProperty(e) {
+            e.preventDefault();
+            const payload = {
+                title: document.getElementById('p-title').value,
+                price: document.getElementById('p-price').value,
+                region: document.getElementById('p-region').value,
+                location: document.getElementById('p-location').value,
+                category: document.getElementById('p-category').value,
+                images: [document.getElementById('p-image').value],
+                status: 'Published'
+            };
+
+            await supabase.from('properties').insert([payload]);
+            closeForm();
+            fetchProperties();
+        }
+
+        async function deleteProperty(id) {
+            if (confirm("Delete property?")) {
+                await supabase.from('properties').delete().eq('id', id);
+                fetchProperties();
+            }
+        }
+    </script>
+</body>
+</html>
