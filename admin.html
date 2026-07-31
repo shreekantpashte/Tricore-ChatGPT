@@ -76,6 +76,7 @@
         <div class="bg-white rounded-lg shadow-2xl max-w-xl w-full p-6">
             <h3 id="modal-title" class="text-lg font-bold mb-4">Add New Property</h3>
             <form id="property-form" class="space-y-3 text-xs">
+                <input type="hidden" id="p-id">
                 <div><label class="font-bold">Title</label><input type="text" id="p-title" required class="w-full border p-2 rounded"></div>
                 <div class="grid grid-cols-2 gap-3">
                     <div><label class="font-bold">Price</label><input type="text" id="p-price" required class="w-full border p-2 rounded" placeholder="e.g. ₹1.12 Cr"></div>
@@ -113,8 +114,8 @@
 
     <!-- SCRIPT -->
     <script>
-        // UPDATE THESE TWO LINES WITH YOUR ACTUAL KEYS
-        const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co/rest/v1/";
+        // Clean base URL without trailing rest/v1/
+        const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
 
         let supabaseClient;
@@ -179,6 +180,7 @@
                         <td class="p-3 text-blue-700 font-bold">${item.price}</td>
                         <td class="p-3"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px] font-bold">${item.status || 'Published'}</span></td>
                         <td class="p-3 text-right space-x-2">
+                            <button onclick="editProperty('${item.id}')" class="text-blue-600 font-bold">Edit</button>
                             <button onclick="deleteProperty('${item.id}')" class="text-red-600 font-bold">Delete</button>
                         </td>
                     </tr>
@@ -186,11 +188,37 @@
             });
         }
 
-        function openForm() { document.getElementById('property-modal').classList.remove('hidden'); }
-        function closeForm() { document.getElementById('property-modal').classList.add('hidden'); }
+        function openForm() { 
+            document.getElementById('p-id').value = '';
+            document.getElementById('property-form').reset();
+            document.getElementById('modal-title').innerText = 'Add New Property';
+            document.getElementById('property-modal').classList.remove('hidden'); 
+        }
+
+        function closeForm() { 
+            document.getElementById('property-modal').classList.add('hidden'); 
+        }
+
+        function editProperty(id) {
+            const prop = propertiesData.find(p => p.id === id);
+            if (!prop) return;
+
+            document.getElementById('p-id').value = prop.id;
+            document.getElementById('p-title').value = prop.title || '';
+            document.getElementById('p-price').value = prop.price || '';
+            document.getElementById('p-region').value = prop.region || 'All Mumbai';
+            document.getElementById('p-location').value = prop.location || '';
+            document.getElementById('p-category').value = prop.category || '1, 2, 3, 4 BHK Flats';
+            document.getElementById('p-image').value = (prop.images && prop.images[0]) ? prop.images[0] : '';
+            
+            document.getElementById('modal-title').innerText = 'Edit Property';
+            document.getElementById('property-modal').classList.remove('hidden');
+        }
 
         document.getElementById('property-form').addEventListener('submit', async function(e) {
             e.preventDefault();
+            const id = document.getElementById('p-id').value;
+
             const payload = {
                 title: document.getElementById('p-title').value,
                 price: document.getElementById('p-price').value,
@@ -201,9 +229,15 @@
                 status: 'Published'
             };
 
-            const { error } = await supabaseClient.from('properties').insert([payload]);
-            if (error) {
-                alert("Error saving property: " + error.message);
+            let res;
+            if (id) {
+                res = await supabaseClient.from('properties').update(payload).eq('id', id);
+            } else {
+                res = await supabaseClient.from('properties').insert([payload]);
+            }
+
+            if (res.error) {
+                alert("Error saving property: " + res.error.message);
             } else {
                 closeForm();
                 document.getElementById('property-form').reset();
