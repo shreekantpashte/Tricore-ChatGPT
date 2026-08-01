@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verified Land & Plot Investments | Tricore Realty & Advisory</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { navy: { 800: '#1e293b', 900: '#0f172a' }, surface: '#F8FAFC' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-slate-800 font-sans antialiased">
+
+    <!-- UNIFIED NAVIGATION HEADER -->
+    <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            
+            <a href="index.html" class="text-xl sm:text-2xl font-extrabold text-navy-900 flex items-center gap-2 tracking-tight">
+                <i class="fa-solid fa-building text-blue-600"></i> TRICORE
+            </a>
+            
+            <div class="hidden md:flex space-x-8 font-medium text-slate-700 text-sm">
+                <a href="index.html" class="hover:text-blue-600 transition">Home</a>
+                <a href="buy.html" class="hover:text-blue-600 transition font-semibold">Buy Properties</a>
+                <a href="land.html" class="text-blue-600 font-bold transition">Land Investment</a>
+                <a href="services.html" class="hover:text-blue-600 transition">Services</a>
+                <a href="index.html#about" class="hover:text-blue-600 transition">About</a>
+                <a href="index.html#contact" class="hover:text-blue-600 transition">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20have%20an%20enquiry%20regarding%20Land%20Investment." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold p-2 sm:px-3.5 sm:py-2 rounded-[8px] transition flex items-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp text-base"></i> <span class="hidden sm:inline">WhatsApp</span>
+                </a>
+                <a href="buy.html" class="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-2.5 sm:px-4 py-2 rounded-[8px] transition whitespace-nowrap">
+                    Explore
+                </a>
+                
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-blue-600 focus:outline-none p-1.5 border rounded-lg bg-slate-50">
+                    <i id="menu-icon" class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-3 font-semibold text-sm text-slate-700 shadow-lg">
+            <a href="index.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Home</a>
+            <a href="buy.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Buy Properties</a>
+            <a href="land.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100 text-blue-600 font-bold">Land Investment</a>
+            <a href="services.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Services</a>
+            <a href="index.html#about" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">About</a>
+            <a href="index.html#contact" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HEADER SPACER -->
+    <div class="pt-24 pb-6 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-navy-900">Verified Land & Plot Investments</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-1">Direct clear-title agricultural, NA & industrial land parcels across Karjat, Lonavala, Thane & MMR belt.</p>
+        </div>
+    </div>
+
+    <!-- MAIN LAND GRID -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div id="land-properties-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+                <div class="col-span-3 text-center py-12 text-slate-400">Loading land listings...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 py-8 text-xs border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            &copy; 2026 Tricore Realty & Advisory. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        const SUPABASE_URL = "https://pccvfdvsufqnlnvcdrxk.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        async function loadLandListings() {
+            const grid = document.getElementById('land-properties-grid');
+            try {
+                // Fetch ONLY Land listings (is_land = true or Category = Plots / Land)
+                const { data, error } = await supabaseClient
+                    .from('properties')
+                    .select('*')
+                    .or('is_land.eq.true,category.eq.Plots / Land')
+                    .order('created_at', { ascending: false });
+
+                if (data && data.length > 0) {
+                    grid.innerHTML = '';
+                    data.forEach(item => {
+                        const img = (item.images && item.images[0]) ? item.images[0] : 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80';
+                        const locationText = item.location || item.region;
+                        const whatsappUrl = `https://wa.me/919987975429?text=${encodeURIComponent('Hi Tricore, I am interested in Land Plot: ' + item.title + ' (' + locationText + ')')}`;
+                        const detailUrl = `property-detail.html?id=${item.id}`;
+
+                        grid.innerHTML += `
+                            <div class="bg-white rounded-[8px] border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between h-full">
+                                <div>
+                                    <a href="${detailUrl}">
+                                        <img src="${img}" class="w-full h-48 object-cover cursor-pointer hover:opacity-95 transition" alt="${item.title}">
+                                    </a>
+                                    <div class="p-5">
+                                        <span class="text-[10px] font-bold text-blue-600 uppercase block h-8 line-clamp-2">
+                                            <i class="fa-solid fa-map-pin mr-1"></i>${locationText}
+                                        </span>
+                                        <a href="${detailUrl}">
+                                            <h3 class="font-bold text-base text-navy-900 line-clamp-2 h-12 mt-1 mb-2 hover:text-blue-600 transition">${item.title}</h3>
+                                        </a>
+                                        <p class="text-lg font-extrabold text-blue-700 mb-3">${item.price}</p>
+                                        
+                                        <div class="grid grid-cols-2 gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 p-2 rounded-[6px] mb-2">
+                                            <span><i class="fa-solid fa-check text-emerald-600"></i> 7/12 Verified</span>
+                                            <span><i class="fa-solid fa-check text-emerald-600"></i> Clear Title</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-5 pb-5 mt-auto">
+                                    <a href="${whatsappUrl}" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-[6px] text-xs text-center block transition">
+                                        <i class="fa-brands fa-whatsapp mr-1"></i> Enquire on WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                    });
+                } else {
+                    grid.innerHTML = `<div class="col-span-3 text-center py-12 text-slate-400 font-medium">No land investment listings added yet. Use admin.html to post land plots.</div>`;
+                }
+            } catch (e) {
+                console.error(e);
+                grid.innerHTML = `<div class="col-span-3 text-center py-12 text-red-500 font-medium">Failed to load land listings.</div>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadLandListings);
+    </script>
+</body>
+</html>
