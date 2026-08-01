@@ -7,14 +7,18 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: { navy: { 800: '#1e293b', 900: '#0f172a' }, surface: '#F8FAFC' }
+                    colors: {
+                        navy: { 800: '#1e293b', 900: '#0f172a' },
+                        emerald: { 600: '#059669', 700: '#047857' },
+                        surface: '#F8FAFC'
+                    }
                 }
             }
         }
@@ -24,10 +28,10 @@
 
     <!-- UNIFIED NAVIGATION HEADER -->
     <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex justify-between items-center">
             
-            <a href="index.html" class="text-xl sm:text-2xl font-extrabold text-navy-900 flex items-center gap-2 tracking-tight">
-                <i class="fa-solid fa-building text-blue-600"></i> TRICORE
+            <a href="index.html" class="flex items-center">
+                <img src="Tricore logo.png" alt="Tricore Realty & Advisory" class="h-10 sm:h-12 w-auto object-contain">
             </a>
             
             <div class="hidden md:flex space-x-8 font-medium text-slate-700 text-sm">
@@ -35,8 +39,8 @@
                 <a href="buy.html" class="text-blue-600 font-bold transition">Buy Properties</a>
                 <a href="land.html" class="hover:text-blue-600 transition">Land Investment</a>
                 <a href="services.html" class="hover:text-blue-600 transition">Services</a>
-                <a href="index.html#about" class="hover:text-blue-600 transition">About</a>
-                <a href="index.html#contact" class="hover:text-blue-600 transition">Contact</a>
+                <a href="about.html" class="hover:text-blue-600 transition">About</a>
+                <a href="contact.html" class="hover:text-blue-600 transition">Contact</a>
             </div>
 
             <div class="flex items-center gap-2 sm:gap-3">
@@ -58,8 +62,8 @@
             <a href="buy.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100 text-blue-600 font-bold">Buy Properties</a>
             <a href="land.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Land Investment</a>
             <a href="services.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Services</a>
-            <a href="index.html#about" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">About</a>
-            <a href="index.html#contact" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Contact</a>
+            <a href="about.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">About</a>
+            <a href="contact.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Contact</a>
         </div>
     </nav>
 
@@ -75,7 +79,7 @@
     <section class="py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             
-            <!-- SEARCH BAR & TOP CONTROLS -->
+            <!-- SEARCH BAR & CONTROLS -->
             <div class="bg-white p-4 rounded-[8px] border border-slate-200 shadow-sm mb-4">
                 <div class="flex flex-wrap gap-3 items-center justify-between">
                     <div class="flex items-center bg-slate-100 p-1 rounded font-bold text-xs">
@@ -204,7 +208,6 @@
 
         async function initBuyPage() {
             try {
-                // EXCLUDE LAND LISTINGS (Only fetch residential/commercial)
                 const { data, error } = await supabaseClient
                     .from('properties')
                     .select('*')
