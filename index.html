@@ -33,38 +33,11 @@
 
     <!-- UNIFIED NAVIGATION HEADER -->
     <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex justify-between items-center">
             
-            <!-- OFFICIAL HD BRAND LOGO (INLINE VECTOR SVG) -->
-            <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 group">
-                <svg class="h-10 sm:h-12 w-auto" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Top Cube (Dark Navy) -->
-                    <polygon points="100,15 155,46 100,77 45,46" fill="#041730"/>
-                    <polygon points="45,46 100,77 100,115 45,84" fill="#0E2B4B"/>
-                    <polygon points="100,77 155,46 155,84 100,115" fill="#071629"/>
-
-                    <!-- Bottom-Left Cube (Gold) -->
-                    <polygon points="40,82 82,106 40,130 0,106" fill="#C49647"/>
-                    <polygon points="0,106 40,130 40,170 0,146" fill="#A87B32"/>
-                    <polygon points="40,130 82,106 82,146 40,170" fill="#B89053"/>
-
-                    <!-- Bottom-Right Cube (Slate Gray) -->
-                    <polygon points="160,82 200,106 160,130 118,106" fill="#3D4F5C"/>
-                    <polygon points="118,106 160,130 160,170 118,146" fill="#25384C"/>
-                    <polygon points="160,130 200,106 200,146 160,170" fill="#4B5E6C"/>
-
-                    <!-- Center Handshake Element -->
-                    <path d="M52,90 L75,90 L85,100 L78,110 L68,100 L52,100 Z" fill="#B89053"/>
-                    <circle cx="58" cy="95" r="2.5" fill="#FFFFFF"/>
-                    <path d="M148,90 L125,90 L115,100 L122,110 L132,100 L148,100 Z" fill="#041730"/>
-                    <circle cx="142" cy="95" r="2.5" fill="#FFFFFF"/>
-                    <path d="M78,100 C82,95 90,95 95,99 C100,104 102,108 108,108 L115,100 C110,92 98,92 90,96 C84,94 76,96 72,102 Z" fill="#041730"/>
-                    <path d="M82,104 L88,112 M90,106 L95,114 M97,107 L102,115" stroke="#B89053" stroke-width="3" stroke-linecap="round"/>
-                </svg>
-                <div class="flex flex-col justify-center">
-                    <span class="text-xl sm:text-2xl font-black text-[#041730] tracking-[0.14em] leading-none">TRICORE</span>
-                    <span class="text-[8px] sm:text-[9.5px] font-extrabold text-[#B89053] tracking-[0.26em] uppercase mt-1">REALTY & ADVISORY</span>
-                </div>
+            <!-- UPLOADED EXACT BRAND LOGO -->
+            <a href="index.html" class="flex items-center">
+                <img src="Tricore logo.png" alt="Tricore Realty & Advisory" class="h-10 sm:h-12 w-auto object-contain">
             </a>
             
             <!-- Desktop Menu -->
@@ -356,10 +329,10 @@
 
                 <!-- CAROUSEL ARROWS -->
                 <div class="flex items-center gap-2">
-                    <button onclick="prevTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm">
+                    <button onclick="prevTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm" aria-label="Previous Testimonials">
                         <i class="fa-solid fa-chevron-left text-sm"></i>
                     </button>
-                    <button onclick="nextTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm">
+                    <button onclick="nextTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm" aria-label="Next Testimonials">
                         <i class="fa-solid fa-chevron-right text-sm"></i>
                     </button>
                 </div>
@@ -375,26 +348,12 @@
         </div>
     </section>
 
-    <!-- 6. FOOTER WITH BRAND LOGO -->
+    <!-- 6. FOOTER -->
     <footer id="contact" class="bg-slate-950 text-slate-400 py-12 text-xs border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
-                <a href="index.html" class="flex items-center gap-2.5 mb-4">
-                    <svg class="h-8 w-auto" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <polygon points="100,15 155,46 100,77 45,46" fill="#3B82F6"/>
-                        <polygon points="45,46 100,77 100,115 45,84" fill="#60A5FA"/>
-                        <polygon points="100,77 155,46 155,84 100,115" fill="#1D4ED8"/>
-                        <polygon points="40,82 82,106 40,130 0,106" fill="#F59E0B"/>
-                        <polygon points="0,106 40,130 40,170 0,146" fill="#D97706"/>
-                        <polygon points="40,130 82,106 82,146 40,170" fill="#FBBF24"/>
-                        <polygon points="160,82 200,106 160,130 118,106" fill="#9CA3AF"/>
-                        <polygon points="118,106 160,130 160,170 118,146" fill="#6B7280"/>
-                        <polygon points="160,130 200,106 200,146 160,170" fill="#D1D5DB"/>
-                    </svg>
-                    <div class="flex flex-col justify-center">
-                        <span class="text-xl font-black text-white tracking-[0.12em] leading-none">TRICORE</span>
-                        <span class="text-[8px] font-extrabold text-[#F59E0B] tracking-[0.25em] uppercase mt-1">REALTY & ADVISORY</span>
-                    </div>
+                <a href="index.html" class="flex items-center mb-4">
+                    <img src="Tricore logo.png" alt="Tricore Realty & Advisory" class="h-10 sm:h-12 w-auto object-contain bg-white p-1 rounded">
                 </a>
                 <p class="leading-relaxed mb-4">Trusted partner in residential, commercial, and revenue legal record advisory across Mumbai Metropolitan Region & Lonavala.</p>
                 <div class="flex space-x-3 text-base text-slate-300">
