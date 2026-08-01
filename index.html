@@ -40,7 +40,7 @@
                 <i class="fa-solid fa-building text-blue-600"></i> TRICORE
             </a>
             
-            <!-- Desktop Menu (Updated Links to standalone pages) -->
+            <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-8 font-medium text-slate-700 text-sm">
                 <a href="index.html" class="text-blue-600 font-bold transition">Home</a>
                 <a href="buy.html" class="hover:text-blue-600 transition font-semibold">Buy Properties</a>
@@ -317,17 +317,34 @@
         </div>
     </section>
 
-    <!-- 5. TESTIMONIALS SECTION -->
-    <section class="py-12 sm:py-16 bg-surface border-b border-slate-200">
+    <!-- 5. TESTIMONIALS SECTION (SLIDER CAROUSEL WITH CONTROLS & AUTO 4s ROTATION) -->
+    <section class="py-12 sm:py-16 bg-surface border-b border-slate-200 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="text-center max-w-2xl mx-auto mb-10">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-2">Client Testimonials</h2>
-                <p class="text-slate-600 text-xs sm:text-sm">Real stories from buyers and landowners across Mumbai, Thane & Lonavala.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-10 gap-4">
+                <div class="text-center sm:text-left">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900 mb-2">Client Testimonials</h2>
+                    <p class="text-slate-600 text-xs sm:text-sm">Real stories from buyers and landowners across Mumbai, Thane & Lonavala.</p>
+                </div>
+
+                <!-- CAROUSEL ARROWS -->
+                <div class="flex items-center gap-2">
+                    <button onclick="prevTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm" aria-label="Previous Testimonials">
+                        <i class="fa-solid fa-chevron-left text-sm"></i>
+                    </button>
+                    <button onclick="nextTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm" aria-label="Next Testimonials">
+                        <i class="fa-solid fa-chevron-right text-sm"></i>
+                    </button>
+                </div>
             </div>
 
-            <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-                <div class="col-span-3 text-center py-8 text-slate-400">Loading client reviews...</div>
+            <!-- CAROUSEL CONTAINER -->
+            <div class="overflow-hidden" id="testimonial-carousel-wrapper">
+                <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch transition-all duration-500 ease-in-out">
+                    <div class="col-span-3 text-center py-8 text-slate-400 font-medium">Loading client reviews...</div>
+                </div>
             </div>
+
         </div>
     </section>
 
@@ -427,6 +444,65 @@
             } else {
                 window.location.href = `buy.html?region=${encodeURIComponent(region)}&type=${encodeURIComponent(type)}`;
             }
+        }
+
+        // TESTIMONIALS SLIDER ENGINE
+        let allTestimonials = [];
+        let testimonialStartIndex = 0;
+        let testimonialAutoTimer = null;
+
+        function renderTestimonialsSlice() {
+            const testGrid = document.getElementById('testimonials-grid');
+            if (!allTestimonials || allTestimonials.length === 0) {
+                testGrid.innerHTML = `<div class="col-span-3 text-center py-6 text-slate-400 font-medium">No client reviews added yet.</div>`;
+                return;
+            }
+
+            testGrid.innerHTML = '';
+            
+            // Render 3 testimonials starting from testimonialStartIndex
+            for (let i = 0; i < 3; i++) {
+                const itemIndex = (testimonialStartIndex + i) % allTestimonials.length;
+                const t = allTestimonials[itemIndex];
+
+                testGrid.innerHTML += `
+                    <div class="p-6 bg-white rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between h-full transition duration-300">
+                        <div>
+                            <div class="flex text-amber-400 text-xs mb-3">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed italic mb-4">"${t.review}"</p>
+                        </div>
+                        <div class="pt-3 border-t border-slate-100 mt-auto">
+                            <p class="font-bold text-xs text-navy-900">${t.client_name}</p>
+                            <p class="text-[10px] text-slate-400">${t.location || 'Mumbai'}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function nextTestimonial() {
+            if (allTestimonials.length === 0) return;
+            testimonialStartIndex = (testimonialStartIndex + 1) % allTestimonials.length;
+            renderTestimonialsSlice();
+        }
+
+        function prevTestimonial() {
+            if (allTestimonials.length === 0) return;
+            testimonialStartIndex = (testimonialStartIndex - 1 + allTestimonials.length) % allTestimonials.length;
+            renderTestimonialsSlice();
+        }
+
+        function startTestimonialTimer() {
+            if (testimonialAutoTimer) clearInterval(testimonialAutoTimer);
+            testimonialAutoTimer = setInterval(() => {
+                nextTestimonial();
+            }, 4000); // 4 Seconds Auto Rotation
         }
 
         // Load Dynamic Supabase Content
@@ -544,26 +620,22 @@
                 }
             } catch (e) { console.error(e); }
 
-            // 4. Load Testimonials
+            // 4. Load ALL Testimonials & Initialize Auto-Rotating 3-Card Carousel
             try {
-                const testGrid = document.getElementById('testimonials-grid');
-                const { data: testData } = await supabaseClient.from('testimonials').select('*').limit(3);
+                const { data: testData } = await supabaseClient.from('testimonials').select('*').order('created_at', { ascending: false });
                 if (testData && testData.length > 0) {
-                    testGrid.innerHTML = '';
-                    testData.forEach(t => {
-                        testGrid.innerHTML += `
-                            <div class="p-6 bg-white rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between h-full">
-                                <div>
-                                    <div class="flex text-amber-400 text-xs mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                                    <p class="text-xs text-slate-600 leading-relaxed italic mb-4">"${t.review}"</p>
-                                </div>
-                                <div class="pt-3 border-t border-slate-100 mt-auto">
-                                    <p class="font-bold text-xs text-navy-900">${t.client_name}</p>
-                                    <p class="text-[10px] text-slate-400">${t.location || 'Mumbai'}</p>
-                                </div>
-                            </div>
-                        `;
-                    });
+                    allTestimonials = testData;
+                    renderTestimonialsSlice();
+                    startTestimonialTimer();
+
+                    // Pause auto-play on hover
+                    const wrapper = document.getElementById('testimonial-carousel-wrapper');
+                    if (wrapper) {
+                        wrapper.addEventListener('mouseenter', () => clearInterval(testimonialAutoTimer));
+                        wrapper.addEventListener('mouseleave', () => startTestimonialTimer());
+                    }
+                } else {
+                    document.getElementById('testimonials-grid').innerHTML = `<div class="col-span-3 text-center py-6 text-slate-400 font-medium">Add reviews in admin.html to display here.</div>`;
                 }
             } catch (e) { console.error(e); }
         }
