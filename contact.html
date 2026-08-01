@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Tricore Realty & Advisory</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { navy: { 800: '#1e293b', 900: '#0f172a' }, surface: '#F8FAFC' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-slate-800 font-sans antialiased">
+
+    <!-- UNIFIED NAVIGATION HEADER -->
+    <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            
+            <a href="index.html" class="text-xl sm:text-2xl font-extrabold text-navy-900 flex items-center gap-2 tracking-tight">
+                <i class="fa-solid fa-building text-blue-600"></i> TRICORE
+            </a>
+            
+            <div class="hidden md:flex space-x-8 font-medium text-slate-700 text-sm">
+                <a href="index.html" class="hover:text-blue-600 transition">Home</a>
+                <a href="buy.html" class="hover:text-blue-600 transition font-semibold">Buy Properties</a>
+                <a href="land.html" class="hover:text-blue-600 transition">Land Investment</a>
+                <a href="services.html" class="hover:text-blue-600 transition">Services</a>
+                <a href="about.html" class="hover:text-blue-600 transition">About</a>
+                <a href="contact.html" class="text-blue-600 font-bold transition">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20have%20an%20enquiry." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold p-2 sm:px-3.5 sm:py-2 rounded-[8px] transition flex items-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp text-base"></i> <span class="hidden sm:inline">WhatsApp</span>
+                </a>
+                <a href="buy.html" class="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-2.5 sm:px-4 py-2 rounded-[8px] transition whitespace-nowrap">
+                    Explore
+                </a>
+                
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-blue-600 focus:outline-none p-1.5 border rounded-lg bg-slate-50">
+                    <i id="menu-icon" class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-3 font-semibold text-sm text-slate-700 shadow-lg">
+            <a href="index.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Home</a>
+            <a href="buy.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Buy Properties</a>
+            <a href="land.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Land Investment</a>
+            <a href="services.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Services</a>
+            <a href="about.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">About</a>
+            <a href="contact.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100 text-blue-600 font-bold">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HEADER SPACER -->
+    <div class="pt-24 pb-6 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-navy-900">Get in Touch with Tricore</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-1">Connect with our Real Estate Advisory Desk or Revenue Legal Team directly.</p>
+        </div>
+    </div>
+
+    <!-- MAIN CONTACT CONTENT -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- CONTACT DETAILS CARDS (LEFT) -->
+                <div class="space-y-4">
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-lg mb-3">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <h3 class="font-bold text-sm text-navy-900 mb-1">Real Estate Advisory Desk</h3>
+                        <p class="text-xs text-slate-500 mb-2">For buying property, site visits, or listing a property:</p>
+                        <a href="tel:+919987975429" class="text-xs font-bold text-blue-600 hover:underline block">+91 9987975429</a>
+                        <a href="tel:+919223585782" class="text-xs font-bold text-blue-600 hover:underline block">+91 9223585782</a>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-lg mb-3">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <h3 class="font-bold text-sm text-navy-900 mb-1">Revenue Legal & Record Desk</h3>
+                        <p class="text-xs text-slate-500 mb-2">For 7/12 extracts, title searches, ferfar entries & legal advice:</p>
+                        <a href="tel:+917715818373" class="text-xs font-bold text-emerald-600 hover:underline block">+91 7715818373</a>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center text-lg mb-3">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <h3 class="font-bold text-sm text-navy-900 mb-1">Email & Office</h3>
+                        <p class="text-xs text-slate-500 mb-1">contact@tricorerealty.com</p>
+                        <p class="text-xs text-slate-500">City Center Office, Thane & Mumbai, Maharashtra</p>
+                    </div>
+                </div>
+
+                <!-- PREFILLED WHATSAPP FORM (RIGHT) -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-sm">
+                        <h2 class="text-xl font-extrabold text-navy-900 mb-1">Send an Instant Inquiry via WhatsApp</h2>
+                        <p class="text-xs text-slate-500 mb-6">Fill out the details below. Tapping submit opens WhatsApp with your inquiry pre-formatted for immediate response.</p>
+
+                        <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4 text-xs">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block font-bold mb-1 text-slate-700">YOUR NAME *</label>
+                                    <input type="text" id="c-name" required placeholder="e.g. Rajesh Sharma" class="w-full border p-2.5 rounded-lg bg-slate-50 text-slate-800 font-medium focus:outline-none focus:border-blue-600">
+                                </div>
+                                <div>
+                                    <label class="block font-bold mb-1 text-slate-700">PHONE NUMBER *</label>
+                                    <input type="tel" id="c-phone" required placeholder="e.g. 9820012345" class="w-full border p-2.5 rounded-lg bg-slate-50 text-slate-800 font-medium focus:outline-none focus:border-blue-600">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block font-bold mb-1 text-slate-700">INQUIRY TYPE *</label>
+                                    <select id="c-type" onchange="updateDeskNumber()" class="w-full border p-2.5 rounded-lg bg-slate-50 text-slate-800 font-medium focus:outline-none focus:border-blue-600">
+                                        <option value="Buy Residential/Commercial Property">Buy Property (Flat / Villa / Commercial)</option>
+                                        <option value="Land / Plot Investment">Land Investment (Karjat / Lonavala / MMR)</option>
+                                        <option value="Revenue Legal / 7/12 Extract Service">Revenue Record & Legal Title Service</option>
+                                        <option value="List My Property For Sale">List My Property for Sale</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block font-bold mb-1 text-slate-700">PREFERRED LOCATION</label>
+                                    <select id="c-location" class="w-full border p-2.5 rounded-lg bg-slate-50 text-slate-800 font-medium focus:outline-none focus:border-blue-600">
+                                        <option value="All Mumbai">All Mumbai</option>
+                                        <option value="All Thane">All Thane</option>
+                                        <option value="Navi Mumbai">Navi Mumbai</option>
+                                        <option value="Virar & Vasai">Virar & Vasai</option>
+                                        <option value="Lonavala / Karjat">Lonavala / Karjat</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block font-bold mb-1 text-slate-700">YOUR MESSAGE / REQUIREMENT</label>
+                                <textarea id="c-message" rows="4" placeholder="Briefly describe what you are looking for..." class="w-full border p-2.5 rounded-lg bg-slate-50 text-slate-800 font-medium focus:outline-none focus:border-blue-600"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-lg text-sm transition shadow-md flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                                <span>Send Inquiry via WhatsApp</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 py-8 text-xs border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            &copy; 2026 Tricore Realty & Advisory. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        let targetWhatsAppNumber = "919987975429"; // Default Real Estate Desk
+
+        function updateDeskNumber() {
+            const type = document.getElementById('c-type').value;
+            if (type.includes("Revenue Legal")) {
+                targetWhatsAppNumber = "917715818373"; // Legal Desk
+            } else {
+                targetWhatsAppNumber = "919987975429"; // Real Estate Desk
+            }
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('c-name').value.trim();
+            const phone = document.getElementById('c-phone').value.trim();
+            const type = document.getElementById('c-type').value;
+            const location = document.getElementById('c-location').value;
+            const message = document.getElementById('c-message').value.trim();
+
+            const formattedMessage = `Hi Tricore Team,\n\nI have submitted an inquiry on your website:\n- *Name:* ${name}\n- *Phone:* ${phone}\n- *Inquiry Type:* ${type}\n- *Preferred Location:* ${location}\n- *Message:* ${message || 'N/A'}`;
+
+            const encodedMessage = encodeURIComponent(formattedMessage);
+            window.open(`https://wa.me/${targetWhatsAppNumber}?text=${encodedMessage}`, '_blank');
+        }
+    </script>
+</body>
+</html>
