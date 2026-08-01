@@ -31,13 +31,15 @@
 </head>
 <body class="bg-surface text-slate-800 font-sans antialiased">
 
-    <!-- UNIFIED NAVIGATION HEADER -->
+    <!-- UNIFIED NAVIGATION HEADER WITH ENLARGED BRAND LOGO -->
     <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
             
-            <!-- UPLOADED EXACT BRAND LOGO -->
-            <a href="index.html" class="flex items-center">
-                <img src="Tricore logo.png" alt="Tricore Realty & Advisory" class="h-10 sm:h-12 w-auto object-contain">
+            <!-- UPLOADED EXACT BRAND LOGO (PROPORTIONATELY ENLARGED) -->
+            <a href="index.html" class="flex items-center py-1">
+                <img src="Tricore logo.png" 
+                     alt="Tricore Realty & Advisory" 
+                     class="h-14 sm:h-18 md:h-24 w-auto object-contain transition-all duration-200">
             </a>
             
             <!-- Desktop Menu -->
@@ -83,8 +85,8 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section id="home" class="relative pt-20 min-h-[85vh] flex items-center overflow-hidden bg-navy-900">
+    <!-- HERO SECTION (WITH INCREASED PADDING TO CLEAR ENLARGED LOGO) -->
+    <section id="home" class="relative pt-28 sm:pt-36 min-h-[85vh] flex items-center overflow-hidden bg-navy-900">
         <div id="hero-carousel" class="absolute inset-0 w-full h-full">
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1920&q=80');"></div>
@@ -329,10 +331,10 @@
 
                 <!-- CAROUSEL ARROWS -->
                 <div class="flex items-center gap-2">
-                    <button onclick="prevTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm" aria-label="Previous Testimonials">
+                    <button onclick="prevTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm">
                         <i class="fa-solid fa-chevron-left text-sm"></i>
                     </button>
-                    <button onclick="nextTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm" aria-label="Next Testimonials">
+                    <button onclick="nextTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm">
                         <i class="fa-solid fa-chevron-right text-sm"></i>
                     </button>
                 </div>
