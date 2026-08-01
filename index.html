@@ -31,17 +31,18 @@
 </head>
 <body class="bg-surface text-slate-800 font-sans antialiased">
 
-    <!-- NAVIGATION HEADER -->
+    <!-- UNIFIED NAVIGATION HEADER -->
     <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
             
-            <!-- Logo (Left Aligned) -->
+            <!-- Logo (Left) -->
             <a href="index.html" class="text-xl sm:text-2xl font-extrabold text-navy-900 flex items-center gap-2 tracking-tight">
                 <i class="fa-solid fa-building text-blue-600"></i> TRICORE
             </a>
             
             <!-- Desktop Menu (Center) -->
             <div class="hidden md:flex space-x-8 font-medium text-slate-700 text-sm">
+                <a href="index.html" class="text-blue-600 font-bold transition">Home</a>
                 <a href="buy.html" class="hover:text-blue-600 transition font-semibold">Buy Properties</a>
                 <a href="#land" class="hover:text-blue-600 transition">Land Investment</a>
                 <a href="services.html" class="hover:text-blue-600 transition">Services</a>
@@ -49,7 +50,7 @@
                 <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
             </div>
 
-            <!-- Right Controls: Buttons & Mobile Hamburger Icon (Right Aligned) -->
+            <!-- Header CTAs & Hamburger Toggle (Right) -->
             <div class="flex items-center gap-2 sm:gap-3">
                 <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20have%20a%20Real%20Estate%20enquiry." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold p-2 sm:px-3.5 sm:py-2 rounded-[8px] transition flex items-center gap-1.5">
                     <i class="fa-brands fa-whatsapp text-base"></i> <span class="hidden sm:inline">WhatsApp</span>
@@ -58,7 +59,7 @@
                     Explore
                 </a>
                 
-                <!-- Hamburger Button Moved to Right -->
+                <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-blue-600 focus:outline-none p-1.5 border rounded-lg bg-slate-50" aria-label="Toggle Navigation Menu">
                     <i id="menu-icon" class="fa-solid fa-bars text-lg"></i>
                 </button>
@@ -67,21 +68,12 @@
 
         <!-- MOBILE MENU DRAWER -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-3 font-semibold text-sm text-slate-700 shadow-lg">
-            <a href="buy.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100 text-blue-600 font-bold">
-                <i class="fa-solid fa-house-chimney text-blue-600 mr-2"></i> Buy Properties
-            </a>
-            <a href="#land" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">
-                <i class="fa-solid fa-map-location-dot text-emerald-600 mr-2"></i> Land Investment
-            </a>
-            <a href="services.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">
-                <i class="fa-solid fa-scale-balanced text-amber-600 mr-2"></i> Revenue Legal Services
-            </a>
-            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">
-                <i class="fa-solid fa-circle-info text-purple-600 mr-2"></i> About Tricore
-            </a>
-            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">
-                <i class="fa-solid fa-phone text-blue-600 mr-2"></i> Contact & Office
-            </a>
+            <a href="index.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100 text-blue-600 font-bold">Home</a>
+            <a href="buy.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Buy Properties</a>
+            <a href="#land" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Land Investment</a>
+            <a href="services.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Services</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">About</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Contact</a>
             
             <div class="pt-2 border-t border-slate-100">
                 <a href="buy.html" class="w-full bg-blue-600 text-white text-center py-2.5 rounded-lg block font-bold text-xs">
@@ -91,7 +83,7 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION WITH CAROUSEL & SEARCH KIOSK -->
     <section id="home" class="relative pt-20 min-h-[85vh] flex items-center overflow-hidden bg-navy-900">
         <div id="hero-carousel" class="absolute inset-0 w-full h-full">
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1920&q=80');"></div>
@@ -123,7 +115,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-4">
                         <div class="bg-slate-50 p-2.5 rounded border">
                             <label class="block text-[10px] font-bold text-slate-500 mb-1 tracking-wider uppercase">LOCATION</label>
-                            <select id="filter-region" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none">
+                            <select id="filter-region" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none cursor-pointer">
                                 <option value="All">All Regions</option>
                                 <option value="All Mumbai">All Mumbai</option>
                                 <option value="All Thane">All Thane</option>
@@ -135,7 +127,7 @@
 
                         <div class="bg-slate-50 p-2.5 rounded border">
                             <label class="block text-[10px] font-bold text-slate-500 mb-1 tracking-wider uppercase">CATEGORY</label>
-                            <select id="filter-type" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none">
+                            <select id="filter-type" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none cursor-pointer">
                                 <option value="All">All Categories</option>
                                 <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
                                 <option value="Bungalows & Houses">Bungalows / Villa</option>
@@ -146,7 +138,7 @@
 
                         <div class="bg-slate-50 p-2.5 rounded border">
                             <label class="block text-[10px] font-bold text-slate-500 mb-1 tracking-wider uppercase">SERVICE</label>
-                            <select id="filter-service" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none">
+                            <select id="filter-service" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none cursor-pointer">
                                 <option value="Property Purchase">Property Purchase</option>
                                 <option value="7/12 Extract / CTS Card">7/12 Extract & Ferfar</option>
                                 <option value="Title Verification">Title Verification</option>
@@ -203,7 +195,7 @@
                 <a href="buy.html?type=Plots+/+Land" class="text-xs sm:text-sm font-bold text-blue-600 hover:underline">View All Land Plots &rarr;</a>
             </div>
 
-            <div id="land-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div id="land-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
                 <div class="col-span-3 text-center py-8 text-slate-400">Loading land opportunities...</div>
             </div>
         </div>
@@ -220,7 +212,7 @@
                 <a href="buy.html" class="text-xs sm:text-sm font-bold text-blue-600 hover:underline">View All Properties &rarr;</a>
             </div>
 
-            <div id="home-properties-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div id="home-properties-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
                 <div class="col-span-3 text-center py-8 text-slate-400">Loading recommended properties...</div>
             </div>
         </div>
@@ -234,7 +226,7 @@
                 <p class="text-slate-600 text-xs sm:text-sm">Comprehensive legal documentation and revenue assistance under one roof.</p>
             </div>
 
-            <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 items-stretch">
                 <div class="col-span-3 text-center py-8 text-slate-400">Loading popular services...</div>
             </div>
 
@@ -334,7 +326,7 @@
                 <p class="text-slate-600 text-xs sm:text-sm">Real stories from buyers and landowners across Mumbai, Thane & Lonavala.</p>
             </div>
 
-            <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
                 <div class="col-span-3 text-center py-8 text-slate-400">Loading client reviews...</div>
             </div>
         </div>
@@ -435,12 +427,11 @@
         // Load Dynamic Supabase Content
         async function initHomePage() {
             
-            // 1. Load Land Investments (with fallback if no land flag is set yet)
+            // 1. Load Land Investments (with fallback)
             try {
                 const landGrid = document.getElementById('land-grid');
                 let { data: landData } = await supabaseClient.from('properties').select('*').eq('is_land', true).limit(3);
                 
-                // Fallback: If no land property tagged yet, get any plots/land or latest properties
                 if (!landData || landData.length === 0) {
                     const fallbackRes = await supabaseClient.from('properties').select('*').eq('category', 'Plots / Land').limit(3);
                     landData = fallbackRes.data;
@@ -454,14 +445,28 @@
                     landGrid.innerHTML = '';
                     landData.forEach(item => {
                         const img = (item.images && item.images[0]) ? item.images[0] : 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80';
+                        const locationText = item.location || item.region;
+                        
                         landGrid.innerHTML += `
-                            <div class="bg-surface rounded-lg border overflow-hidden shadow-sm hover:shadow-md transition">
-                                <a href="property-detail.html?id=${item.id}"><img src="${img}" class="w-full h-48 object-cover"></a>
-                                <div class="p-5">
-                                    <span class="text-[10px] font-bold text-blue-600 uppercase"><i class="fa-solid fa-map-pin mr-1"></i>${item.location || item.region}</span>
-                                    <h3 class="font-bold text-base text-navy-900 mt-1 mb-1 line-clamp-1">${item.title}</h3>
-                                    <p class="text-lg font-extrabold text-blue-700 mb-3">${item.price}</p>
-                                    <a href="property-detail.html?id=${item.id}" class="w-full bg-blue-600 text-white font-bold py-2 rounded text-xs text-center block">View Details &rarr;</a>
+                            <div class="bg-surface rounded-[8px] border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between h-full">
+                                <div>
+                                    <a href="property-detail.html?id=${item.id}">
+                                        <img src="${img}" class="w-full h-48 object-cover cursor-pointer hover:opacity-95 transition" alt="${item.title}">
+                                    </a>
+                                    <div class="p-5">
+                                        <span class="text-[10px] font-bold text-blue-600 uppercase block h-8 line-clamp-2">
+                                            <i class="fa-solid fa-map-pin mr-1"></i>${locationText}
+                                        </span>
+                                        <a href="property-detail.html?id=${item.id}">
+                                            <h3 class="font-bold text-base text-navy-900 line-clamp-2 h-12 mt-1 mb-2 hover:text-blue-600 transition">${item.title}</h3>
+                                        </a>
+                                        <p class="text-lg font-extrabold text-blue-700 mb-3">${item.price}</p>
+                                    </div>
+                                </div>
+                                <div class="px-5 pb-5 mt-auto">
+                                    <a href="property-detail.html?id=${item.id}" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-[6px] text-xs text-center block transition">
+                                        View Details &rarr;
+                                    </a>
                                 </div>
                             </div>
                         `;
@@ -471,12 +476,11 @@
                 }
             } catch (e) { console.error(e); }
 
-            // 2. Load Recommended Properties (with fallback to latest properties)
+            // 2. Load Recommended Properties (With Rigid Uniform Height Grid)
             try {
                 const homeGrid = document.getElementById('home-properties-grid');
                 let { data: recData } = await supabaseClient.from('properties').select('*').eq('is_featured', true).limit(3);
                 
-                // Fallback: If no property is tagged featured yet, show latest published properties
                 if (!recData || recData.length === 0) {
                     const fallbackRes = await supabaseClient.from('properties').select('*').order('created_at', { ascending: false }).limit(3);
                     recData = fallbackRes.data || [];
@@ -486,17 +490,35 @@
                     homeGrid.innerHTML = '';
                     recData.forEach(item => {
                         const img = (item.images && item.images[0]) ? item.images[0] : 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80';
-                        const whatsappUrl = `https://wa.me/919987975429?text=${encodeURIComponent('Hi Tricore, I am interested in ' + item.title)}`;
+                        const locationText = item.location || item.region;
+                        const whatsappUrl = `https://wa.me/919987975429?text=${encodeURIComponent('Hi Tricore, I am interested in ' + item.title + ' (' + locationText + ')')}`;
+                        const detailUrl = `property-detail.html?id=${item.id}`;
+
                         homeGrid.innerHTML += `
-                            <div class="bg-white rounded-lg border overflow-hidden shadow-sm hover:shadow-md transition">
-                                <a href="property-detail.html?id=${item.id}"><img src="${img}" class="w-full h-48 object-cover"></a>
-                                <div class="p-5">
-                                    <span class="text-[10px] font-bold text-slate-500 uppercase"><i class="fa-solid fa-location-dot text-red-500 mr-1"></i>${item.location || item.region}</span>
-                                    <a href="property-detail.html?id=${item.id}">
-                                        <h3 class="font-bold text-base text-navy-900 mt-1 mb-1 hover:text-blue-600 transition line-clamp-1">${item.title}</h3>
+                            <div class="bg-white rounded-[8px] border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between h-full">
+                                <div>
+                                    <a href="${detailUrl}">
+                                        <img src="${img}" class="w-full h-48 object-cover cursor-pointer hover:opacity-95 transition" alt="${item.title}">
                                     </a>
-                                    <p class="text-lg font-extrabold text-blue-700 mb-3">${item.price}</p>
-                                    <a href="${whatsappUrl}" target="_blank" class="w-full bg-emerald-600 text-white font-bold py-2 rounded text-xs text-center block">Enquire on WhatsApp</a>
+                                    <div class="p-5">
+                                        <span class="text-[10px] font-bold text-slate-500 uppercase block h-8 line-clamp-2">
+                                            <i class="fa-solid fa-location-dot text-red-500 mr-1"></i>${locationText}
+                                        </span>
+                                        <a href="${detailUrl}">
+                                            <h3 class="font-bold text-base text-navy-900 line-clamp-2 h-12 mt-1 mb-2 hover:text-blue-600 transition">${item.title}</h3>
+                                        </a>
+                                        <p class="text-lg font-extrabold text-blue-700 mb-3">${item.price}</p>
+                                        
+                                        <div class="grid grid-cols-2 gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 p-2 rounded-[6px] mb-2">
+                                            <span><i class="fa-solid fa-check text-emerald-600"></i> Legal Verified</span>
+                                            <span><i class="fa-solid fa-check text-emerald-600"></i> Clear Title</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-5 pb-5 mt-auto">
+                                    <a href="${whatsappUrl}" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-[6px] text-xs text-center block transition">
+                                        <i class="fa-brands fa-whatsapp mr-1"></i> Enquire on WhatsApp
+                                    </a>
                                 </div>
                             </div>
                         `;
@@ -514,11 +536,13 @@
                     servGrid.innerHTML = '';
                     servData.forEach(s => {
                         servGrid.innerHTML += `
-                            <div class="p-5 border rounded-lg bg-surface hover:border-blue-500 transition">
-                                <i class="${s.icon || 'fa-solid fa-file-contract'} text-2xl text-blue-600 mb-3 block"></i>
-                                <h3 class="font-bold text-sm text-navy-900 mb-1">${s.title}</h3>
-                                <p class="text-xs text-slate-500 mb-4 line-clamp-2">${s.description || 'Full legal and revenue record documentation support.'}</p>
-                                <a href="service-detail.html?id=${s.id}" class="text-xs font-bold text-emerald-700 hover:underline">Know More & WhatsApp &rarr;</a>
+                            <div class="p-5 border border-slate-200 rounded-lg bg-surface hover:border-blue-500 transition shadow-sm flex flex-col justify-between h-full">
+                                <div>
+                                    <i class="${s.icon || 'fa-solid fa-file-contract'} text-2xl text-blue-600 mb-3 block"></i>
+                                    <h3 class="font-bold text-sm text-navy-900 mb-2 h-10 line-clamp-2">${s.title}</h3>
+                                    <p class="text-xs text-slate-500 mb-4 line-clamp-3">${s.description || 'Full legal and revenue record documentation support.'}</p>
+                                </div>
+                                <a href="service-detail.html?id=${s.id}" class="text-xs font-bold text-emerald-700 hover:underline flex items-center gap-1 mt-auto">Know More & WhatsApp &rarr;</a>
                             </div>
                         `;
                     });
@@ -535,10 +559,12 @@
                     testGrid.innerHTML = '';
                     testData.forEach(t => {
                         testGrid.innerHTML += `
-                            <div class="p-6 bg-white rounded-lg border shadow-sm">
-                                <div class="flex text-amber-400 text-xs mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                                <p class="text-xs text-slate-600 leading-relaxed italic mb-4">"${t.review}"</p>
+                            <div class="p-6 bg-white rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between h-full">
                                 <div>
+                                    <div class="flex text-amber-400 text-xs mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                    <p class="text-xs text-slate-600 leading-relaxed italic mb-4">"${t.review}"</p>
+                                </div>
+                                <div class="pt-3 border-t border-slate-100 mt-auto">
                                     <p class="font-bold text-xs text-navy-900">${t.client_name}</p>
                                     <p class="text-[10px] text-slate-400">${t.location || 'Mumbai'}</p>
                                 </div>
