@@ -11,7 +11,7 @@
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Supabase JS Client SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
@@ -33,37 +33,17 @@
 
     <!-- UNIFIED NAVIGATION HEADER -->
     <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex justify-between items-center">
             
-            <!-- Brand Logo (HD Emblem + Typography) -->
-            <a href="index.html" class="flex items-center gap-2">
-                <div class="flex items-center gap-2">
-                    <svg class="h-9 sm:h-11 w-auto" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Top Cube Block (Dark Navy) -->
-                        <polygon points="80,10 110,28 80,46 50,28" fill="#0A1E38"/>
-                        <polygon points="50,28 80,46 80,68 50,50" fill="#0E2B4B"/>
-                        <polygon points="80,46 110,28 110,50 80,68" fill="#071629"/>
-
-                        <!-- Bottom Left Cube Block (Warm Gold) -->
-                        <polygon points="45,45 72,61 45,78 18,61" fill="#C49647"/>
-                        <polygon points="18,61 45,78 45,100 18,83" fill="#A87B32"/>
-                        <polygon points="45,78 72,61 72,83 45,100" fill="#D6A550"/>
-
-                        <!-- Bottom Right Cube Block (Slate Gray) -->
-                        <polygon points="115,45 142,61 115,78 88,61" fill="#3D4F5C"/>
-                        <polygon points="88,61 115,78 115,100 88,83" fill="#2B3944"/>
-                        <polygon points="115,78 142,61 142,83 115,100" fill="#4B5E6C"/>
-
-                        <!-- Center Stylized Handshake -->
-                        <path d="M58 52 L70 52 L76 58 L72 63 L65 57 L58 57 Z" fill="#D6A550"/>
-                        <path d="M102 52 L90 52 L84 58 L88 63 L95 57 L102 57 Z" fill="#0E2B4B"/>
-                        <circle cx="75" cy="60" r="3" fill="#D6A550"/>
-                        <circle cx="85" cy="60" r="3" fill="#0E2B4B"/>
-                    </svg>
-                    <div class="flex flex-col justify-center">
-                        <span class="text-xl sm:text-2xl font-black text-[#0A1E38] tracking-widest leading-none">TRICORE</span>
-                        <span class="text-[8px] sm:text-[9.5px] font-bold text-[#B88A38] tracking-[0.2em] uppercase mt-1">REALTY & ADVISORY</span>
-                    </div>
+            <!-- ORIGINAL BRAND LOGO (HD EMBLEM + MATCHING BRAND TYPOGRAPHY) -->
+            <a href="index.html" class="flex items-center gap-2 sm:gap-3 group">
+                <img src="https://raw.githubusercontent.com/shreekantpashte/tricore-assets/main/logo_emblem.png" 
+                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=100&q=80';" 
+                     alt="Tricore Logo Emblem" 
+                     class="h-9 sm:h-12 w-auto object-contain">
+                <div class="flex flex-col justify-center">
+                    <span class="text-xl sm:text-2xl font-black text-[#041730] tracking-[0.12em] leading-none">TRICORE</span>
+                    <span class="text-[8px] sm:text-[9.5px] font-extrabold text-[#B89053] tracking-[0.25em] uppercase mt-1">REALTY & ADVISORY</span>
                 </div>
             </a>
             
@@ -86,6 +66,7 @@
                     Explore
                 </a>
                 
+                <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-blue-600 focus:outline-none p-1.5 border rounded-lg bg-slate-50" aria-label="Toggle Navigation Menu">
                     <i id="menu-icon" class="fa-solid fa-bars text-lg"></i>
                 </button>
@@ -355,10 +336,10 @@
 
                 <!-- CAROUSEL ARROWS -->
                 <div class="flex items-center gap-2">
-                    <button onclick="prevTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm">
+                    <button onclick="prevTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm" aria-label="Previous Testimonials">
                         <i class="fa-solid fa-chevron-left text-sm"></i>
                     </button>
-                    <button onclick="nextTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm">
+                    <button onclick="nextTestimonial()" class="w-10 h-10 rounded-full border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition shadow-sm" aria-label="Next Testimonials">
                         <i class="fa-solid fa-chevron-right text-sm"></i>
                     </button>
                 </div>
@@ -374,25 +355,18 @@
         </div>
     </section>
 
-    <!-- 6. FOOTER WITH BRAND LOGO -->
+    <!-- 6. FOOTER -->
     <footer id="contact" class="bg-slate-950 text-slate-400 py-12 text-xs border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
-                <a href="index.html" class="flex items-center gap-2 mb-4">
-                    <svg class="h-9 w-auto" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <polygon points="80,10 110,28 80,46 50,28" fill="#3B82F6"/>
-                        <polygon points="50,28 80,46 80,68 50,50" fill="#60A5FA"/>
-                        <polygon points="80,46 110,28 110,50 80,68" fill="#1D4ED8"/>
-                        <polygon points="45,45 72,61 45,78 18,61" fill="#F59E0B"/>
-                        <polygon points="18,61 45,78 45,100 18,83" fill="#D97706"/>
-                        <polygon points="45,78 72,61 72,83 45,100" fill="#FBBF24"/>
-                        <polygon points="115,45 142,61 115,78 88,61" fill="#9CA3AF"/>
-                        <polygon points="88,61 115,78 115,100 88,83" fill="#6B7280"/>
-                        <polygon points="115,78 142,61 142,83 115,100" fill="#D1D5DB"/>
-                    </svg>
+                <a href="index.html" class="flex items-center gap-2.5 mb-4">
+                    <img src="https://raw.githubusercontent.com/shreekantpashte/tricore-assets/main/logo_emblem.png" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=100&q=80';" 
+                         alt="Tricore Logo Emblem" 
+                         class="h-8 w-auto object-contain">
                     <div class="flex flex-col justify-center">
-                        <span class="text-xl font-black text-white tracking-widest leading-none">TRICORE</span>
-                        <span class="text-[8px] font-bold text-[#F59E0B] tracking-[0.2em] uppercase mt-1">REALTY & ADVISORY</span>
+                        <span class="text-xl font-black text-white tracking-[0.12em] leading-none">TRICORE</span>
+                        <span class="text-[8px] font-extrabold text-[#B89053] tracking-[0.25em] uppercase mt-1">REALTY & ADVISORY</span>
                     </div>
                 </a>
                 <p class="leading-relaxed mb-4">Trusted partner in residential, commercial, and revenue legal record advisory across Mumbai Metropolitan Region & Lonavala.</p>
