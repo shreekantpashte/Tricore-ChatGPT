@@ -6,13 +6,8 @@
     <title>Tricore Realty & Advisory | Mumbai, Thane, Navi Mumbai, Virar & Lonavala</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Supabase JS Client SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         tailwind.config = {
@@ -35,22 +30,19 @@
     <nav class="fixed w-full bg-white border-b border-slate-200 z-50 top-0 left-0 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
             
-            <!-- Logo (Left) -->
             <a href="index.html" class="text-xl sm:text-2xl font-extrabold text-navy-900 flex items-center gap-2 tracking-tight">
                 <i class="fa-solid fa-building text-blue-600"></i> TRICORE
             </a>
             
-            <!-- Desktop Menu (Center) -->
             <div class="hidden md:flex space-x-8 font-medium text-slate-700 text-sm">
                 <a href="index.html" class="text-blue-600 font-bold transition">Home</a>
                 <a href="buy.html" class="hover:text-blue-600 transition font-semibold">Buy Properties</a>
-                <a href="#land" class="hover:text-blue-600 transition">Land Investment</a>
+                <a href="land.html" class="hover:text-blue-600 transition">Land Investment</a>
                 <a href="services.html" class="hover:text-blue-600 transition">Services</a>
                 <a href="#about" class="hover:text-blue-600 transition">About</a>
                 <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
             </div>
 
-            <!-- Header CTAs & Hamburger Toggle (Right) -->
             <div class="flex items-center gap-2 sm:gap-3">
                 <a href="https://wa.me/919987975429?text=Hi%20Tricore,%20I%20have%20a%20Real%20Estate%20enquiry." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold p-2 sm:px-3.5 sm:py-2 rounded-[8px] transition flex items-center gap-1.5">
                     <i class="fa-brands fa-whatsapp text-base"></i> <span class="hidden sm:inline">WhatsApp</span>
@@ -59,31 +51,23 @@
                     Explore
                 </a>
                 
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-blue-600 focus:outline-none p-1.5 border rounded-lg bg-slate-50" aria-label="Toggle Navigation Menu">
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-blue-600 focus:outline-none p-1.5 border rounded-lg bg-slate-50">
                     <i id="menu-icon" class="fa-solid fa-bars text-lg"></i>
                 </button>
             </div>
         </div>
 
-        <!-- MOBILE MENU DRAWER -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-3 font-semibold text-sm text-slate-700 shadow-lg">
             <a href="index.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100 text-blue-600 font-bold">Home</a>
             <a href="buy.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Buy Properties</a>
-            <a href="#land" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Land Investment</a>
+            <a href="land.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Land Investment</a>
             <a href="services.html" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Services</a>
             <a href="#about" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">About</a>
             <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded hover:bg-slate-100">Contact</a>
-            
-            <div class="pt-2 border-t border-slate-100">
-                <a href="buy.html" class="w-full bg-blue-600 text-white text-center py-2.5 rounded-lg block font-bold text-xs">
-                    View All Verified Listings
-                </a>
-            </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION WITH CAROUSEL & SEARCH KIOSK -->
+    <!-- HERO SECTION -->
     <section id="home" class="relative pt-20 min-h-[85vh] flex items-center overflow-hidden bg-navy-900">
         <div id="hero-carousel" class="absolute inset-0 w-full h-full">
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 opacity-100 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1920&q=80');"></div>
@@ -115,7 +99,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-4">
                         <div class="bg-slate-50 p-2.5 rounded border">
                             <label class="block text-[10px] font-bold text-slate-500 mb-1 tracking-wider uppercase">LOCATION</label>
-                            <select id="filter-region" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none cursor-pointer">
+                            <select id="filter-region" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none">
                                 <option value="All">All Regions</option>
                                 <option value="All Mumbai">All Mumbai</option>
                                 <option value="All Thane">All Thane</option>
@@ -127,7 +111,7 @@
 
                         <div class="bg-slate-50 p-2.5 rounded border">
                             <label class="block text-[10px] font-bold text-slate-500 mb-1 tracking-wider uppercase">CATEGORY</label>
-                            <select id="filter-type" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none cursor-pointer">
+                            <select id="filter-type" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none">
                                 <option value="All">All Categories</option>
                                 <option value="1, 2, 3, 4 BHK Flats">1, 2, 3, 4 BHK Flats</option>
                                 <option value="Bungalows & Houses">Bungalows / Villa</option>
@@ -138,7 +122,7 @@
 
                         <div class="bg-slate-50 p-2.5 rounded border">
                             <label class="block text-[10px] font-bold text-slate-500 mb-1 tracking-wider uppercase">SERVICE</label>
-                            <select id="filter-service" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none cursor-pointer">
+                            <select id="filter-service" class="w-full bg-transparent font-semibold text-slate-800 text-xs focus:outline-none">
                                 <option value="Property Purchase">Property Purchase</option>
                                 <option value="7/12 Extract / CTS Card">7/12 Extract & Ferfar</option>
                                 <option value="Title Verification">Title Verification</option>
@@ -188,11 +172,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-2">
                 <div>
-                    <span class="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-1">Hero Product Showcase</span>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-navy-900">Verified Land Investment Opportunities</h2>
                     <p class="text-slate-600 text-xs sm:text-sm mt-1">Direct clear-title agricultural & NA plots in Karjat, Lonavala & MMR belt.</p>
                 </div>
-                <a href="buy.html?type=Plots+/+Land" class="text-xs sm:text-sm font-bold text-blue-600 hover:underline">View All Land Plots &rarr;</a>
+                <a href="land.html" class="text-xs sm:text-sm font-bold text-blue-600 hover:underline">View All Land Plots &rarr;</a>
             </div>
 
             <div id="land-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
@@ -352,7 +335,7 @@
                 <ul class="space-y-2 font-medium">
                     <li><a href="index.html" class="hover:text-white">Home</a></li>
                     <li><a href="buy.html" class="hover:text-white">Buy Properties</a></li>
-                    <li><a href="#land" class="hover:text-white">Land Investment</a></li>
+                    <li><a href="land.html" class="hover:text-white">Land Investment</a></li>
                     <li><a href="services.html" class="hover:text-white">Revenue Legal Services</a></li>
                     <li><a href="admin.html" class="hover:text-white text-slate-500">Admin Portal</a></li>
                 </ul>
@@ -391,20 +374,11 @@
         const SUPABASE_ANON_KEY = "sb_publishable_JVqfPJWwmLrAMk7_nXp0pA_OwsvTnVt";
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Mobile Menu Drawer Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('menu-icon');
             menu.classList.toggle('hidden');
-            
-            if (menu.classList.contains('hidden')) {
-                icon.className = "fa-solid fa-bars text-lg";
-            } else {
-                icon.className = "fa-solid fa-xmark text-lg";
-            }
         }
 
-        // Hero Background Carousel
         let currentSlide = 0;
         const slides = document.querySelectorAll('.hero-slide');
         if (slides.length > 0) {
@@ -417,31 +391,23 @@
             }, 4500);
         }
 
-        // Kiosk Search Handler
         function handleKioskSearch() {
             const region = document.getElementById('filter-region').value;
             const type = document.getElementById('filter-type').value;
-            window.location.href = `buy.html?region=${encodeURIComponent(region)}&type=${encodeURIComponent(type)}`;
+            if (type === 'Plots / Land') {
+                window.location.href = `land.html`;
+            } else {
+                window.location.href = `buy.html?region=${encodeURIComponent(region)}&type=${encodeURIComponent(type)}`;
+            }
         }
 
-        // Load Dynamic Supabase Content
         async function initHomePage() {
-            
-            // 1. Load Land Investments (with fallback)
+            // 1. Load Land Investments
             try {
                 const landGrid = document.getElementById('land-grid');
-                let { data: landData } = await supabaseClient.from('properties').select('*').eq('is_land', true).limit(3);
-                
-                if (!landData || landData.length === 0) {
-                    const fallbackRes = await supabaseClient.from('properties').select('*').eq('category', 'Plots / Land').limit(3);
-                    landData = fallbackRes.data;
-                }
-                if (!landData || landData.length === 0) {
-                    const fallbackAll = await supabaseClient.from('properties').select('*').limit(3);
-                    landData = fallbackAll.data || [];
-                }
+                let { data: landData } = await supabaseClient.from('properties').select('*').or('is_land.eq.true,category.eq.Plots / Land').limit(3);
 
-                if (landData.length > 0) {
+                if (landData && landData.length > 0) {
                     landGrid.innerHTML = '';
                     landData.forEach(item => {
                         const img = (item.images && item.images[0]) ? item.images[0] : 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80';
@@ -476,13 +442,13 @@
                 }
             } catch (e) { console.error(e); }
 
-            // 2. Load Recommended Properties (With Rigid Uniform Height Grid)
+            // 2. Load Recommended Properties (Residential/Commercial)
             try {
                 const homeGrid = document.getElementById('home-properties-grid');
-                let { data: recData } = await supabaseClient.from('properties').select('*').eq('is_featured', true).limit(3);
+                let { data: recData } = await supabaseClient.from('properties').select('*').eq('is_featured', true).not('is_land', 'eq', true).limit(3);
                 
                 if (!recData || recData.length === 0) {
-                    const fallbackRes = await supabaseClient.from('properties').select('*').order('created_at', { ascending: false }).limit(3);
+                    const fallbackRes = await supabaseClient.from('properties').select('*').not('is_land', 'eq', true).order('created_at', { ascending: false }).limit(3);
                     recData = fallbackRes.data || [];
                 }
 
@@ -546,8 +512,6 @@
                             </div>
                         `;
                     });
-                } else {
-                    servGrid.innerHTML = `<div class="col-span-3 text-center py-6 text-slate-400 font-medium">Add services in admin.html to display here.</div>`;
                 }
             } catch (e) { console.error(e); }
 
@@ -571,8 +535,6 @@
                             </div>
                         `;
                     });
-                } else {
-                    testGrid.innerHTML = `<div class="col-span-3 text-center py-6 text-slate-400 font-medium">Add reviews in admin.html to display here.</div>`;
                 }
             } catch (e) { console.error(e); }
         }
